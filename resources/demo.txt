@@ -1,0 +1,34 @@
+ //循环
+ @foreach ($data as $val)
+
+
+ @endforeach
+
+
+//引用验证器
+ use App\Http\Requests\StoreColumnPost;
+
+
+//跳转
+ return redirect('/Admin/Column')->with('info','创建成功');
+
+ return back()->with('info','创建失败');
+
+//模拟表单提交类型
+ {{ method_field('DELETE') }}
+ {{ csrf_field() }}
+
+//Cookie的使用  withCookie($AdminUserId);是必须加的否则页面接收不到Cookie
+ $AdminUserId = Cookie::make('AdminUserId', $AdminUser->id,'时间');
+ return redirect('/Admin/Administrator')->with('info',"登录成功")->withCookie($AdminUserId);
+ 
+//获取Cookie
+ Cookie::get('UserId');
+
+
+//清除 
+ Cookie::forget('USERID');
+
+
+ //下载
+ return response()->download($pathToFile);
