@@ -1,0 +1,365 @@
+*,div,ul,li,ol,li,p{
+    padding:0;
+    margin:0;
+    border:0;
+    font-family: "微软雅黑", Arial, "Hiragino Sans GB", "Microsoft YaHei", STHeiti, "WenQuanYi Micro Hei", SimSun, sans-serif;
+}
+.container{
+    max-width: 70%;
+}
+.header{
+    border-bottom:1px solid #bbb;
+    line-height: 0.8rem;
+}
+.header .container{
+    position: relative;
+}
+.header .logo{
+    position: absolute;
+    top: 13%;
+    left: -2.1rem;
+    width: 2rem;
+}
+.header span{
+    color: #666;
+}
+.header span a{
+    color: #000;
+    text-decoration: none;
+    margin-left: 0.2rem;
+}
+.content{
+    background: url("../images/timg.jpg")no-repeat;
+    background-size: 100%;
+}
+.content .big{
+    width: 50%;
+    background: rgba(0,0,0,0.6);
+    margin-top: 1rem;
+    margin-bottom: 1.25rem;
+    border-radius: 0.1rem;
+}
+.content .top{
+    text-align: center;
+    color: #dfdfdf;
+    padding-top: 0.6rem;
+}
+.content .top p:first-child{
+    font-size: 0.28rem;
+    padding-bottom: 0.1rem;
+}
+.content form{
+    margin-top: 0.5rem;
+    padding: 0 0.8rem 0.7rem;
+}
+.content form label{
+    display: block;
+    margin-top: 0.25rem;
+    overflow: hidden;
+}
+.content form label span{
+    text-align: right;
+    width: 20%;
+    color: #dfdfdf;
+    float: left;
+    line-height: 0.4rem;
+}
+.content form .lab .inp{
+    width: 40%;
+}
+.content form .lab .inp1 {
+    width: 30%;
+    float: right;
+    border: 1px solid #fff;
+    text-align: center;
+    color: #fff;
+    border-radius: 0.15rem;
+    padding: 0.1rem 0;
+}
+.content form label input{
+    background: none;
+    padding: 0.1rem 0.15rem;
+    border: 1px solid #fff;
+    border-radius: 0.15rem;
+    width: 75%;
+    float: left;
+    margin-left: 5%;
+    outline: none;
+    color: #dfdfdf;
+}
+.content form label .msgs1{
+    background:#E6E6E6;
+    color:#818080 !important;
+    border:1px solid #CCCCCC;
+}
+.content form label select{
+    background: none;
+    padding: 0.1rem 0.15rem;
+    border: 1px solid #fff;
+    border-radius: 0.15rem;
+    width: 75%;
+    float: left;
+    margin-left: 5%;
+    color: #999;
+    outline: none;
+}
+.content form p{
+    margin-top: 0.3rem;
+    overflow: hidden;
+}
+.content form p span{
+    float: left;
+    color: #dfdfdf;
+}
+.content form p span:last-child{
+    float: right;
+}
+.content form p span:first-child a{
+    color: #dfdfdf;
+}
+.content form p a{
+    color: #ea8c02;
+    text-decoration: none;
+}
+.content form .tijiao{
+    display: block;
+    width: 100%;
+    background: none;
+    color: #fff;
+    border: 1px solid #dfdfdf;
+    padding: 0.1rem;
+    border-radius: 0.15rem;
+    margin-top: 1rem;
+}
+.members-document{
+    position: fixed;
+    width: 100%;
+    height:100%;
+    background: rgba(0,0,0,0.8);
+    left: 0;
+    top:0;
+    display: none;
+}
+.members-document .document{
+    width: 30%;
+    margin: 1.5rem auto;
+    background: #fff;
+    height: 7rem;
+    border-radius: 0.05rem;
+    padding:0.5rem 0.2rem;
+    text-align: center;
+    position: relative;
+    overflow-y: scroll;
+}
+.members-document .d-close{
+    position: absolute;
+    right: 35%;
+    top: 1rem;
+}
+.members-document .d-close a{
+    color: #fff;
+    text-decoration: none;
+}
+@media screen and (max-width: 1680px){
+    .content .big {
+        margin-top: 0.6rem;
+    }
+}
+@media (max-width: 1660px) and (min-width: 1360px){
+    .header .container {
+        width: 60%;
+    }
+    .container{
+        width: 60%;
+    }
+    .guang img{
+        width: 100%;
+        margin-top: 0.35rem;
+    }
+    .content .big {
+        margin-top: 0.8rem;
+        margin-bottom: 0.85rem;
+    }
+    .content .top {
+        padding-top: 0.3rem;
+    }
+    .content form {
+        margin-top: 0.2rem;
+        padding: 0 0.4rem 0.75rem;
+    }
+    .content form p {
+        margin-top: 0.2rem;
+    }
+    .content form .tijiao {
+        margin-top: 0.5rem;
+    }
+    .members-document .d-close {
+        top: 0.8rem;
+    }
+    .members-document .document {
+        margin: 1.1rem auto;
+        height: 5rem;
+    }
+}
+@media screen and (max-width: 1440px){
+    .content {
+        background-size: 116%;
+    }
+    .content form {
+        padding: 0 0.28rem 0.5rem;
+    }
+    html{
+        font-size: 80px !important;
+    }
+    body{
+        font-size: 11px !important;
+    }
+}
+@media (max-width: 1366px) and (min-width: 1360px) {
+    .content {
+        background-size: 100% 100%;
+    }
+    .header .container {
+        width: 60%;
+    }
+    .container{
+        width: 65%;
+    }
+    .guang img{
+        width: 100%;
+        margin-top: 0.35rem;
+    }
+    .content .big {
+        margin-top: 0.5rem;
+        margin-bottom: 0.48rem;
+    }
+    .content .top {
+        padding-top: 0.3rem;
+    }
+    .content form {
+        margin-top: 0.1rem;
+        padding: 0 0.4rem 0.3rem;
+    }
+    .content form p {
+        margin-top: 0.1rem;
+    }
+    .content form .tijiao {
+        margin-top: 0.15rem;
+    }
+    .content form label span {
+        width: 22%;
+    }
+    .content form label input {
+        padding: 0.08rem 0.15rem;
+        width: 73%;
+        border-radius: 0.1rem;
+    }
+    .content form label select {
+        padding: 0.08rem 0.15rem;
+        width: 73%;
+        border-radius: 0.1rem;
+    }
+    .content form .lab .inp1 {
+        width: 34%;
+    }
+    .content form .lab .inp{
+        width: 34%;
+    }
+    .content form label {
+        margin-top: 0.1rem;
+    }
+}
+@media screen and (max-width: 768px){
+    .container {
+        max-width: 100% !important;
+    }
+    .content {
+        background-size: 500%;
+    }
+    .content .big {
+        width: 100%;
+        margin-top: 0.45rem;
+        margin-bottom:0.5rem;
+    }
+    .content form {
+        padding: 0 0.14rem 0.5rem;
+    }
+    .header .logo {
+        position: static;
+        top: 6%;
+        left: -2.1rem;
+        width: 1.25rem;
+    }
+    .members-document .d-close {
+        right: 10%;
+    }
+    .members-document .document {
+        width: 80%;
+        height: 5rem;
+    }
+}
+@media (max-width: 375px) and (min-width: 360px){
+    .content form label span {
+        width: 24%;
+    }
+    .content form label input {
+        width: 70%;
+    }
+    .content form .lab .inp {
+        width: 34%;
+    }
+    .content form label select {
+        width: 70%;
+    }
+    .header span a {
+        display: none;
+    }
+}
+@media screen and (max-width: 320px){
+    .header .logo {
+        width: 1.05rem;
+    }
+    .content form label span {
+        text-align: left;
+        width: 100%;
+    }
+    .content form label input {
+        padding:0.05rem 0.15rem;
+        width: 100%;
+        margin-left: 0;
+    }
+    .content form label {
+        margin-top: 0.1rem;
+    }
+    .content form {
+        margin-top: 0.1rem;
+        padding: 0 0.14rem 0.3rem;
+    }
+    .content .top {
+        padding-top: 0.3rem;
+    }
+    .content form label select {
+        padding: 0.5rem 0.15rem;
+        width: 100%;
+        margin-left: 0
+    }
+    .content form p {
+        margin-top: 0.2rem;
+    }
+    .content form .tijiao {
+        margin-top: 0.2rem;
+    }
+    .content {
+        background-size: 700%;
+    }
+    .header span a {
+        display: none;
+    }
+    .content form .lab .inp1 {
+        width: 45%;
+        padding: 0.05rem 0;
+    }
+    .content form .lab .inp {
+        width: 50%;
+    }
+}

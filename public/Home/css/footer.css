@@ -1,0 +1,133 @@
+/*footer*/
+.container{
+    max-width: 70%;
+}
+.footer{
+    border-top: 1px solid #bbbbbb;
+    margin-top: 0.85rem;
+    padding-top: 0.5rem;
+}
+.footer .top{
+    overflow: hidden;
+    padding-bottom: 0.4rem;
+}
+.footer .top .left{
+    float: left;
+    width: 65%;
+}
+.footer .top .left ul{
+    overflow: hidden;
+}
+.footer .top .left ul li{
+    float: left;
+    list-style: none;
+    width: 25%;
+}
+.footer .top .left ul li a{
+    display: block;
+    color: #0a0a0a;
+    line-height: 0.25rem;
+    text-decoration: none;
+}
+.footer .top .left ul li a.title{
+    font-size: 0.14rem;
+    color: #000;
+    padding-bottom: 0.4rem;
+}
+.footer .top .right{
+    float: left;
+    width: 35%;
+    overflow: hidden;
+}
+.footer .top .right .er{
+    text-align: center;
+    width: 45%;
+    float: left;
+}
+.footer .top .right .er p{
+    margin-top: 0.05rem;
+}
+.footer .top .right .address{
+    width: 55%;
+    float: left;
+}
+.footer .top .right .address p{
+    margin-top: 0.1rem;
+}
+.footer .top .right .address img{
+    width: 0.25rem;
+    margin-right: 0.1rem;
+}
+.footer .bottom{
+    border-top: 1px solid #bbbbbb;
+    background: #e1e2e3;
+    text-align: center;
+    padding: 0.3rem 0;
+}
+.footer .bottom p{
+    line-height: 25px;
+}
+.footer .bottom a{
+    text-decoration: none;
+    color: #000;
+}
+/*footer*/
+
+
+@media (max-width: 1660px) and (min-width: 1360px){
+    .container{
+        width: 70%;
+    }
+}
+@media screen and (max-width: 1440px){
+    .footer .top .right .er {
+        width: 40%;
+    }
+    .footer .top .right .er img{
+        width: 100%;
+        padding: 10px;
+    }
+    .footer .top .right .address {
+        width: 60%;
+    }
+}
+@media (max-width: 1366px) and (min-width: 1360px) {
+    .footer .top .left {
+        width: 60%;
+    }
+    .footer .top .right {
+        width: 40%;
+    }
+    .footer .top .right .er {
+        width: 40%;
+    }
+    .footer .top .right .address {
+        width: 60%;
+    }
+}
+@media screen and (max-width: 768px){
+    .footer {
+        padding-top: 0.4rem;
+    }
+    .footer .top .left {
+        width: 100%;
+    }
+    .footer .top .right {
+        width: 100%;
+        margin-top: 0.3rem;
+    }
+    .footer .top .right .er {
+        width: 40%;
+    }
+    .footer .top .right .er img{
+        width: 100%;
+    }
+    .footer .top .right .address {
+        width: 60%;
+        float: left;
+    }
+    .footer .top .left ul li a.title {
+        font-size: 0.16rem;
+        padding-bottom: 0.2rem;
+    }
+}

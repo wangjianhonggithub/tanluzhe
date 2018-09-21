@@ -1,0 +1,166 @@
+*,div,ul,li,ol,li,p{
+    padding:0;
+    margin:0;
+    border:0;
+    font-family: "微软雅黑", Arial, "Hiragino Sans GB", "Microsoft YaHei", STHeiti, "WenQuanYi Micro Hei", SimSun, sans-serif;
+}
+.container{
+    max-width: 70%;
+}
+.content{
+    overflow: hidden;
+    margin-top:0.15rem;
+}
+.content .item {
+    width: 2.75rem;
+    height: 1.5rem;
+    float: left;
+    position: relative;
+    margin-left:0.1rem;
+}
+.content .addImg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+.content .preview,.preBlock{
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+}
+.content .delete {
+    width: 0.2rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    display: none;
+}
+.content .preBlock img {
+    display: block;
+}
+.content .upload_input{
+    display: block;
+    width: 0;
+    height: 0;
+    -webkit-opacity: 0.0;
+    /* Netscape and Older than Firefox 0.9 */
+    -moz-opacity: 0.0;
+    /* Safari 1.x (pre WebKit!) 老式khtml内核的Safari浏览器*/
+    -khtml-opacity: 0.0;
+    /* IE9 + etc...modern browsers */
+    opacity: .0;
+    /* IE 4-9 */
+    filter:alpha(opacity=0);
+    /*This works in IE 8 & 9 too*/
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    /*IE4-IE9*/
+    filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+}
+/*.content .left .center a:nth-child(3){
+    color:#fff;
+    background:#3f51b5
+}*/
+.content .right{
+    float: right;
+    width: 68%;
+    margin-top: 0.2rem;
+    -webkit-box-shadow:  0 0 0.3rem #888888;
+    -moz-box-shadow:  0 0 0.3rem #888888;
+    box-shadow:  0 0 30px #888888;
+    padding: 0 0.2rem 0.5rem;
+    margin-bottom: 0.2rem;
+}
+.content .right .top{
+    padding: 0.15rem 0;
+    border-bottom: 1px solid #bbb;
+}
+.content .right .top span{
+    margin-left: 0.08rem;
+    font-size: 0.18rem;
+}
+.content .right .con-con .title{
+    padding: 0.3rem 0;
+}
+.content form .lab{
+    display: block;
+    margin-top:0.4rem;
+    overflow: hidden;
+}
+.content form .lab span{
+    float: left;
+    width: 20%;
+    text-align: right;
+    line-height: 0.4rem;
+}
+.content form .lab .con-right{
+    float: left;
+    width: 80%;
+}
+.content form .lab .zhu{
+    color: #FF9800;
+    margin-left: 20%;
+    margin-top: 0.25rem;
+}
+.cl{
+    clear: both;
+}
+.content form .tijiao{
+    margin: 0.55rem 0 0 20%;
+    display: block;
+    background: #3F51B5;
+    color: #fff;
+    padding: 0.1rem;
+    width: 20%;
+    border-radius: 0.2rem;
+}
+
+
+@media (max-width: 1660px) and (min-width: 1360px){
+    .container{
+        width: 70%;
+    }
+}
+@media screen and (max-width: 1440px){
+    html{
+        font-size: 80px !important;
+    }
+    body{
+        font-size: 11px !important;
+    }
+}
+@media screen and (max-width: 768px){
+    .container {
+       max-width: 100% !important;
+    }
+    .content .right {
+        width: 100%;
+    }
+    .content form .lab span {
+        width: 100%;
+        line-height: 0.3rem;
+        text-align: left;
+    }
+    .content form .lab .con-right {
+        width: 100%;
+    }
+    .content .item {
+        margin-left: 0;
+        width: 3.44rem;
+        height: 2rem;
+    }
+    .content form .lab .zhu {
+        margin-left: 0;
+    }
+    .content form .tijiao {
+        margin:0.55rem 0 0 0;
+        width: 50%;
+        border-radius: 0.05rem;
+    }
+
+}

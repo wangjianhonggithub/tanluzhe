@@ -1,0 +1,339 @@
+*,div,ul,li,ol,li,p{
+    padding:0;
+    margin:0;
+    border:0;
+    font-family: "微软雅黑", Arial, "Hiragino Sans GB", "Microsoft YaHei", STHeiti, "WenQuanYi Micro Hei", SimSun, sans-serif;
+}
+.container{
+    max-width: 70%;
+}
+/*banner*/
+.banner{
+    margin-top: 0.3rem;
+    overflow: hidden;
+}
+.banner .banner-left{
+    width: 78%;
+    float: left;
+}
+.banner .banner-left .carousel-inner img{
+    width: 100%;
+}
+.banner .banner-right{
+    float: right;
+    width: 21%;
+}
+.banner .banner-right .carousel-inner img{
+    width: 100%;
+    height: 3.05rem;
+}
+.banner .banner-right .carousel-indicators li {
+    width: 0.3rem;
+    height: 0.05rem;
+    border-radius: 0;
+    background: #fff;
+}
+.banner .banner-right .carousel-indicators .active {
+    background-color: #FF9800;
+    border: 1px solid #FF9800;
+}
+/*banner*/
+.content .item {
+    width: 100px;
+    height: 100px;
+    float: left;
+    position: relative;
+    margin-left: 0.1rem;
+}
+.content .addImg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+.content .preview,.preBlock{
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+}
+.content .delete {
+    width: 0.2rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    display: none;
+}
+.content .preBlock img {
+    display: block;
+}
+.content .upload_input{
+    display: block;
+    width: 0;
+    height: 0;
+    -webkit-opacity: 0.0;
+    /* Netscape and Older than Firefox 0.9 */
+    -moz-opacity: 0.0;
+    /* Safari 1.x (pre WebKit!) 老式khtml内核的Safari浏览器*/
+    -khtml-opacity: 0.0;
+    /* IE9 + etc...modern browsers */
+    opacity: .0;
+    /* IE 4-9 */
+    filter:alpha(opacity=0);
+    /*This works in IE 8 & 9 too*/
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    /*IE4-IE9*/
+    filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+}
+.content .top{
+    padding: 0.2rem 0;
+}
+.content .con-con{
+    border: 1px solid #bbb;
+}
+.content .con-con .title{
+    padding: 0.3rem;
+    border-bottom: 1px solid #bbb;
+}
+.content form{
+    width: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.content form label{
+    font-weight: normal;
+}
+.content form .lab{
+    display: block;
+    margin-top: 0.2rem;
+    overflow: hidden;
+}
+.content form .lab span{
+    float: left;
+    width: 20%;
+    text-align: right;
+    line-height:0.4rem;
+}
+.content form .lab .con-right{
+    float: left;
+    width: 80%;
+}
+.content form .lab input.con-right{
+    border: 1px solid #bbb;
+    background: none;
+    padding: 0.1rem;
+    border-radius: 0.1rem;
+    outline: none;
+}
+.content form .lab select.con-right{
+    border: 1px solid #bbb;
+    background: none;
+    padding: 0.1rem;
+    border-radius: 0.1rem;
+    outline: none;
+}
+.content form .lab textarea.con-right{
+    border: 1px solid #bbb;
+    background: none;
+    padding: 0.1rem;
+    border-radius: 0.1rem;
+    outline: none;
+}
+.content form .lab .con-check{
+    margin-top: 0.14rem;
+    margin-left: 1.2rem;
+}
+.content form .lab p.con-right{
+    margin-top: 0.1rem;
+    padding-left: 0.1rem;
+}
+.content form .lab .zhu{
+    float: left;
+    color: #3f51b5;
+    margin-top: 0.11rem;
+}
+.content form .lab:nth-child(8) .zhu{
+    margin-left: 1.2rem;
+    margin-top: 0.2rem;
+}
+.content form .lab:first-child input{
+    float: left;
+    margin-left: 0.68rem;
+    margin-top: 0.08rem;
+    outline: none;
+}
+.content form .file-con{
+    position: relative;
+}
+.content form .file-con .btn{
+    width: 25%;
+    background: #3F51B5;
+    color: #fff;
+    padding: 0.1rem;
+    border-radius: 0.2rem;
+    position: absolute;
+    left: 0;
+}
+.content form .tijiao{
+    margin: 0.55rem auto;
+    display: block;
+    background: #3F51B5;
+    color: #fff;
+    padding: 0.1rem;
+    width: 30%;
+    border-radius: 0.2rem;
+}
+.content form .members{
+    color: #000;
+    text-decoration: none;
+}
+
+.members-document{
+    position: fixed;
+    width: 100%;
+    height:100%;
+    background: rgba(0,0,0,0.8);
+    left: 0;
+    top:0;
+    display: none;
+    z-index: 9;
+}
+.members-document .document{
+    width: 30%;
+    margin: 1.5rem auto;
+    background: #fff;
+    height: 7rem;
+    border-radius: 0.05rem;
+    padding:0.5rem 0.2rem;
+    position: relative;
+    overflow-y: scroll;
+}
+.members-document .d-close{
+    position: absolute;
+    right: 35%;
+    top: 1rem;
+}
+.members-document .d-close a{
+    color: #fff;
+    text-decoration: none;
+}
+@media (max-width: 1660px) and (min-width: 1360px){
+    .container{
+        width: 60%;
+    }
+    .content form .lab:first-child input {
+        margin-left: 0.58rem;
+    }
+    .members-document .d-close {
+        top: 0.8rem;
+    }
+    .members-document .document {
+        margin: 1.1rem auto;
+        height: 5rem;
+    }
+    .content .item {
+        margin-left: 0.06rem;
+    }
+}
+@media screen and (max-width: 1440px){
+    .content form .lab:first-child input {
+        margin-left: 0.4rem;
+        width: 50%;
+    }
+    .content form .lab span {
+        width: 25%;
+    }
+    .content form .lab .con-right {
+        width: 75%;
+    }
+    .content .item {
+        margin-left: 0.06rem;
+        margin-top:0.06rem;
+    }
+    html{
+        font-size: 80px !important;
+    }
+    body{
+        font-size: 11px !important;
+    }
+}
+
+@media (max-width: 1366px) and (min-width: 1360px) {
+    .container{
+        width: 65%;
+    }
+    .content .item {
+        margin-left: 0.06rem;
+        margin-top:0.06rem
+    }
+    .content form .lab:first-child input {
+        margin-left: 0.38rem;
+        width: 45%;
+    }
+}
+@media screen and (max-width: 768px){
+    .container {
+        max-width: 100% !important;
+    }
+    .banner .banner-left {
+        width: 100%;
+    }
+    .banner .banner-right {
+        width: 100%;
+        margin-top: 0.1rem;
+    }
+    .banner .banner-right .carousel-inner img {
+        height: 4.05rem;
+    }
+    .content form {
+        width: 80%;
+    }
+    .content form .lab:first-child input {
+        margin-left: 0.02rem;
+        width: 50%;
+    }
+    .content form .lab:first-child{
+        height: 0.66rem !important;
+    }
+    .content form .lab span {
+        width: 100%;
+        line-height: 0.3rem;
+        text-align: left;
+    }
+    .content form .lab {
+        margin-top: 0.1rem;
+    }
+    .content form .lab .con-right {
+        width: 100%;
+    }
+    .content form .lab:nth-child(8) .zhu {
+        margin-left: 0;
+    }
+    .content form .lab .con-check {
+        margin-left: 0;
+    }
+    .content form .tijiao {
+        width: 50%;
+    }
+    .members-document .d-close {
+        right: 10%;
+    }
+    .members-document .document {
+        width: 80%;
+        height: 5rem;
+    }
+}
+@media (max-width: 375px) and (min-width: 360px){
+    .content form .file-con .btn {
+        width: 30%;
+    }
+}
+@media screen and (max-width: 320px){
+    .content form .file-con .btn {
+        width: 34%;
+    }
+}

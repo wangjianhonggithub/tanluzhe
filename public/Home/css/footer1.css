@@ -1,0 +1,130 @@
+/*footer*/
+.footer{
+    border-top: 1px solid #bbbbbb;
+    margin-top: 85px;
+    padding-top: 50px;
+}
+.footer .top{
+    overflow: hidden;
+    padding-bottom: 40px;
+}
+.footer .top .left{
+    float: left;
+    width: 65%;
+}
+.footer .top .left ul{
+    overflow: hidden;
+}
+.footer .top .left ul li{
+    float: left;
+    list-style: none;
+    width: 33.333%;
+}
+.footer .top .left ul li a{
+    display: block;
+    color: #0a0a0a;
+    line-height: 25px;
+    text-decoration: none;
+}
+.footer .top .left ul li a.title{
+    font-size: 18px;
+    color: #000;
+    padding-bottom: 16px;
+}
+.footer .top .right{
+    float: left;
+    width: 35%;
+    overflow: hidden;
+}
+.footer .top .right .er{
+    text-align: center;
+    width: 50%;
+    float: left;
+}
+.footer .top .right .er p{
+    margin-top:5px;
+}
+.footer .top .right .address{
+    width: 50%;
+    float: left;
+}
+.footer .top .right .address p{
+    margin-top:10px;
+}
+.footer .top .right .address img{
+    width: 25px;
+    margin-right:10px;
+}
+.footer .bottom{
+    border-top: 1px solid #bbbbbb;
+    background: #e1e2e3;
+    text-align: center;
+    padding: 30px 0;
+}
+.footer .bottom p{
+    line-height: 25px;
+}
+.footer .bottom a{
+    text-decoration: none;
+    color: #000;
+}
+/*footer*/
+
+
+@media (max-width: 1660px) and (min-width: 1360px){
+    .container{
+        width: 70%;
+    }
+}
+@media screen and (max-width: 1440px){
+    .footer .top .right .er {
+        width: 40%;
+    }
+    .footer .top .right .er img{
+        width: 100%;
+        padding: 10px;
+    }
+    .footer .top .right .address {
+        width: 60%;
+    }
+}
+@media (max-width: 1366px) and (min-width: 1360px) {
+    .footer .top .left {
+        width: 60%;
+    }
+    .footer .top .right {
+        width: 40%;
+    }
+    .footer .top .right .er {
+        width: 40%;
+    }
+    .footer .top .right .address {
+        width: 60%;
+    }
+}
+@media screen and (max-width: 768px){
+    .footer {
+        padding-top: 40px;
+    }
+    .footer .top .left {
+        width: 100%;
+    }
+    .footer .top .right {
+        width: 100%;
+        margin-top:30px;
+    }
+    .footer .top .right .er {
+        width: 40%;
+    }
+    .footer .top .right .er img{
+        width: 100%;
+    }
+    .footer .top .right .address {
+        width: 60%;
+        float: left;
+    }
+    .footer .top .left ul li a.title {
+        font-size: 16px;
+        padding-bottom: 20px;
+    }
+}

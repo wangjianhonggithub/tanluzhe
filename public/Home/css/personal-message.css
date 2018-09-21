@@ -1,0 +1,93 @@
+*,div,ul,li,ol,li,p{
+    padding:0;
+    margin:0;
+    border:0;
+    font-family: "微软雅黑", Arial, "Hiragino Sans GB", "Microsoft YaHei", STHeiti, "WenQuanYi Micro Hei", SimSun, sans-serif;
+}
+.container{
+    max-width: 70%;
+}
+.content{
+    overflow: hidden;
+    margin-top: 0.15rem;
+}
+.content .left .center a:nth-child(5){
+    color:#fff;
+    background:#3f51b5
+}
+.content .right{
+    float: right;
+    width: 68%;
+    margin-top: 0.2rem;
+    -webkit-box-shadow:  0 0 0.3rem #888888;
+    -moz-box-shadow:  0 0 0.3rem #888888;
+    box-shadow:  0 0 0.3rem #888888;
+    padding: 0 0.2rem 0.5rem;
+}
+.content .right .top{
+    padding: 0.15rem 0;
+    border-bottom: 1px solid #bbb;
+}
+.content .right .top span{
+    margin-left: 0.08rem;
+    font-size: 0.18rem;
+}
+.content .right .con-con ul li{
+    list-style: none;
+    border: 1px solid #bbb;
+    padding: 0.2rem;
+    overflow: hidden;
+    margin-top: 0.2rem;
+}
+.content .right .con-con ul li{
+    color: #666;
+    text-decoration: none;
+    font-size: 0.14rem;
+}
+.content .right .con-con ul li .title{
+    font-size: 0.18rem;
+    margin-bottom: 0.2rem;
+}
+.content .right .con-con ul li .time{
+    margin-top: 0.2rem;
+    border-top: 1px solid #bbb;
+    padding-top: 0.2rem;
+}
+.content .right .con-con ul li .time span{
+    display: block;
+    width: 50%;
+    float: left;
+}
+.content .right .con-con ul li .time span a{
+    color: red;
+    text-decoration: none;
+}
+
+
+@media (max-width: 1660px) and (min-width: 1360px){
+    .container{
+        width: 70%;
+    }
+}
+@media screen and (max-width: 1440px){
+    html{
+        font-size: 80px !important;
+    }
+    body{
+        font-size: 11px !important;
+    }
+}
+@media screen and (max-width: 768px){
+    .container {
+        max-width: 100% !important;
+    }
+    .content .right {
+        width: 100%;
+    }
+    .content .right .con-con ul li .nr .con-bottom .img-left {
+        width: 30%;
+    }
+    .content .right .con-con ul li .nr .con-bottom .nr-right {
+        width: 100%;
+    }
+}

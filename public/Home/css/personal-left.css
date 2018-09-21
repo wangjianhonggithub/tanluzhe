@@ -1,0 +1,119 @@
+.content .left {
+    float: left;
+    width: 30%;
+}
+.content .left .top{
+    width: 100%;
+    -webkit-box-shadow:  0 0 0.3rem #888888;
+    -moz-box-shadow:  0 0 0.3rem #888888;
+    box-shadow:  0 0 0.3rem #888888;
+    padding: 0.45rem 0.25rem;
+    margin-top:0.2rem;
+    overflow: hidden;
+}
+.content .left .top .head{
+    border-radius: 50%;
+    float: left;
+    width: 1rem;
+    height: 1rem;
+}
+.content .left .top .head-right{
+    float: left;
+    width: 50%;
+    margin-top: 0.3rem;
+    margin-left: 0.1rem;
+}
+.content .left .top .head-right p:last-child{
+    margin-top: 0.1rem;
+}
+.content .left .top .head-right p:last-child a{
+    color: #ffa31c;
+    text-decoration: none;
+}
+.content .left .center{
+    background: #fff;
+    border-radius: 0.05rem;
+    border: 1px solid #bbb;
+    margin-top: 0.2rem;
+    text-align: center;
+    overflow: hidden;
+}
+.content .left .center a{
+    color: #666;
+    text-decoration: none;
+    width: 25%;
+    float: left;
+    display: block;
+    height: 100%;
+    padding: 0.2rem 0;
+    position: relative;
+}
+.content .left .center a .message{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: red;
+    color: #fff;
+    width: 0.3rem;
+    height: 0.3rem;
+    text-align: center;
+    line-height: 0.3rem;
+    border-radius: 50%;
+}
+.content .left .bottom{
+    width: 100%;
+    -webkit-box-shadow:  0 0 0.3rem #888888;
+    -moz-box-shadow:  0 0 0.3rem #888888;
+    box-shadow:  0 0 0.3rem #888888;
+    margin-top: 0.2rem;
+    padding: 0.42rem 0.2rem;
+    margin-bottom: 0.2rem;
+    background: #f2f4f7;
+}
+.content .left .bottom ul li{
+    list-style: none;
+    border-bottom: 1px solid #bbb;
+    font-size: 0.16rem;
+}
+.content .left .bottom ul li:last-child{
+    border: none;
+}
+.content .left .bottom ul li a{
+    color: #666;
+    text-decoration: none;
+    display: block;
+    padding: 0.3rem;
+}
+.content .left .bottom ul li a span{
+    margin-left: 0.1rem;
+}
+.content .left .bottom ul li a{
+    position: relative;
+}
+.content .left .bottom ul li a .message{
+    position: absolute;
+    top: 16%;
+    left: 4%;
+    background: red;
+    color: #fff;
+    width: 0.3rem;
+    height: 0.3rem;
+    text-align: center;
+    line-height: 0.3rem;
+    border-radius: 50%;
+}
+
+
+@media screen and (max-width: 1440px){
+    html{
+        font-size: 80px !important;
+    }
+    body{
+        font-size: 11px !important;
+    }
+}
+@media screen and (max-width: 768px){
+    .content .left {
+        width: 100%;
+    }
+}
