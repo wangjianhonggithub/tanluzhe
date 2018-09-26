@@ -323,3 +323,4 @@ Route::get('/SoftwareInfo/{id}.html', 'Home\ListInfoController@SoftwareInfo');
  * 广告列表
  */
 Route::get('/banner/test', 'Home\BannerController@test');
+Route::get('/transactions/test', 'Home\transactionsController@test');
