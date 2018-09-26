@@ -324,3 +324,7 @@ Route::get('/SoftwareInfo/{id}.html', 'Home\ListInfoController@SoftwareInfo');
  */
 Route::get('/banner/test', 'Home\BannerController@test');
 Route::get('/transactions/test', 'Home\transactionsController@test');
+
+
+Route::any('/complaints', 'Home\ComplaintsController@doComplaints');//投诉
+Route::any('/complaintsList', 'Home\ComplaintsController@getList');//留言列表
