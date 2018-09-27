@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Cookie;
+use Illuminate\Support\Facades\DB;
 
 /**
  * 账户中心
@@ -21,9 +23,14 @@ class AccountsController extends Controller
     /**
      * 获取用户余额数量
      */
-    public function info()
+    static public function info()
     {
-
+        $res = DB::table('accounts')->where('uid',Cookie::get('UserId'))->first();
+        if($res){
+            return $res->balance;
+        }else{
+            return '您暂时没有余额信息';
+        }
     }
 
     /**

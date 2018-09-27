@@ -23,10 +23,12 @@ class ComplaintsController extends Controller
     {
         $list = DB::table('complaints')
             ->join('users', 'users.id', '=', 'complaints.uid')
-            ->select('users.username','users.header_pic','complaints.content','complaints.addtime','complaints.id')
+            ->select('users.username','users.header_pic','complaints.content','complaints.addtime','complaints.id','complaints.title','complaints.contact')
+            ->latest('complaints.addtime')
             ->get();
         return $list;
     }
+
 
     /**
      * 跳转到留言表
@@ -35,7 +37,7 @@ class ComplaintsController extends Controller
      */
     public function create()
     {
-        return view('Home.Complaints.index');
+        return view('Home.UserCenter.Complaint');
     }
 
     /**
@@ -45,6 +47,8 @@ class ComplaintsController extends Controller
     {
         $data['uid'] = Cookie::get('UserId');
         $data['content'] = $request->input('content');
+        $data['title'] = $request->input('title');
+        $data['contact'] = $request->input('contact');
         $data['addtime'] = date('Y-m-d H:i:s');
         $res = DB::table('complaints')->insert($data);
         if($res){
@@ -55,6 +59,6 @@ class ComplaintsController extends Controller
             $result['status'] = 0;
         }
 
-        return $result;
+        return view('Home.UserCenter.Complaint');
     }
 }

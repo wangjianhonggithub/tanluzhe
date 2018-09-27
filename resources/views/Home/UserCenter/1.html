@@ -17,11 +17,11 @@
 
 <div class="content">
     <div class="container">
-       @include('Home.Public.CenterLeft')
+        @include('Home.Public.CenterLeft')
         <div class="right">
             <div class="top">
                 <img src="/Home/images/icon(6).png">
-                <span>我的上传</span>
+                <span>下载记录</span>
             </div>
             <div class="con-con">
                 <!-- <ul class="title">
@@ -33,11 +33,20 @@
                         <p class="con-title">
                             <span>标题</span>
                             <span>类型</span>
-                            <span>状态</span>
-                            <span>时间</span>
-                            <span>下载次数</span>
-                            <span>操作</span>
+                            <span>大小</span>
+                            <span>操作时间</span>
                         </p>
+                        @foreach($DownInfo as $downInfo)
+                        <p class="wz-con">
+                            <a href="/SoftwareInfo/{{$downInfo->id}}.html">
+                                <span>{{$downInfo->softwarename}}</span>
+                                <span>{{$downInfo->caty_name}}</span>
+                                <span>{{$downInfo->software_size}}</span>
+                                <span>{{$downInfo->created_at}}</span>
+                            </a>
+                        </p>
+                        @endforeach
+                        {{ $DownInfo->links() }}
                     </li>
                 </ul>
 

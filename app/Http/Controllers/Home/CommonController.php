@@ -9,6 +9,8 @@
 namespace App\Http\Controllers\Home;
 
 
+use Illuminate\Support\Facades\DB;
+use Cookie;
 class CommonController
 {
     /**
@@ -42,4 +44,26 @@ class CommonController
         $result['SoftwareHotDown'] = $data;
         return $result;
     }
+
+    /**
+     * @param $num 被扣除的金额
+     */
+    static public function consumption($num)
+    {
+        $res = DB::table('accounts')->where('uid',Cookie::get('UserId'))->first();
+        if($res){
+            if($res->balance>=$num){
+                return DB::table('accounts')->where('uid',Cookie::get('UserId'))->decrement('balance',$num);
+            }else{
+                $result['status'] = 3;
+                $result['msg'] = '账户余额不足';
+            }
+        }else{
+            $result['status'] = 2;
+            $result['msg'] = '暂时没有您的账户';
+        }
+
+        return $result;
+    }
+
 }

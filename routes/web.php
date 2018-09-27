@@ -326,5 +326,21 @@ Route::get('/banner/test', 'Home\BannerController@test');
 Route::get('/transactions/test', 'Home\transactionsController@test');
 
 
+Route::get('/complaints/create', 'Home\ComplaintsController@create');//投诉
 Route::any('/complaints', 'Home\ComplaintsController@doComplaints');//投诉
 Route::any('/complaintsList', 'Home\ComplaintsController@getList');//留言列表
+
+
+//广告
+Route::any('/Banner/Advertising', 'Home\BannerController@Advertising');//广告投放
+Route::any('/Banner/RuleAds', 'Home\BannerController@RuleAds');//广告投放
+
+
+/*
+ * 竞价
+ * */
+Route::any('/Auction/showAll', 'Home\AuctionController@showAll');//查看竞价
+Route::any('/Auction/showone/{id}', 'Home\AuctionController@showone');//查看指定的竞价
+Route::any('/Auction/typing', 'Home\AuctionController@typing');//执行用户的竞价动作
+Route::any('/Auction/test', 'Home\AuctionController@test');//执行用户的竞价动作
+
