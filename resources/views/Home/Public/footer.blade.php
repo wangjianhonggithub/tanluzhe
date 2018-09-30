@@ -24,11 +24,21 @@
                         <a href="javascript:;">怎么下载软件</a> -->
                     </li>
                      <li>
-                        <a href="" class="title">投诉建议</a>
+                        <a href="/complaints/create" class="title">投诉建议</a>
                     </li>
                     <li>
                         <a href="" class="title">广告投放</a>
                     </li>
+                    <li>
+                        <a href="/Banner/Advertising" class="title">轮播广告竞拍</a>
+                    </li>
+                    <li>
+                        <a href="/Banner/stAdvertising" class="title">静态广告竞拍</a>
+                    </li>
+                    <li>
+                        <a href="/Auction/myBiddersOfBanner" class="title">我参与的竞拍</a>
+                    </li>
+
                 </ul>
             </div>
             <div class="right">

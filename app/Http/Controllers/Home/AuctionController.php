@@ -17,55 +17,6 @@ use Illuminate\Support\Facades\DB;
 
 class AuctionController extends Controller
 {
-    /**
-     * 查看竞价排名（轮播）
-     */
-    public function showAll()
-    {
-        return view('Home.Banner.Ranking',['banList'=>BannerController::BannerList()]);
-    }
-
-    /**
-     * 查看竞价排名（静态）
-     */
-    public function stcshowAll()
-    {
-        return view('Home.Banner.StcRanking',['banList'=>BannerController::adv_imagesList()]);
-    }
-    
-    /**
-     * 查看某一个的竞价排名
-     */
-    public function showone($id)
-    {
-
-        $list = DB::table('auction')->where('banners_id',$id)->get();
-        if($list->isEmpty()){
-            $data['sta'] = 0;
-            $data['msg'] = '暂时没有人来竞拍';
-        }else{
-            $data['sta'] = 1;
-            $data['data'] = $list;
-        }
-       return $data;
-    }
-
-    /**
-     * 查看某一个的竞价排名
-     */
-    public function stCshowone($where)
-    {
-
-        $list = DB::table('auction')->where('adv_images',$where)->get();
-        if($list->isEmpty()){
-            $data['sta'] = 0;
-            $data['msg'] = '暂时没有人来竞拍';
-        }else{
-            $data['sta'] = 1;
-            $data['data'] = $list;
-        }
-        return $data;
-    }
     
     /**
      * 录入竞价信息
@@ -145,8 +96,110 @@ class AuctionController extends Controller
         }
     }
 
+
+    /**
+     * 查看用户参与的所有的竞拍
+     */
+    public function myBiddersOfBanner()
+    {
+        $list = DB::table('auction')->where('uid',Cookie::get('UserId'))->get();
+        foreach ($list as $k=>$v){
+            $list[$k]->title = 'ss';
+            if($v->banners_id==0){
+
+            }else{
+                $list[$k]->title = DB::table('banners')->where('id',34)->first()->title;
+            }
+            if($list[$k]->adv_images==''){
+
+            }else{
+                $list[$k]->title = self::Initialization()['adv_images'][$v->adv_images];
+            }
+        }
+        return $list;
+    }
+
+    /**
+     * 初始化广告信息
+     */
+    static public function Initialization($id = 0){
+
+        $list = DB::table('banners')->where('id',$id)->first();
+
+        $data['adv_images'] = array(
+            'ind_s'=>'首轮播上',
+            'ind_x'=>'首轮播下',
+            'ind_z'=>'首页中部',
+            'list_h'=>'列表横幅',
+            'list_s'=>'表轮播上',
+            'list_x'=>'列表轮播下',
+            'info_bz'=>'详情轮播左',
+            'info_bc'=>'详情轮播中',
+            'info_by'=>'详情轮播右',
+            'info_z'=>'详情中部',
+            'info_bcy'=>'详情轮播中右',
+            ''=>''
+        );
+
+        return $data;
+    }
+
+    /**
+     *
+     */
+
+    /**
+     * 查看竞价排名（轮播）
+     */
+    public function showAll()
+    {
+        return view('Home.Banner.Ranking',['banList'=>BannerController::BannerList()]);
+    }
+
+    /**
+     * 查看竞价排名（静态）
+     */
+    public function stcshowAll()
+    {
+        return view('Home.Banner.StcRanking',['banList'=>BannerController::adv_imagesList()]);
+    }
+
+    /**
+     * 查看某一个的竞价排名
+     */
+    public function showone($id)
+    {
+
+        $list = DB::table('auction')->where('banners_id',$id)->get();
+        if($list->isEmpty()){
+            $data['sta'] = 0;
+            $data['msg'] = '暂时没有人来竞拍';
+        }else{
+            $data['sta'] = 1;
+            $data['data'] = $list;
+        }
+        return $data;
+    }
+
+    /**
+     * 查看某一个的竞价排名(静态)
+     */
+    public function stCshowone($where)
+    {
+
+        $list = DB::table('auction')->where('adv_images',$where)->get();
+        if($list->isEmpty()){
+            $data['sta'] = 0;
+            $data['msg'] = '暂时没有人来竞拍';
+        }else{
+            $data['sta'] = 1;
+            $data['data'] = $list;
+        }
+        return $data;
+    }
+
     public function test()
     {
-        $this->typingtow();
+        $list = $this->myBiddersOfBanner();
     }
 }

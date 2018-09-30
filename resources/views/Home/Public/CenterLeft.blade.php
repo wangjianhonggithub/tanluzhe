@@ -61,6 +61,12 @@
                     @endif
                 </a>
             </li>
+            <li>
+                <a href="/Banner/myBannerList">
+                    <img src="/Home/images/icon(6).png">
+                    <span>我的广告位</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

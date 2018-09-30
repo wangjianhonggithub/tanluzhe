@@ -359,5 +359,6 @@ Route::any('/Auction/showone/{id}', 'Home\AuctionController@showone');//查看�
 Route::get('/Auction/stcshowone/{where}', 'Home\AuctionController@stCshowone');//查看指定的竞价(静态)
 Route::any('/Auction/typing', 'Home\AuctionController@typing');//执行用户的竞价动作 （轮播广告）
 Route::post('/Auction/stcTyping', 'Home\AuctionController@stcTyping');//执行用户的竞价动作 （静态）
+Route::get('/Auction/myBiddersOfBanner', 'Home\AuctionController@myBiddersOfBanner');//我参与的竞价
 Route::any('/Auction/test', 'Home\AuctionController@test');//测试
 

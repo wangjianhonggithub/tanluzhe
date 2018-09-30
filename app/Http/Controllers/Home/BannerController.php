@@ -14,7 +14,8 @@ use Cookie;
 class BannerController extends Controller
 {
 
-
+    
+    
     /**
      * 加载用户自己拥有的广告位
      */
@@ -59,7 +60,6 @@ class BannerController extends Controller
         $data['banner_img'] = '';
         $data['description'] = '';
         $data['url'] = '';
-        $data['title'] = '';
         $result['sta'] = DB::table('banners_users')->where('id',$id)->update($data);
         if($result['sta']){
             $result['msg'] = '删除成功';

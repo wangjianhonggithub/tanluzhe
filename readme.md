@@ -73,4 +73,6 @@
 
 [加载自己的广告位](http://www.explorernetwork.com/Banner/myBannerList "查看静态广告排名")
 
+[加载自己的广告位](http://www.explorernetwork.com/Auction/myBiddersOfBanner "我参与的竞拍")
+
 
