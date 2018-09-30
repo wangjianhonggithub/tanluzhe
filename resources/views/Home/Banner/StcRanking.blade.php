@@ -107,9 +107,19 @@
                         请选择您要查看的广告位排名：
                     </div>
                     <select name="">
-                        @foreach($banList as $banList)
-                            <option onclick="list({{$banList->id}})" value="id">{{$banList->title}}</option>
-                        @endforeach
+
+                            <option onclick="list('ind_s')" value="ind_s">首轮播上</option>
+                            <option onclick="list('ind_x')" value="ind_x">首轮播下</option>
+                            <option onclick="list('ind_z')" value="ind_z">首页中部</option>
+                            <option onclick="list('list_h')" value="list_h">列表横幅</option>
+                            <option onclick="list('list_s')" value="list_s">列表轮播上</option>
+                            <option onclick="list('list_x')" value="list_x">列表轮播下</option>
+                            <option onclick="list('info_bz')" value="info_bz">详情轮播左</option>
+                            <option onclick="list('info_bc')" value="info_bc">详情轮播中</option>
+                            <option onclick="list('info_by')" value="info_by">详情轮播右</option>
+                            <option onclick="list('info_z')" value="info_z">详情中部</option>
+                            <option onclick="list('info_bcy')" value="info_bcy">详情轮播中右</option>
+
                     </select>
                 </div>
                 <div id="box" class="boxtwo">
@@ -144,7 +154,7 @@
                     </div>
                 </div>
             </div>
-            <div class="adfoot">
+            <div onclick="demo()" class="adfoot">
                 想知道广告投放规则？请点击这里查看<a href="/Banner/RuleAds">《广告投放规则》</a>
             </div>
         </div>
@@ -159,9 +169,8 @@
 <script src="/Home/js/personal.js"></script>
 <script src="/Home/js/public.js"></script>
 <script>
-
-   function list(id){
-        var re = $.get("/Auction/showone/"+id,
+    function list(id){
+        var re = $.get("/Auction/stcshowone/"+id,
                 function(data){
                     console.log(data);
                     $('.twocontent').remove()// 删除标签

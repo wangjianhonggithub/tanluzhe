@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 class AuctionController extends Controller
 {
     /**
-     * 查看竞价排名
+     * 查看竞价排名（轮播）
      */
     public function showAll()
     {
@@ -26,11 +26,37 @@ class AuctionController extends Controller
     }
 
     /**
+     * 查看竞价排名（静态）
+     */
+    public function stcshowAll()
+    {
+        return view('Home.Banner.StcRanking',['banList'=>BannerController::adv_imagesList()]);
+    }
+    
+    /**
      * 查看某一个的竞价排名
      */
     public function showone($id)
     {
+
         $list = DB::table('auction')->where('banners_id',$id)->get();
+        if($list->isEmpty()){
+            $data['sta'] = 0;
+            $data['msg'] = '暂时没有人来竞拍';
+        }else{
+            $data['sta'] = 1;
+            $data['data'] = $list;
+        }
+       return $data;
+    }
+
+    /**
+     * 查看某一个的竞价排名
+     */
+    public function stCshowone($where)
+    {
+
+        $list = DB::table('auction')->where('adv_images',$where)->get();
         if($list->isEmpty()){
             $data['sta'] = 0;
             $data['msg'] = '暂时没有人来竞拍';
@@ -52,14 +78,13 @@ class AuctionController extends Controller
         $data['status'] = 0;
         unset($data['_token']);
         //判断是第几次竞拍
-        if(self::typingJudge($data['banners_id'])){
+        if(self::typingJudge($data)){
             //第二次竞拍
-            self::typingSecond(self::typingJudge($data['banners_id']),$data);
+            self::typingSecond(self::typingJudge($data),$data);
           }else{
             //第一次竞拍
             self::typingFirst($data);
         }
-
     }
 
     //第一次竞拍
@@ -98,13 +123,19 @@ class AuctionController extends Controller
     }
 
     /**
+     * 判断是第几次竞拍
      * @param $banners_id 参与竞拍的广告
      * @return bool
      */
-    static function typingJudge($banners_id)
+    static function typingJudge($data)
     {
         $where['uid'] = Cookie::get('UserId');
-        $where['banners_id'] = $banners_id;
+        if(isset($data['banners_id'])){
+            $where['banners_id'] = $data['banners_id'];
+        }else{
+            //如果没有 banners_id，就代表的是静态的广告（二开真难！！！！！！）
+            $where['adv_images'] = $data['adv_images'];
+        }
         $where['status'] = 0;
         $res = DB::table('auction')->where($where)->first();
         if($res){
