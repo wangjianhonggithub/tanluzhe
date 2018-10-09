@@ -338,16 +338,15 @@ Route::any('/Banner/Advertising', 'Home\BannerController@Advertising');//广告�
 Route::any('/Banner/stAdvertising', 'Home\BannerController@stAdvertising');//广告竞拍界面 静态
 Route::any('/Banner/RuleAds', 'Home\BannerController@RuleAds');//广告投放规则
 Route::get('/Banner/myBannerList', 'Home\BannerController@myBannerList');//加载用户自己拥有的广告位
-
 Route::get('/Banner/addMyBanner/{id}', 'Home\BannerController@addMyBanner');//为自己的广告位添加广告
 Route::post('/Banner/doaddMyBanner', 'Home\BannerController@doaddMyBanner');//执行添加动作
 Route::get('/Banner/delMyBanner/{id}', 'Home\BannerController@delMyBanner');//将自己的广告位上的广告位删除
-
-
 Route::get('/Banner/addAdv/{id}', 'Home\BannerController@addAdv');//跳转到广告位添加页面
 Route::any('/Banner/doAddAdv', 'Home\BannerController@doAddAdv');//执行广告添加动作
-
 Route::get('/Banner/test', 'Home\BannerController@test');//测试
+
+
+Route::get('/adv/test', 'Home\Adv_ImagesController@test');//测试
 
 
 /*

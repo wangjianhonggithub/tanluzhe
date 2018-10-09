@@ -13,9 +13,9 @@ class IndexController extends Controller
 {
     public function show()
     {
-    	$BannerOne = Banner::GetBannerSelect(1);
-    	$BannerTwo = Banner::GetBannerSelect(2);
-    	$BannerThree = Banner::GetBannerSelect(3);
+    	$BannerOne = BannerController::displayBanner(1);
+    	$BannerTwo = BannerController::displayBanner(2);
+    	$BannerThree = BannerController::displayBanner(3);
         $AdvImage = AdvImage::GetAdvImageOne(1);
         $Caty = Caty::GetCatyHomeAll();
         $software = DB::table('software')->join('users', 'users.id', '=', 'software.uid')->where('software.softwaretype','=',$Caty[0]->id)->where('software.is_status','=',1)->select('software.*','users.nickname')->orderBy('software.id','desc')->limit(9)->get();

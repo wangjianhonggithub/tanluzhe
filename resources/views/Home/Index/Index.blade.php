@@ -29,7 +29,7 @@
             <div class="carousel-inner" role="listbox">
                 @foreach($BannerOne as $ov)
                 <div class="item">
-                    <a href="javascript:;">
+                    <a href="{{$ov->url}}">
                        <img src="{{$ov->banner_img}}">
                     </a>
                 </div>
@@ -58,7 +58,7 @@
             <div class="carousel-inner" role="listbox">
                  @foreach($BannerTwo as $tv)
                 <div class="item">
-                    <a href="javascript:;">
+                    <a href="{{$tv->url}}">
                        <img src="{{$tv->banner_img}}">
                     </a>
                 </div>

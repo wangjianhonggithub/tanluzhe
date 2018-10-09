@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="/Home/css/header.css">
     <link rel="stylesheet" href="/Home/css/footer.css">
     <link rel="stylesheet" href="/Home/css/personal-left.css">
-    <style type="text/css">
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<style type="text/css">
         html{
             font-size: 100px;
         }
@@ -63,47 +66,82 @@
 <body>
 
 @include('Home.Public.header')
+<script>
+    $.validator.setDefaults({
+        submitHandler: function() {
+            alert("提交事件!");
+        }
+    });
 
+    $().ready(function() {
+// 在键盘按下并释放及提交后验证提交表单
+        $("#signupForm").validate({
+            rules: {
+                title: "required",
+                lastname: "required",
+            },
+            messages: {
+                firstname: "标题不能是空的",
+                url: "url不能是空的",
+            }
+        });
+    });
+
+</script>
 <div class="content">
-    <div class="container">
-        @include('Home.Public.CenterLeft')
-        <div class="right">
-            <form action="/Banner/doaddMyBanner" method="post">
-                <input type='hidden' name='_token' value='{{ csrf_token() }}'>
-            <div class="top">
-                <img src="/Home/images/icon(4).png">
-                <span>添加广告位</span>
+    <div class="form-group">
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul style="color:red;">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-            <div class="con-con">
-                <div class="conitem">
-                    <div class="itemleft">标题</div>
-                    <input class="itemright" type="text" name="" id="" value="" />
-                </div>
-                <div class="conitem">
-                    <div class="itemleft">URL</div>
-                    <input class="itemright" type="text" name="" id="" value="" />
-                </div>
-                <div class="conitem">
-                    <div class="itemleft">描述</div>
-                    <input class="itemright" type="text" name="" id="" value="" />
-                </div>
-                <div class="conitema">
-                    <div class="itemleft">图片展示</div>
-                    <img src="" class="rightpic"/>
-                </div>
-                <div class="conitem">
-                    <div class="itemleft">上传轮播图</div>
-                    <div class="rightfile">
-                        <input  type="file" name="" id="" value="" />
-                    </div>
-                </div>
-            </div>
-            <button type="submit" style="width: 100px;height: 30px;text-align: center;
-            display: block;line-height: 30px;margin: 0 auto;font-size: 20px;border-radius: 5px;background-color: #0b75cb;color: #ffffff">确认上传 </button>
-            </form>
-        </div>
-
+        @endif
     </div>
+    <div class="container">
+@include('Home.Public.CenterLeft')
+<div class="right">
+<form action="/Banner/doaddMyBanner" method="post" enctype="multipart/form-data">
+    <input type='hidden' name='_token' value='{{ csrf_token() }}'>
+    <input type='hidden' name='id' value='{{ $id }}'>
+<div class="top">
+    <img src="/Home/images/icon(4).png">
+    <span>添加广告位</span>
+</div>
+<div class="con-con">
+    <div class="conitem">
+        <div class="itemleft">标题</div>
+        <label for="title"></label>
+        <input class="itemright" type="text" id="title" name="title" id="" value="" />
+    </div>
+    <div class="conitem">
+        <div class="itemleft">URL</div>
+        <label for="title" id="url "></label>
+        <input class="itemright" id="url" type="text" name="url" id="" value="" />
+    </div>
+    <div class="conitem">
+        <div class="itemleft">描述</div>
+        <input class="itemright" type="text" name="description" id="" value="" />
+    </div>
+{{--                <div class="conitema">
+        <div class="itemleft">图片展示</div>
+        <img src="" class="rightpic"/>
+    </div>--}}
+    <div class="conitem">
+        <div class="itemleft">上传轮播图</div>
+        <div class="rightfile">
+            <input style="display: block" type="file" name="banner_img" id="" value="" />
+        </div>
+    </div>
+</div>
+<button type="submit" style="width: 100px;height: 30px;text-align: center;
+display: block;line-height: 30px;margin: 0 auto;font-size: 20px;border-radius: 5px;background-color: #0b75cb;color: #ffffff">确认上传 </button>
+</form>
+</div>
+
+</div>
 </div>
 
 @include('Home.Public.footer')

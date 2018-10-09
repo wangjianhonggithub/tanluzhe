@@ -116,7 +116,7 @@ class AuctionController extends Controller
                 $list[$k]->title = self::Initialization()['adv_images'][$v->adv_images];
             }
         }
-        return $list;
+        return view('Home.Banner.myBiddersOfBanner',['list'=>$list]);
     }
 
     /**
@@ -198,6 +198,7 @@ class AuctionController extends Controller
         return $data;
     }
 
+    
     public function test()
     {
         $list = $this->myBiddersOfBanner();

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Banner;
 use App\Model\AdvImage;
+use App\Service\Common;
 use App\Model\Caty;
 use DB;
 use App\Service\Sorting;
@@ -31,26 +32,30 @@ class BannerController extends Controller
      */
     public function addMyBanner($id)
     {
-        return view('Home.Banner.addMyBanner');
+        return view('Home.Banner.addMyBanner',['id'=>$id]);
     }
 
     public function doaddMyBanner(Request $request)
     {
-        $Banner = New Banner;
         $uploadname = 'banner_img';
         $dir = 'uploads/imgpath';
-        $Banner->c_id = isset($request->c_id) ? $request->c_id :1;
-        $Banner->url = isset($request->url) ? $request->url :'';
-        $Banner->description = $request->description;
-        $Banner->title = $request->title;
-        $Banner->banner_img = Common::DirUpload($uploadname,$request,$dir);
-        if ($Banner->save()) {
-            return redirect('/Admin/Banner')->with('info','创建成功');
-        }else{
-            return back()->with('info','创建失败');
+        $id = $request->id;
+        $data['c_id'] = isset($request->c_id) ? $request->c_id :1;
+        $data['url'] = isset($request->url) ? $request->url :'';
+        $data['description'] = $request->description;
+        $data['title'] = $request->title;
+        if($data['title']==null){
+            return back()->withErrors(['标题不能为空！']);
         }
+        $data['banner_img'] = Common::DirUpload($uploadname,$request,$dir);
+        if(DB::table('banners_users')->where('id',$id)->update($data)){
+            return redirect('/Banner/myBannerList');
+        }else{
+            return back()->withErrors(['广告添加失败！']);
+        }
+
     }
-    
+
     /**
      * 删除广告
      * @param $id
@@ -136,12 +141,47 @@ class BannerController extends Controller
     }
 
 
-    /*
-     * 测试
-     * */
-    public function test()
+    /**
+     * 展示轮播图，优先展示用户的轮播图，如果用户的没有被拍卖，就展示管理员默认的广告
+     * @param int $c_id 分类
+     * @return array
+     */
+    static public function displayBanner($c_id=0)
     {
-        dump($this->adv_imagesList());
+        $ban = DB::table('banners')->get();
+        $ban_users = DB::table('banners_users')->where('status',1)->get();
+        foreach ($ban as $k=>$v){
+            $banners[$v->id] = $v;
+        }
+        foreach ($ban_users as $k=>$v){
+            $banners_users[$v->id] = $v;
+        }
+        foreach ($banners as $k=>$v){
+            if(isset($banners_users[$k])){
+                $banners[$k] = $banners_users[$k];
+            }
+            $banners_users[$k] = $v;
+        }
+        $data = array();
+        if($c_id==0){
+            $data =  $banners;
+        }else{
+            foreach ($banners as $key=>$val){
+                if($val->c_id==$c_id){
+                    $data[] = $val;
+                }
+            }
+        }
+
+        return $data;
+    }
+    /*
+ * 测试
+ * */
+    public function test($c_id=1)
+    {
+
+
 
     }
 

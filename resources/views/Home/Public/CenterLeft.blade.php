@@ -64,7 +64,13 @@
             <li>
                 <a href="/Banner/myBannerList">
                     <img src="/Home/images/icon(6).png">
-                    <span>我的广告位</span>
+                    <span>我的广告位(轮播图)</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Banner/myBannerList">
+                    <img src="/Home/images/icon(6).png">
+                    <span>我的广告位（静态广告）</span>
                 </a>
             </li>
         </ul>
