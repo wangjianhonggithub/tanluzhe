@@ -68,7 +68,7 @@
                 </a>
             </li>
             <li>
-                <a href="/Banner/myBannerList">
+                <a href="/adv/advList">
                     <img src="/Home/images/icon(6).png">
                     <span>我的广告位（静态广告）</span>
                 </a>

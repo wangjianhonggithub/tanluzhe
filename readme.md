@@ -75,4 +75,6 @@
 
 [加载自己的广告位](http://www.explorernetwork.com/Auction/myBiddersOfBanner "我参与的竞拍")
 
+[加载自己的广告位](http://www.explorernetwork.com/adv/advList "我的静态广告列表")
+
 

@@ -347,6 +347,9 @@ Route::get('/Banner/test', 'Home\BannerController@test');//测试
 
 
 Route::get('/adv/test', 'Home\Adv_ImagesController@test');//测试
+Route::get('/adv/advList', 'Home\Adv_ImagesController@advList');//静态广告列表
+Route::get('/adv/add/{id}', 'Home\Adv_ImagesController@add');//跳转添加页面
+Route::post('/adv/create', 'Home\Adv_ImagesController@create');//执行广告添加动作
 
 
 /*
