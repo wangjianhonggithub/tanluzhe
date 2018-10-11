@@ -66,4 +66,20 @@ class CommonController
         return $result;
     }
 
+    /**
+     * @return array
+     */
+    static public function getAdvList()
+    {
+        $list = DB::table('adv_images')->get();
+        unset($list[2]->id);
+        $data = array();
+        foreach ($list[2] as $k=>$v){
+            if($v == Cookie::get('UserId')){
+                $data[] = $k;
+            }
+        }
+        return $data;
+    }
+
 }
