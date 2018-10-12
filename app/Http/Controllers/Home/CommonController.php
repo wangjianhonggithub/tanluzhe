@@ -82,4 +82,32 @@ class CommonController
         return $data;
     }
 
+    /**
+     * @param $uid 用户id
+     * 判断某个用户的账户是否存在，不存在就创建
+     */
+    static public function isSetUserAccounts($uid)
+    {
+        $result = DB::table('accounts')->where('uid',$uid)->first();
+        if(empty($result)) {
+            $data['uid'] = $uid;
+            $data['balance'] = 0;
+            $data['addtime'] = date('Y-m-d H:i:s');
+            DB::table('accounts')->insert($data);
+        }
+
+    }
+
+    /**
+     * 对象转换成数组
+     */
+    static public function toArr($object)
+    {
+        $new  = array();
+        foreach ($object as $k=>$v){
+            $new[$k] = $v;
+        }
+
+        return $new;
+    }
 }

@@ -322,10 +322,17 @@ Route::get('/SoftwareInfo/{id}.html', 'Home\ListInfoController@SoftwareInfo');
 
 
 //---------------------------------------------二次功能添加---------------------------------------
+//前台新加功能
+
+Route::resource('/Admin/Banner', 'Admin\BannerController');
+
+//后台新加功能
 /**
  * 广告列表
  */
-Route::get('/transactions/test', 'Home\transactionsController@test');
+Route::get('/Bidders/test', 'Admin\BiddersController@test');
+Route::get('/Bidders/BiddersList', 'Admin\BiddersController@BiddersList');//竞拍列表
+Route::get('/Bidders/getresult/{id}', 'Admin\BiddersController@getresult');//结束轮播图广告竞拍
 
 
 Route::get('/complaints/create', 'Home\ComplaintsController@create');//投诉
