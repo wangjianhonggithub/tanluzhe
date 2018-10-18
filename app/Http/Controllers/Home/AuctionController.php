@@ -20,19 +20,10 @@ class AuctionController extends Controller
 {
     public function test()
     {
-        $this->adv_results();
+        $res = $this->adv_results('ind_x');
+        dump($res);
     }
-
-    //------------------------------------- 结束静态广告竞拍star
-
-    public function adv_results()
-    {
-        $list = DB::table('auction')->where('adv_images','!=' ,'')->get();
-        dump($list);
-
-    }
-
-    //------------------------------------- 结束静态广告竞拍end
+    
 
     /**
      * 录入竞价信息
@@ -229,26 +220,53 @@ class AuctionController extends Controller
         $res = DB::table('banners_users')->insert($list);//将广告赋予竞拍成功的人
         if($res){
             //如果广告竞拍成功，将竞拍成功的问和竞拍失败的订单状态进行修改
-            DB::table('auction')->where('status',0)->where('money',$money)->update(['status'=>3]);
-            DB::table('auction')->where('status',0)->where('banners_id', '>=', 0)->update(['status'=>2]);
+            DB::table('auction')->where('status',0)->where('money',$money)->where('banners_id',$banners_id)->update(['status'=>3]);
+            DB::table('auction')->where('status',0)->where('banners_id',$banners_id)->update(['status'=>2]);
             DB::table('banners')->where('id',$banners_id)->update(['status'=>1]);
+            self::backMoney();
         }
 
     }
 
+    //------------------------------------- 结束静态广告竞拍star
+
+    static public function adv_results($adv_images)
+    {
+        $money = DB::table('auction')->where('status','0')->where('adv_images',$adv_images)->max('money');
+        if($money==null){
+            return array('status'=>1,'msg'=>'没有找到用户竞拍的记录');
+        }
+        $data = DB::table('auction')->where('status','0')->where('adv_images',$adv_images)->where('money',$money)->first();//获取被竞拍到的最高价格的人
+        //将用户的uid，赋给静态广告的id
+        $res = DB::table('adv_images')->where('id',3)->update([$adv_images=>$data->uid]);
+        if($res){
+            // 如果修改成功
+            DB::table('auction')->where('status',0)->where('adv_images',$adv_images)->update(['status'=>2]);
+            DB::table('auction')->where('status',2)->where('money',$money)->update(['status'=>3]);
+            DB::table('adv_images')->where('id',4)->update([$adv_images=>1]);
+            DB::table('adv_images')->where('id',5)->update([$adv_images=>date('Y-m-d H:i:s')]);
+            self::backMoney();
+            return array('status'=>0,'msg'=>'广告竞拍成功结束');
+        }else{
+            return array('status'=>2,'msg'=>'用户没有改变');
+        }
+
+    }
+
+    //------------------------------------- 结束静态广告竞拍end
+    
     /**
      * 将金额返还给未能竞拍成功的用户
      */
-    public function backMoney()
+    static public function backMoney()
     {
         $list = DB::table('auction')->where('status',2)->get();
         foreach ($list as $key=>$val){
             CommonController::isSetUserAccounts($val->uid);//判断用户是否存在，不存在就创建个新的账户
-            $res = DB::table('auction')->where('auction_id',$val->auction_id)->where('banners_id', '>=', 0)->update(['status'=>4]);
+            $res = DB::table('auction')->where('auction_id',$val->auction_id)->update(['status'=>4]);
             if($res){
                 DB::table('accounts')->where('uid',$val->uid)->increment('balance',$val->money);
             }
-
         }
     }
 

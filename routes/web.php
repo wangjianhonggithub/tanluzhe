@@ -371,3 +371,17 @@ Route::post('/Auction/stcTyping', 'Home\AuctionController@stcTyping');//执行�
 Route::get('/Auction/myBiddersOfBanner', 'Home\AuctionController@myBiddersOfBanner');//我参与的竞价
 Route::any('/Auction/test', 'Home\AuctionController@test');//测试
 
+
+/**
+ * 软件竞价
+ */
+Route::get('/soft/test', 'Home\SoftwareController@test');//软件
+Route::get('/soft/Softwarelist', 'Home\SoftwareController@Softwarelist');//我的软件为的竞价列表
+Route::get('/soft/bidPrice', 'Home\SoftwareController@bidPrice');//我的软件为的竞价列表
+Route::get('/soft/allList', 'Home\SoftwareController@allList');//没有被竞拍的软件位，
+Route::get('/soft/allSoft', 'Home\SoftwareController@allSoft');//所有的软件位
+Route::get('/soft/bidPrice', 'Home\SoftwareController@bidPrice');//跳转竞价页面
+Route::get('/soft/doBidPrice/{softwaretype}/{order}', 'Home\SoftwareController@doBidPrice');//执行竞价动作
+
+
+

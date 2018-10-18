@@ -3,11 +3,11 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="c45bcc3b-bac8-452c-b9ff-7dc33a45ed97" name="上传下载" url="http://explorernetwork.sir6.cn">
-        <fileTransfer host="explorernetwork.sir6.cn" port="2" password="dff9dff9dfe0dfc1dfe2dfe6dfd8dff0dfe0dfc4" username="explorernetwork.sir6.cn">
+        <fileTransfer host="explorernetwork.sir6.cn" port="21" password="dff9dff9dfe0dfc1dfe2dfe6dfd8dff0dfe0dfc4" username="explorernetwork.sir6.cn">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
           </advancedOptions>
-          <option name="port" value="2" />
+          <option name="port" value="21" />
         </fileTransfer>
       </webServer>
     </option>
