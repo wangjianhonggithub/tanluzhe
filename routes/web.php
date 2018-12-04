@@ -341,7 +341,7 @@ Route::get('/complaintsList', 'Home\ComplaintsController@getList');//投诉列�
 
 
 //广告
-Route::any('/Banner/Advertising', 'Home\BannerController@Advertising');//广告竞拍界面 轮播图
+/*Route::any('/Banner/Advertising', 'Home\BannerController@Advertising');//广告竞拍界面 轮播图
 Route::any('/Banner/stAdvertising', 'Home\BannerController@stAdvertising');//广告竞拍界面 静态
 Route::any('/Banner/RuleAds', 'Home\BannerController@RuleAds');//广告投放规则
 Route::get('/Banner/myBannerList', 'Home\BannerController@myBannerList');//加载用户自己拥有的广告位
@@ -350,8 +350,9 @@ Route::post('/Banner/doaddMyBanner', 'Home\BannerController@doaddMyBanner');//�
 Route::get('/Banner/delMyBanner/{id}', 'Home\BannerController@delMyBanner');//将自己的广告位上的广告位删除
 Route::get('/Banner/addAdv/{id}', 'Home\BannerController@addAdv');//跳转到广告位添加页面
 Route::any('/Banner/doAddAdv', 'Home\BannerController@doAddAdv');//执行广告添加动作
-Route::get('/Banner/test', 'Home\BannerController@test');//测试
+Route::get('/Banner/test', 'Home\BannerController@test');//测试*/
 
+Route::resource('/carousel', 'Home\CarouselController');
 
 Route::get('/adv/test', 'Home\Adv_ImagesController@test');//测试
 Route::get('/adv/advList', 'Home\Adv_ImagesController@advList');//静态广告列表
@@ -376,12 +377,22 @@ Route::any('/Auction/test', 'Home\AuctionController@test');//测试
  * 软件竞价
  */
 Route::get('/soft/test', 'Home\SoftwareController@test');//软件
-Route::get('/soft/Softwarelist', 'Home\SoftwareController@Softwarelist');//我的软件为的竞价列表
-Route::get('/soft/bidPrice', 'Home\SoftwareController@bidPrice');//我的软件为的竞价列表
+Route::get('/soft/Softwarelist', 'Home\SoftwareController@Softwarelist');//我的软件位的竞价列表
+Route::get('/soft/bidPrice', 'Home\SoftwareController@bidPrice');//我的软件位的竞价列表
 Route::get('/soft/allList', 'Home\SoftwareController@allList');//没有被竞拍的软件位，
 Route::get('/soft/allSoft', 'Home\SoftwareController@allSoft');//所有的软件位
 Route::get('/soft/bidPrice', 'Home\SoftwareController@bidPrice');//跳转竞价页面
 Route::get('/soft/doBidPrice/{softwaretype}/{order}', 'Home\SoftwareController@doBidPrice');//执行竞价动作
+Route::resource('/billboard','Admin\BillboardController');
+Route::get('/billboard/verify','Admin\BillboardController@verify');
+Route::post('/billboard/verify','Admin\BillboardController@doverify');
+Route::get('/billboardAuc/{billboards_position}', 'Admin\BillboardController@getresultAuc');//结束竞拍
 
-
-
+/**
+ * 广告牌竞拍
+ */
+Route::get('/auc', 'Home\BillboardController@show');
+Route::get('/createauc/{id}', 'Home\BillboardController@createAuc');
+Route::post('/auc', 'Home\BillboardController@auction');
+Route::get('/auc/list/{view}', 'Home\BillboardController@list');//我的广告牌
+Route::post('/auc/markup', 'Home\BillboardController@markup');//我的广告牌

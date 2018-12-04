@@ -15,8 +15,8 @@ use Cookie;
 class BannerController extends Controller
 {
 
-    
-    
+
+
     /**
      * 加载用户自己拥有的广告位
      */
@@ -93,7 +93,7 @@ class BannerController extends Controller
         $balance = AccountsController::info();//获取用户余额信息
         return view('Home.Banner.stAdvertising',['banList'=>self::adv_imagesList(),'balance'=>$balance]);
     }
-    
+
     /**
      * 广告列表(轮播图)
      * @return mixed
@@ -110,10 +110,10 @@ class BannerController extends Controller
      */
     static public function adv_imagesList()
     {
-       return $list = DB::table('adv_images')->get();
+        return $list = DB::table('adv_images')->get();
 
     }
-    
+
     /*
      * 广告投放规则
      * */
@@ -137,7 +137,7 @@ class BannerController extends Controller
      */
     public function doAddAdv()
     {
-        
+
     }
 
 
@@ -175,15 +175,5 @@ class BannerController extends Controller
 
         return $data;
     }
-    /*
- * 测试
- * */
-    public function test($c_id=1)
-    {
 
-
-
-    }
-
-    
 }

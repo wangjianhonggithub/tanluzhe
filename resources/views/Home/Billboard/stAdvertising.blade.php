@@ -141,7 +141,6 @@
     </style>
 </head>
 <body>
-
 @include('Home.Public.header')
 
 <div class="content">
@@ -153,22 +152,16 @@
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left ">
-                <div class="adtitle">
-                    <span>广告投放</span><span>&gt;</span><span>静态广告位</span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left ">
                 <div class="adheader">
-                    <span>广告位竞价（静态广告位）</span>
+                    <span>输入加价金额</span>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <form action="/Auction/typing" method="post">
+                <form action="/auc/markup" method="post">
                     <input type='hidden' name='_token' value='{{ csrf_token() }}'>
+                    <input type='hidden' name='id' value='{{$id}}'>
                     <div class="admain">
                     <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2  col-sm-10 col-sm-offset-1  col-xs-10 col-xs-offset-1 ">
                         <div class="mainone">
@@ -178,28 +171,8 @@
                                 <span class="item-b">余额不足？立即<a href="#">充值</a></span>
                             </div>
                         </div>
-                        <div class="maintwo">
-                            <div class="twoleft">请选择投放的广告位：</div>
-                            <div class="tworight">
-
-                                <select name="adv_images">
-                                    <option value="ind_s">首轮播上</option>
-                                    <option value="ind_x">首轮播下</option>
-                                    <option value="ind_z">首页中部</option>
-                                    <option value="list_h">列表横幅</option>
-                                    <option value="list_s">列表轮播上</option>
-                                    <option value="list_x">列表轮播下</option>
-                                    <option value="info_bz">详情轮播左</option>
-                                    <option value="info_bc">详情轮播中</option>
-                                    <option value="info_by">详情轮播右</option>
-                                    <option value="info_z">详情中部</option>
-                                    <option value="info_bcy">详情轮播中右</option>
-                                </select>
-
-                            </div>
-                        </div>
                         <div class="mainthree">
-                            <div class="threeleft">请填写您竞价的价格：</div>
+                            <div class="threeleft">您的加价金额：</div>
                             <div class="threeright">
                                 <input type="text" name="money" id="" value="" />
                             </div>

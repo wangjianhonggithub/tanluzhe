@@ -33,7 +33,8 @@
                         <a href="/Banner/Advertising" class="title">轮播广告竞拍</a>
                     </li>
                     <li>
-                        <a href="/Banner/stAdvertising" class="title">静态广告竞拍</a>
+                        <a href="/auc" class="title">广告牌竞拍</a>
+                        {{--<a href="/Banner/stAdvertising" class="title">静态广告竞拍</a>--}}
                     </li>
                     <li>
                         <a href="/Auction/myBiddersOfBanner" class="title">我参与的竞拍</a>

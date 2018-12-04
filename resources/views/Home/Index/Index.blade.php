@@ -85,12 +85,12 @@
         <div class="banner-left">
             <div class="img-div">
                 <a href="javascript:;">
-                   <img src="{{$AdvImage->ind_s}}">
+                   <img src="{{$AdvImage[1]->billboards_pic? $AdvImage[1]->billboards_pic : $AdvImage[1]->billboards_default_pic}}">
                 </a>
             </div>
             <div class="img-div">
                 <a href="javascript:;">
-                   <img src="{{$AdvImage->ind_x}}">
+                   <img src="{{$AdvImage[2]->billboards_pic? $AdvImage[2]->billboards_pic : $AdvImage[2]->billboards_default_pic}}">
                 </a>
             </div>
         </div>
@@ -196,7 +196,8 @@
 <div class="guang">
     <div class="container">
         <a href="javascript:;">
-            <img src="{{$AdvImage->ind_z}}">
+            {{--<img src="{{$AdvImage[3]->billboards_default_pic}}">--}}
+            <img src="{{$AdvImage[3]->billboards_pic? $AdvImage[3]->billboards_pic : $AdvImage[3]->billboards_default_pic}}">
         </a>
     </div>
 </div>

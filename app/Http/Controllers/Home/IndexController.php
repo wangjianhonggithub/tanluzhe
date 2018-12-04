@@ -16,7 +16,12 @@ class IndexController extends Controller
     	$BannerOne = BannerController::displayBanner(1);
     	$BannerTwo = BannerController::displayBanner(2);
     	$BannerThree = BannerController::displayBanner(3);
-        $AdvImage = AdvImage::GetAdvImageOne(1);
+        $list = DB::table('billboards')->where('billboards_position','>',0)->get();
+        foreach ($list as $key=>$val){
+            $AdvImage[$val->billboards_position] = $val;
+        }
+//        $AdvImage = AdvImage::GetAdvImageOne(1); 广告牌第一次设计展示（表没有删除）
+
         $Caty = Caty::GetCatyHomeAll();
         $software = DB::table('software')->join('users', 'users.id', '=', 'software.uid')->where('software.softwaretype','=',$Caty[0]->id)->where('software.is_status','=',1)->select('software.*','users.nickname')->orderBy('software.id','desc')->limit(9)->get();
         foreach ($software as $key => $value) {
