@@ -3,31 +3,14 @@
 namespace Yansongda\Pay\Gateways\Alipay;
 
 use Yansongda\Pay\Contracts\GatewayInterface;
-use Yansongda\Pay\Log;
+use Yansongda\Pay\Events;
+use Yansongda\Pay\Exceptions\GatewayException;
+use Yansongda\Pay\Exceptions\InvalidConfigException;
+use Yansongda\Pay\Exceptions\InvalidSignException;
 use Yansongda\Supports\Collection;
-use Yansongda\Supports\Config;
 
 class PosGateway implements GatewayInterface
 {
-    /**
-     * Config.
-     *
-     * @var Config
-     */
-    protected $config;
-
-    /**
-     * Bootstrap.
-     *
-     * @author yansongda <me@yansongda.cn>
-     *
-     * @param Config $config
-     */
-    public function __construct(Config $config)
-    {
-        $this->config = $config;
-    }
-
     /**
      * Pay an order.
      *
@@ -36,46 +19,26 @@ class PosGateway implements GatewayInterface
      * @param string $endpoint
      * @param array  $payload
      *
+     * @throws GatewayException
+     * @throws InvalidConfigException
+     * @throws InvalidSignException
+     *
      * @return Collection
      */
     public function pay($endpoint, array $payload): Collection
     {
-        $payload['method'] = $this->getMethod();
+        $payload['method'] = 'alipay.trade.pay';
         $payload['biz_content'] = json_encode(array_merge(
             json_decode($payload['biz_content'], true),
             [
-                'product_code' => $this->getProductCode(),
+                'product_code' => 'FACE_TO_FACE_PAYMENT',
                 'scene'        => 'bar_code',
             ]
         ));
-        $payload['sign'] = Support::generateSign($payload, $this->config->get('private_key'));
+        $payload['sign'] = Support::generateSign($payload);
 
-        Log::debug('Paying A Pos Order:', [$endpoint, $payload]);
+        Events::dispatch(Events::PAY_STARTED, new Events\PayStarted('Alipay', 'Pos', $endpoint, $payload));
 
-        return Support::requestApi($payload, $this->config->get('ali_public_key'));
-    }
-
-    /**
-     * Get method config.
-     *
-     * @author yansongda <me@yansongda.cn>
-     *
-     * @return string
-     */
-    protected function getMethod()
-    {
-        return 'alipay.trade.pay';
-    }
-
-    /**
-     * Get productCode config.
-     *
-     * @author yansongda <me@yansongda.cn>
-     *
-     * @return string
-     */
-    protected function getProductCode()
-    {
-        return 'FACE_TO_FACE_PAYMENT';
+        return Support::requestApi($payload);
     }
 }

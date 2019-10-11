@@ -27,13 +27,14 @@
                 <ul class="con-wz">
                     <li>
                         <p class="con-title">
-                            <span>标题</span>
-                            <span>操作</span>
+                            <span style='width: 33%;text-align: center;'>标题</span>
+                            <!-- <span style='width: 33%;text-align: center;'>图片</span> -->
+                            <span style='width: 33%;text-align: center;'>操作</span>
                         </p>
                         @foreach($list as $va)
                             <p class="wz-con">
                                 <a href="">
-                                    <span>
+                                    <span style='width: 33%;text-align: center;'>
 
                                         @switch($va)
                                         @case('ind_s')
@@ -85,8 +86,11 @@
                                         @endswitch
                                     </span>
                                 </a>
-                            <span>
-                                <a href="/adv/add/{{$va}}">添加广告</a>
+                           <!--  <span style='width: 33%;text-align: center;'>
+                                <img style="width: 60px; height: 60px;" src="{{$va}}"></span>
+                            </span> -->
+                            <span style='width: 33%;text-align: center;'>
+                                <a href="javascript:;">隐藏不展示</a>
                             </span>
                             </p>
                         @endforeach

@@ -154,17 +154,79 @@ class AuctionController extends Controller
     /**
      * 查看竞价排名（轮播）
      */
-    public function showAll()
-    {
-        return view('Home.Banner.Ranking',['banList'=>BannerController::BannerList()]);
+    public function showAll($id)
+    {   
+
+        $id   = $id;
+		//echo $id;die();
+        $data = BannerController::BannerList();
+
+         // $resData = DB::table('user_auc_bill')
+         //                ->join('users', 'users.id', '=', 'user_auc_bill.users_id')
+         //                ->join('banners', 'banners.id', '=', 'user_auc_bill.banners_id')
+         //                ->where('user_auc_bill.banners_id','=',$id)
+         //                ->where('user_auc_bill.status','=',2)
+         //                ->select('user_auc_bill.*', 'users.username','banners.title')
+         //                ->orderBy('user_auc_bill.money','desc')
+         //                ->paginate(10);
+
+        if ($data) {
+        
+            $resData = DB::table('user_auc_bill')
+                        ->join('users', 'users.id', '=', 'user_auc_bill.users_id')
+                        ->join('banners', 'banners.id', '=', 'user_auc_bill.banners_id')
+                        ->where('user_auc_bill.banners_id','=',$id)
+                        ->where('user_auc_bill.status','=',2)
+                        ->select('user_auc_bill.*', 'users.username','banners.title')
+                        ->orderBy('user_auc_bill.money','desc')
+                        ->paginate(10);
+
+
+            if ($resData) {
+                foreach ($resData as $key => $value) {
+                    $resData[$key]->key = $key+1;
+                }
+            }
+
+
+        }
+        // var_dump();die;
+        return view('Home.Banner.Ranking',['banList'=>$data,'resData'=>$resData,'id'=>$id]);
     }
 
     /**
      * 查看竞价排名（静态）
      */
-    public function stcshowAll()
+    public function stcshowAll($id)
     {
-        return view('Home.Banner.StcRanking',['banList'=>BannerController::adv_imagesList()]);
+        $id   = $id;
+
+        $data = BillboardController::BillBoardList();
+        
+        if ($data) {
+        
+            $resData = DB::table('user_auc_bill')
+                        ->join('users', 'users.id', '=', 'user_auc_bill.users_id')
+                        ->join('billboards', 'billboards.billboards_position', '=', 'user_auc_bill.billboards_position')
+                        ->where('billboards.billboards_position','=',$id)
+                        ->where('user_auc_bill.status','=',2)
+                        ->select('user_auc_bill.*', 'users.username','billboards.billboards_title')
+                        ->orderBy('user_auc_bill.money','desc')
+                        ->paginate(10);
+
+
+            if ($resData) {
+                foreach ($resData as $key => $value) {
+                    $resData[$key]->key = $key+1;
+                }
+            }
+
+
+        }
+        // var_dump();die;
+        return view('Home.Banner.StcRanking',['banList'=>$data,'resData'=>$resData,'id'=>$id]);
+
+        // return view('Home.Banner.StcRanking',['banList'=>BannerController::adv_imagesList()]);
     }
 
     /**

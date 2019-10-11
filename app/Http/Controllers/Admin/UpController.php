@@ -16,6 +16,7 @@ class UpController extends Controller
      */
     public function index()
     {
+		$information = db::table('information')->get();
         if (isset($_GET['is_status'])) {
             $where['software.is_status'] = $_GET['is_status'];
             $page['is_status'] = $_GET['is_status'];
@@ -70,6 +71,7 @@ class UpController extends Controller
             'data'=>$software,
             'Caty'=>$Caty,
             'page'=>$page,
+			'information'=>$information,
         ]);
     }
 
@@ -143,6 +145,7 @@ class UpController extends Controller
            return back()->with('info','更改失败');
         }
     }
+	
     /**
      * Remove the specified resource from storage.
      *
@@ -161,6 +164,45 @@ class UpController extends Controller
             return back()->with('info','删除失败');
         }
     }
+	public function status(){
+		$id = $_POST['id'];
+		$data['is_status'] = 1;
+
+		$re = db::table('software')->where('id',$id)->update($data);
+		if ($re) {
+			
+			$uid = DB::table('software')->where('id',$_POST['id'])->value('uid');
+			
+			/*** 插入信息提示表*/
+			$news['uid'] =$uid;  
+			$news['msg'] = $_POST['msg'];
+			$news['create_time'] = time();  
+			$xinnews = DB::table('news')->insert($news);
+           return redirect('/Admin/Up')->with('info','审核成功');
+        }else{
+           return back()->with('info','审核失败');
+        }
+	}
+	public function UNstatus(){
+		$id = $_POST['id'];
+		$data['is_status'] = 0;
+
+		$re = db::table('software')->where('id',$id)->update($data);
+		if ($re) {
+			
+			$uid = DB::table('software')->where('id',$_POST['id'])->value('uid');
+			
+			/*** 插入信息提示表*/
+			$news['uid'] =$uid;  
+			$news['msg'] = $_POST['msg'];
+			$news['create_time'] = time();  
+			$xinnews = DB::table('news')->insert($news);
+           return redirect('/Admin/Up')->with('info','审核成功');
+        }else{
+           return back()->with('info','审核失败');
+        }
+	}
+	
 
     /**
      * 执行个性推荐
@@ -172,6 +214,7 @@ class UpController extends Controller
      */
     public function person($id)
     {
+		
         $data['is_person'] = 1;
         $data['recommen_time'] = time();
         $result = Software::ChangeUpdate($id,$data);
@@ -230,5 +273,20 @@ class UpController extends Controller
         $data = Software::GetOne($id);
         $pathToFile = '.'.$data->software;
         return response()->download($pathToFile);
+    }
+
+    public function UNdelete()
+    {
+        $id = $_GET['id'];
+        $del = Software::GetOne($id);
+        if (file_exists('.'.$del['software']) && !empty($del['software'])) {
+            $delete_img = unlink('.'.$del['software']);
+        }
+
+        if (Software::DataDelete($id)) {
+            echo json_encode(['code'=>1,'msg'=>'删除成功']);
+        }else{
+            echo json_encode(['code'=>0,'msg'=>'删除失败']);
+        }
     }
 }

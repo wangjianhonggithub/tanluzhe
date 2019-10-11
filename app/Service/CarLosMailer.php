@@ -4,7 +4,7 @@
  * @Author: Administrator
  * @Date:   2018-04-10 14:25:00
  * @Last Modified by:   Administrator
- * @Last Modified time: 2018-04-11 11:06:59
+ * @Last Modified time: 2019-06-06 15:56:50
  */
 //引入邮件类
 namespace App\Service;
@@ -51,6 +51,7 @@ class CarLosMailer
 		    $mail->Body    = $nickname.'，您好！<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们收到了来自您的密码找回请求。本次验证码为:<b style="color:red">'.$code.'</b>，
 请在10分钟内输入验证码完成本次安全操作!';
 		    $mail->send();
+// var_dump($mail->send());die;
 		    Cookie::queue('EmailCode',$code,600);
 		    return json_encode(['code'=>1,'message'=>'邮件发送成功']);
 		} catch (Exception $e) {

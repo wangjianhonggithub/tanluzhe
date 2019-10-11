@@ -72,17 +72,17 @@
     <div class="container">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                @foreach($SoftwareShuff as $Shuff)
                 <div class="swiper-slide">
+                    @foreach($SoftwareShuff['shuff1'] as $Shuff1)
                     <div class="big">
-                        <a href="/SoftwareInfo/{{$Shuff->id}}.html">
-                            <div class="title">{{$Shuff->softwarename}}</div>
+                        <a href="/SoftwareInfo/{{$Shuff1->id}}.html">
+                            <div class="title">{{$Shuff1->softwarename ? $Shuff1->softwarename : '暂无数据'}}</div>
                             <div class="nr">
-                                {{$Shuff->description}}
+                                {{$Shuff1->description ? $Shuff1->description : '暂无数据'}}
                             </div>
                             <div class="shang">
-                                <p>资源大小：{{$Shuff->software_size}}</p>
-                                @if($Shuff->comment >= 5)
+                                <p>资源大小：{{$Shuff1->software_size?$Shuff1->software_size:'暂无'}}</p>
+                                @if($Shuff1->comment >= 5)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -90,7 +90,7 @@
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 4)
+                                    @elseif($Shuff1->comment >= 4)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -98,7 +98,7 @@
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1-h.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 3)
+                                    @elseif($Shuff1->comment >= 3)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -106,7 +106,7 @@
                                         <img src="/Home/images/star1-h.png">
                                         <img src="/Home/images/star1-h.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 2)
+                                    @elseif($Shuff1->comment >= 2)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -114,7 +114,7 @@
                                         <img src="/Home/images/star1-h.png">
                                         <img src="/Home/images/star1-h.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 1)
+                                    @elseif($Shuff1->comment >= 1)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1-h.png">
@@ -134,17 +134,19 @@
                             </div>
                         </a>
                     </div>
+                    @endforeach
                 </div>
                 <div class="swiper-slide">
+                    @foreach($SoftwareShuff['shuff2'] as $Shuff2) 
                     <div class="big">
-                        <a href="/SoftwareInfo/{{$Shuff->id}}.html">
-                            <div class="title">{{$Shuff->softwarename}}</div>
+                        <a href="/SoftwareInfo/{{$Shuff2->id}}.html">
+                            <div class="title">{{$Shuff2->softwarename?$Shuff2->softwarename:'暂无数据'}}</div>
                             <div class="nr">
-                                {{$Shuff->description}}
+                                {{$Shuff2->description?$Shuff2->description:'暂无数据'}}
                             </div>
                             <div class="shang">
-                                <p>资源大小：{{$Shuff->software_size}}</p>
-                                @if($Shuff->comment >= 5)
+                                <p>资源大小：{{$Shuff2->software_size?$Shuff2->software_size:'暂无数据'}}</p>
+                                @if($Shuff2->comment >= 5)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -152,7 +154,7 @@
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 4)
+                                    @elseif($Shuff2->comment >= 4)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -160,7 +162,7 @@
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1-h.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 3)
+                                    @elseif($Shuff2->comment >= 3)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -168,7 +170,7 @@
                                         <img src="/Home/images/star1-h.png">
                                         <img src="/Home/images/star1-h.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 2)
+                                    @elseif($Shuff2->comment >= 2)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -176,7 +178,7 @@
                                         <img src="/Home/images/star1-h.png">
                                         <img src="/Home/images/star1-h.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 1)
+                                    @elseif($Shuff2->comment >= 1)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1-h.png">
@@ -196,17 +198,19 @@
                             </div>
                         </a>
                     </div>
+                    @endforeach
                 </div>
                 <div class="swiper-slide">
+                    @foreach($SoftwareShuff['shuff3'] as $Shuff3)
                     <div class="big">
-                        <a href="/SoftwareInfo/{{$Shuff->id}}.html">
-                            <div class="title">{{$Shuff->softwarename}}</div>
+                        <a href="/SoftwareInfo/{{$Shuff3->id}}.html">
+                            <div class="title">{{$Shuff3->softwarename?$Shuff3->softwarename:'暂无数据'}}</div>
                             <div class="nr">
-                                {{$Shuff->description}}
+                                {{$Shuff3->description?$Shuff3->description:'暂无数据'}}
                             </div>
                             <div class="shang">
-                                <p>资源大小：{{$Shuff->software_size}}</p>
-                                @if($Shuff->comment >= 5)
+                                <p>资源大小：{{$Shuff3->software_size?$Shuff3->software_size:'暂无数据'}}</p>
+                                @if($Shuff3->comment >= 5)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -214,7 +218,7 @@
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 4)
+                                    @elseif($Shuff3->comment >= 4)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -222,7 +226,7 @@
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1-h.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 3)
+                                    @elseif($Shuff3->comment >= 3)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -230,7 +234,7 @@
                                         <img src="/Home/images/star1-h.png">
                                         <img src="/Home/images/star1-h.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 2)
+                                    @elseif($Shuff3->comment >= 2)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -238,7 +242,7 @@
                                         <img src="/Home/images/star1-h.png">
                                         <img src="/Home/images/star1-h.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 1)
+                                    @elseif($Shuff3->comment >= 1)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1-h.png">
@@ -258,17 +262,19 @@
                             </div>
                         </a>
                     </div>
+                    @endforeach
                 </div>
                 <div class="swiper-slide">
+                     @foreach($SoftwareShuff['shuff4'] as $Shuff4)
                     <div class="big">
-                        <a href="/SoftwareInfo/{{$Shuff->id}}.html">
-                            <div class="title">{{$Shuff->softwarename}}</div>
+                        <a href="/SoftwareInfo/{{$Shuff4->id}}.html">
+                            <div class="title">{{$Shuff4->softwarename?$Shuff4->softwarename:'暂无数据'}}</div>
                             <div class="nr">
-                                {{$Shuff->description}}
+                                {{$Shuff4->description?$Shuff4->description:'暂无数据'}}
                             </div>
                             <div class="shang">
-                                <p>资源大小：{{$Shuff->software_size}}</p>
-                                @if($Shuff->comment >= 5)
+                                <p>资源大小：{{$Shuff4->software_size?$Shuff4->software_size:'暂无数据'}}</p>
+                                @if($Shuff4->comment >= 5)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -276,7 +282,7 @@
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 4)
+                                    @elseif($Shuff4->comment >= 4)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -284,7 +290,7 @@
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1-h.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 3)
+                                    @elseif($Shuff4->comment >= 3)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -292,7 +298,7 @@
                                         <img src="/Home/images/star1-h.png">
                                         <img src="/Home/images/star1-h.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 2)
+                                    @elseif($Shuff4->comment >= 2)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -300,7 +306,7 @@
                                         <img src="/Home/images/star1-h.png">
                                         <img src="/Home/images/star1-h.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 1)
+                                    @elseif($Shuff4->comment >= 1)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1-h.png">
@@ -320,17 +326,19 @@
                             </div>
                         </a>
                     </div>
+                     @endforeach
                 </div>
                 <div class="swiper-slide">
+                    @foreach($SoftwareShuff['shuff5'] as $Shuff5)
                     <div class="big">
-                        <a href="/SoftwareInfo/{{$Shuff->id}}.html">
-                            <div class="title">{{$Shuff->softwarename}}</div>
+                        <a href="/SoftwareInfo/{{$Shuff5->id}}.html">
+                            <div class="title">{{$Shuff5->softwarename?$Shuff5->softwarename:'暂无数据'}}</div>
                             <div class="nr">
-                                {{$Shuff->description}}
+                                {{$Shuff5->description?$Shuff5->description:'暂无数据'}}
                             </div>
                             <div class="shang">
-                                <p>资源大小：{{$Shuff->software_size}}</p>
-                                @if($Shuff->comment >= 5)
+                                <p>资源大小：{{$Shuff5->software_size?$Shuff5->software_size:'暂无数据'}}</p>
+                                @if($Shuff5->comment >= 5)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -338,7 +346,7 @@
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 4)
+                                    @elseif($Shuff5->comment >= 4)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -346,7 +354,7 @@
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1-h.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 3)
+                                    @elseif($Shuff5->comment >= 3)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -354,7 +362,7 @@
                                         <img src="/Home/images/star1-h.png">
                                         <img src="/Home/images/star1-h.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 2)
+                                    @elseif($Shuff5->comment >= 2)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1.png">
@@ -362,7 +370,7 @@
                                         <img src="/Home/images/star1-h.png">
                                         <img src="/Home/images/star1-h.png">
                                     </p>
-                                    @elseif($Shuff->comment >= 1)
+                                    @elseif($Shuff5->comment >= 1)
                                     <p>
                                         <img src="/Home/images/star1.png">
                                         <img src="/Home/images/star1-h.png">
@@ -382,8 +390,8 @@
                             </div>
                         </a>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
         </div>
          <div class="swiper-button-prev"></div>
@@ -394,524 +402,21 @@
     </div>
 </div>
 
-<div class="guang hidden-sm hidden-lg hidden-md">
-    <div class="container">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                @foreach($SoftwareShuff as $Shuff)
-                <div class="swiper-slide">
-                    <div class="big">
-                        <a href="/SoftwareInfo/{{$Shuff->id}}.html">
-                            <div class="title">{{$Shuff->softwarename}}</div>
-                            <div class="nr">
-                                {{$Shuff->description}}
-                            </div>
-                            <div class="shang">
-                                <p>资源大小：{{$Shuff->software_size}}</p>
-                                @if($Shuff->comment >= 5)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 4)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 3)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 2)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 1)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @else
-                                    <p>
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @endif
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="big">
-                        <a href="/SoftwareInfo/{{$Shuff->id}}.html">
-                            <div class="title">{{$Shuff->softwarename}}</div>
-                            <div class="nr">
-                                {{$Shuff->description}}
-                            </div>
-                            <div class="shang">
-                                <p>资源大小：{{$Shuff->software_size}}</p>
-                                @if($Shuff->comment >= 5)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 4)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 3)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 2)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 1)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @else
-                                    <p>
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @endif
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="big">
-                        <a href="/SoftwareInfo/{{$Shuff->id}}.html">
-                            <div class="title">{{$Shuff->softwarename}}</div>
-                            <div class="nr">
-                                {{$Shuff->description}}
-                            </div>
-                            <div class="shang">
-                                <p>资源大小：{{$Shuff->software_size}}</p>
-                                @if($Shuff->comment >= 5)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 4)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 3)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 2)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 1)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @else
-                                    <p>
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @endif
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="big">
-                        <a href="/SoftwareInfo/{{$Shuff->id}}.html">
-                            <div class="title">{{$Shuff->softwarename}}</div>
-                            <div class="nr">
-                                {{$Shuff->description}}
-                            </div>
-                            <div class="shang">
-                                <p>资源大小：{{$Shuff->software_size}}</p>
-                                @if($Shuff->comment >= 5)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 4)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 3)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 2)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 1)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @else
-                                    <p>
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @endif
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="big">
-                        <a href="/SoftwareInfo/{{$Shuff->id}}.html">
-                            <div class="title">{{$Shuff->softwarename}}</div>
-                            <div class="nr">
-                                {{$Shuff->description}}
-                            </div>
-                            <div class="shang">
-                                <p>资源大小：{{$Shuff->software_size}}</p>
-                                @if($Shuff->comment >= 5)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 4)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 3)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 2)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 1)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @else
-                                    <p>
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @endif
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="big">
-                        <a href="/SoftwareInfo/{{$Shuff->id}}.html">
-                            <div class="title">{{$Shuff->softwarename}}</div>
-                            <div class="nr">
-                                {{$Shuff->description}}
-                            </div>
-                            <div class="shang">
-                                <p>资源大小：{{$Shuff->software_size}}</p>
-                                @if($Shuff->comment >= 5)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 4)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 3)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 2)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 1)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @else
-                                    <p>
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @endif
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="big">
-                        <a href="/SoftwareInfo/{{$Shuff->id}}.html">
-                            <div class="title">{{$Shuff->softwarename}}</div>
-                            <div class="nr">
-                                {{$Shuff->description}}
-                            </div>
-                            <div class="shang">
-                                <p>资源大小：{{$Shuff->software_size}}</p>
-                                @if($Shuff->comment >= 5)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 4)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 3)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 2)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 1)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @else
-                                    <p>
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @endif
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="big">
-                        <a href="/SoftwareInfo/{{$Shuff->id}}.html">
-                            <div class="title">{{$Shuff->softwarename}}</div>
-                            <div class="nr">
-                                {{$Shuff->description}}
-                            </div>
-                            <div class="shang">
-                                <p>资源大小：{{$Shuff->software_size}}</p>
-                                @if($Shuff->comment >= 5)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 4)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 3)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 2)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @elseif($Shuff->comment >= 1)
-                                    <p>
-                                        <img src="/Home/images/star1.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @else
-                                    <p>
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                        <img src="/Home/images/star1-h.png">
-                                    </p>
-                                    @endif
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-         <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-        <div class="fixed-guang">
-            <p>赞助推荐</p>
-        </div>
-    </div>
-</div>
+
 <!--广告位-->
 
 <!--最新上线-->
 <div class="new">
     <div class="container">
         <div class="top">
-            搜索结果 <span><input type="radio" name="1" checked="checked"> 最新 &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="1"> 最热<a href="/SeachSoftWare?id={{$CatyNav->id}}&keyword={{$keyword}}">全部</a><a href="/SeachSoftWare?id={{$CatyNav->id}}&keyword={{$keyword}}&charge=0">付费</a><a href="/SeachSoftWare?id={{$CatyNav->id}}&keyword={{$keyword}}&charge=1">免费</a></span>
+            搜索结果 
+			<span  class="radiochecked" data-id="{{$CatyNav->id}}">
+				<input type="radio" name="radio" value="1" checked="checked" id="NEWSLIST"> 最新 &nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="radio" name="radio" value="2" id="HOTLIST"> 最热
+				<a href="/SeachSoftWare?id={{$CatyNav->id}}&keyword={{$keyword}}&hot=''">全部</a>
+				<a class="fufei" href="/SeachSoftWare?id={{$CatyNav->id}}&keyword={{$keyword}}&charge=0">付费</a>
+				<a class="mianfei" href="/SeachSoftWare?id={{$CatyNav->id}}&keyword={{$keyword}}&charge=1">免费</a>
+			</span>
         </div>
         <div class="content">
             <div class="con-con">
@@ -984,7 +489,7 @@
                                 <div class="nr-con">{{$Recommended->description}}</div>
                                 <div class="nr-biao">
                                     <p>上传时间：<?= substr($Recommended->created_at,0,10) ?></p>
-                                    <p>上传者：{{$Recommended->nickname}}</p>
+                                    <p>上传者：<?= substr($Recommended->nickname,0,10) ?></p>
                                     @if($Recommended->comment >= 5)
                                     <p><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"></p>
                                     @elseif($Recommended->comment >= 4)
@@ -1025,6 +530,35 @@
 <script>
     $(".advertising .container .banner-right .carousel-inner .item").eq(0).addClass("active");
     $(".hottest .container .content .con-top ul li").eq(0).addClass("active");
+	
+	$('.radiochecked').click(function(){
+        var hot = $('input[name="radio"]:checked').val();
+        var id = $(this).attr('data-id');
+		var keyword = "{{$keyword}}";
+        if (hot == 1) {
+            $('.fufei').attr('href','/SeachSoftWare?id='+id+'&charge=0&keyword='+keyword+'&hot=1');
+            $('.mianfei').attr('href','/SeachSoftWare?id='+id+'&charge=1&keyword='+keyword+'&hot=1');
+        }else{
+            $('.fufei').attr('href','/SeachSoftWare?id='+id+'&charge=0&keyword='+keyword+'&hot=2');
+            $('.mianfei').attr('href','/SeachSoftWare?id='+id+'&charge=1&keyword='+keyword+'&hot=2');
+        }
+    })
+	$(function(){
+		var hotUrl = "{{$_GET['hot']}}";
+		 if (hotUrl != null) {
+			if (hotUrl == 1) {
+				$('#NEWSLIST').attr('checked','checked');
+			}else{
+				$('#HOTLIST').attr('checked','checked');
+			}
+		}else{
+			$('#NEWSLIST').attr('checked','checked');
+		}
+	})
+   
+	
+
+	
     var mySwiper = new Swiper ('.swiper-container', {
 
         autoplay:true,
@@ -1047,7 +581,7 @@
                     }else{
                         var str2 = '<span class="hot">付费</span></div>';
                     }
-                    var str3 = '<div class="nr-con">'+obj.description+'</div><div class="nr-biao"><p>上传时间：'+obj.created_at.substring(0,10)+'</p><p>上传者：'+obj.nickname+'</p>'
+                    var str3 = '<div class="nr-con">'+obj.description+'</div><div class="nr-biao"><p>上传时间：'+obj.created_at.substring(0,10)+'</p><p>上传者：'+obj.nickname.substring(0,10)+'</p>'
                     if(obj.comment >= 5){
                         var str4  = '<p><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"></p></div>';
                     }else if(obj.comment >= 4){

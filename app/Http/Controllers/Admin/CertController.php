@@ -16,6 +16,8 @@ class CertController extends Controller
      */
     public function index()
     {
+		//审核信息
+		$information = db::table('information')->get();
         if (isset($_GET['is_cert'])) {
             $where['users.is_cert'] = $_GET['is_cert'];
             $page['is_cert'] = $_GET['is_cert'];
@@ -44,6 +46,7 @@ class CertController extends Controller
         return view('/Admin/List/CertList',[
             'data'=>$Certs,
             'page'=>$page,
+			'information'=>$information,
         ]);
     }
 
@@ -120,7 +123,7 @@ class CertController extends Controller
                  * 插入信息提示表
                  */
                 $news['uid'] =$GetOne->uid;  
-                $news['msg'] = '恭喜您,您的认证信息已经审核通过了';
+                $news['msg'] = $_GET['msg'];
                 $news['create_time'] = time();
                 $xinnews = DB::table('news')->insert($news);
                 if ($xinnews) {
@@ -148,7 +151,7 @@ class CertController extends Controller
                  * 插入信息提示表
                  */
                 $news['uid'] =$GetOne->uid;  
-                $news['msg'] = '很遗憾您的认证信息审核未通过,原因是:'.$_GET['msg'];
+                $news['msg'] = $_GET['msg'];
                 $news['create_time'] = time();  
                 $xinnews = DB::table('news')->insert($news);
                 if ($xinnews) {
@@ -176,6 +179,17 @@ class CertController extends Controller
            return redirect('/Admin/Cert')->with('info','删除成功');
         }else{
            return back()->with('info','删除失败');
+        }
+    }
+
+    public function CertDelete()
+    {
+        $id = $_GET['id'];
+        $res = Cert::DataDelete($id);
+        if ($res) {
+            echo json_encode(['code'=>1,'msg'=>'删除成功']);
+        }else{
+            echo json_encode(['code'=>0,'msg'=>'删除失败']);
         }
     }
 }

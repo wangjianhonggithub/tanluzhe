@@ -128,10 +128,24 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        if (UserComment::DataDelete($id)) {
-            return back()->with('info','删除成功');
+        $res = UserComment::DataDelete($id);
+
+
+        if ($res) {
+            return redirect('/Admin/Comment')->with('info','删除成功');
         }else{
             return back()->with('info','删除失败');
+        }
+    }
+
+    public function CommentDelete()
+    {
+        $id = $_GET['id'];
+        $res = UserComment::DataDelete($id);
+        if ($res) {
+            echo json_encode(['code'=>1,'msg'=>'删除成功']);
+        }else{
+            echo json_encode(['code'=>0,'msg'=>'删除失败']);
         }
     }
 }

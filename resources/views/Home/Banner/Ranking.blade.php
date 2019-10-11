@@ -66,7 +66,7 @@
             border-bottom: 1px solid #bbb;
         }
         .twocontent{
-
+            height: 80px;
         }
         .twoc{
             float: left;
@@ -106,9 +106,12 @@
                     <div class="oneleft">
                         请选择您要查看的广告位排名：
                     </div>
-                    <select name="">
+                    <select onchange="list()" id="list" name="">
                         @foreach($banList as $banList)
-                            <option onclick="list({{$banList->id}})" value="id">{{$banList->title}}</option>
+                                <!-- <a href="/Auction/showAll/{$banList->id}" > -->
+                                    <option  value="{{$banList->id}}" {{ $banList->id == $id ?  'selected' : '' }}>{{$banList->title}}</option>
+                                <!-- </a> -->
+                            
                         @endforeach
                     </select>
                 </div>
@@ -127,21 +130,22 @@
                             当前排名
                         </div>
                     </div>
-
+                    @foreach($resData as $banList)
                     <div class="twocontent">
                         <div class="twoc">
-                           zhangs
+                           {{$banList->title}}
                         </div>
                         <div class="twoc">
-                            张三
+                            {{$banList->username}}
                         </div>
                         <div class="twoc">
-                            50.00
+                            {{$banList->money}}
                         </div>
                         <div class="twoc">
-                            1
+                            {{$banList->key}}
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
             <div class="adfoot">
@@ -160,25 +164,27 @@
 <script src="/Home/js/public.js"></script>
 <script>
 
-   function list(id){
-        var re = $.get("/Auction/showone/"+id,
-                function(data){
-                    console.log(data);
-                    $('.twocontent').remove()// 删除标签
-                    if(data.sta==1){
-                        var ht = '';
-                        $.each(data.data, function(i,val){
-                            ht +='<div class="twocontent"><div class="twoc">'+'zhangsan'
-                            ht +='</div><div class="twoc">'+'zhangsan'
-                            ht +='</div><div class="twoc">'+'zhangsan'
-                            ht +='</div><div class="twoc">'+'zhangsan'
-                            ht += '</div>'
-                        });
-                        $(".boxtwo").append(ht);//追加标签
-                    }else{
-                        alert(data.msg);
-                    }
-                });
+   function list(){
+        // var re = $.get("/Auction/showone/"+id,
+        //         function(data){
+        //             console.log(data);
+        //             $('.twocontent').remove()// 删除标签
+        //             if(data.sta==1){
+        //                 var ht = '';
+        //                 $.each(data.data, function(i,val){
+        //                     ht +='<div class="twocontent"><div class="twoc">'+'zhangsan'
+        //                     ht +='</div><div class="twoc">'+'zhangsan'
+        //                     ht +='</div><div class="twoc">'+'zhangsan'
+        //                     ht +='</div><div class="twoc">'+'zhangsan'
+        //                     ht += '</div>'
+        //                 });
+        //                 $(".boxtwo").append(ht);//追加标签
+        //             }else{
+        //                 alert(data.msg);
+        //             }
+        //         });
+        var val=$('#list').val()        
+        window.location.href= '/Auction/showAll/'+val;
     }
 </script>
 </body>

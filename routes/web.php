@@ -30,14 +30,21 @@ Route::group(['middleware'=>'CheckLogin'],function(){
 		/**
 		 * 后台管理员模块 administrator
 		 */
+        Route::get('/Admin/Administrator/delete', 'Admin\AdministratorController@admindelete');
 		Route::get('/Admin/Administrator/UpdatePassword', 'Admin\AdministratorController@UpdatePassword');
 		Route::post('/Admin/Administrator/DoUpdatePassword', 'Admin\AdministratorController@DoUpdatePassword');
 		Route::resource('/Admin/Administrator', 'Admin\AdministratorController');
+
 		/**
 		 * 软件分类管理 Caty
 		 */
 		Route::get('/Admin/CatyDelete', 'Admin\CatyController@CatyDelete');
+
 		Route::resource('/Admin/Caty', 'Admin\CatyController');
+
+		//审核
+		Route::post('/Admin/Up/status', 'Admin\UpController@status');
+		Route::post('/Admin/Up/UNstatus', 'Admin\UpController@UNstatus');
 		/**
 		 * 	更改个性推荐
 		 */
@@ -52,10 +59,12 @@ Route::group(['middleware'=>'CheckLogin'],function(){
 		 * 	后台下载
 		 */
 		Route::get('/Admin/Up/down/{id}', 'Admin\UpController@down');
+        Route::get('/Admin/Up/UNdelete', 'Admin\UpController@UNdelete');
 		/**
 		 * 软件分类管理 Caty
 		 */
 		Route::resource('/Admin/Up', 'Admin\UpController');
+
 		/**
 		 * 关于我们 administrator
 		 */
@@ -67,7 +76,9 @@ Route::group(['middleware'=>'CheckLogin'],function(){
 		/**
 		 * 帮助中心
 		 */
+        Route::get('/Admin/Help/helpdelete', 'Admin\HelpController@helpdelete');
 		Route::resource('/Admin/Help', 'Admin\HelpController');
+
 		/**
 		 * 广告位
 		 */
@@ -75,6 +86,7 @@ Route::group(['middleware'=>'CheckLogin'],function(){
 		/**
 		 * 轮播图Encrypted
 		 */
+        Route::get('/Admin/Banner/bannerdelete', 'Admin\BannerController@bannerdelete');
 		Route::resource('/Admin/Banner', 'Admin\BannerController');
 		/**
 		 * 单张广告图
@@ -93,6 +105,7 @@ Route::group(['middleware'=>'CheckLogin'],function(){
 		 * 平轮管理
 		 */
 		Route::resource('/Admin/Comment', 'Admin\CommentController');
+        Route::get('/Admin/CommentDelete', 'Admin\CommentController@CommentDelete');
 		/**
 		 * 审核
 		 */
@@ -102,6 +115,7 @@ Route::group(['middleware'=>'CheckLogin'],function(){
 		 * 认证消息
 		 */
 		Route::resource('/Admin/Cert', 'Admin\CertController');
+        Route::get('/Admin/CertDelete', 'Admin\CertController@CertDelete');
 });
 /**
  * 首页
@@ -116,8 +130,19 @@ Route::get('/NewUpload','Home\IndexController@NewUpload');
  */
 Route::get('/DownHot','Home\IndexController@DownHot');
 
+Route::get('/DownHot','Home\IndexController@DownHot');
 
 
+//支付宝
+Route::get('/toPay','Home\PayController@index');
+Route::get('/collback','Home\PayController@collback');
+
+//微信支付
+Route::get('/wxPay','Home\PayController@wxPay');
+// Route::get('/notify2','Home\PayController@notify2');
+Route::post('/notify','Home\Pay2Controller@notify2');
+Route::get('/wx','Home\Pay2Controller@index');
+Route::post('/huidiao','Home\PayController@huidiao');
 /**
  * 登录页面 
  */
@@ -182,8 +207,6 @@ Route::get('/DoCheckUserName', 'Home\LoginController@DoCheckUserName');
  * 检测密保问题是否正确
  */
 Route::get('/DoCheckEncrypted', 'Home\LoginController@DoCheckEncrypted');
-
-
 
 /**
  * 检测邮箱
@@ -319,8 +342,6 @@ Route::get('/HelpInfo/{id}.html', 'Home\ListInfoController@HelpInfo');
  */
 Route::get('/SoftwareInfo/{id}.html', 'Home\ListInfoController@SoftwareInfo');
 
-
-
 //---------------------------------------------二次功能添加---------------------------------------
 //前台新加功能
 
@@ -341,7 +362,7 @@ Route::get('/complaintsList', 'Home\ComplaintsController@getList');//投诉列�
 
 
 //广告
-/*Route::any('/Banner/Advertising', 'Home\BannerController@Advertising');//广告竞拍界面 轮播图
+Route::any('/Banner/Advertising', 'Home\BannerController@Advertising');//广告竞拍界面 轮播图
 Route::any('/Banner/stAdvertising', 'Home\BannerController@stAdvertising');//广告竞拍界面 静态
 Route::any('/Banner/RuleAds', 'Home\BannerController@RuleAds');//广告投放规则
 Route::get('/Banner/myBannerList', 'Home\BannerController@myBannerList');//加载用户自己拥有的广告位
@@ -350,21 +371,22 @@ Route::post('/Banner/doaddMyBanner', 'Home\BannerController@doaddMyBanner');//�
 Route::get('/Banner/delMyBanner/{id}', 'Home\BannerController@delMyBanner');//将自己的广告位上的广告位删除
 Route::get('/Banner/addAdv/{id}', 'Home\BannerController@addAdv');//跳转到广告位添加页面
 Route::any('/Banner/doAddAdv', 'Home\BannerController@doAddAdv');//执行广告添加动作
-Route::get('/Banner/test', 'Home\BannerController@test');//测试*/
+Route::get('/Banner/test', 'Home\BannerController@test');//测试
 
 Route::resource('/carousel', 'Home\CarouselController');
+Route::post('/carousel/add', 'Home\CarouselController@add');
+Route::post('/carousel/markup', 'Home\CarouselController@markup');//我的广告牌
 
 Route::get('/adv/test', 'Home\Adv_ImagesController@test');//测试
 Route::get('/adv/advList', 'Home\Adv_ImagesController@advList');//静态广告列表
 Route::get('/adv/add/{id}', 'Home\Adv_ImagesController@add');//跳转添加页面
 Route::post('/adv/create', 'Home\Adv_ImagesController@create');//执行广告添加动作
 
-
 /*
  * 竞价
  * */
-Route::get('/Auction/showAll', 'Home\AuctionController@showAll');//查看竞价(轮播)
-Route::get('/Auction/stcshowAll', 'Home\AuctionController@stcshowAll');//查看竞价(静态)
+Route::get('/Auction/showAll/{id}', 'Home\AuctionController@showAll');//查看竞价(轮播)
+Route::get('/Auction/stcshowAll/{id}', 'Home\AuctionController@stcshowAll');//查看竞价(静态)
 Route::any('/Auction/showone/{id}', 'Home\AuctionController@showone');//查看指定的竞价（轮播）
 Route::get('/Auction/stcshowone/{where}', 'Home\AuctionController@stCshowone');//查看指定的竞价(静态)
 Route::any('/Auction/typing', 'Home\AuctionController@typing');//执行用户的竞价动作 （轮播广告）
@@ -372,11 +394,12 @@ Route::post('/Auction/stcTyping', 'Home\AuctionController@stcTyping');//执行�
 Route::get('/Auction/myBiddersOfBanner', 'Home\AuctionController@myBiddersOfBanner');//我参与的竞价
 Route::any('/Auction/test', 'Home\AuctionController@test');//测试
 
-
 /**
  * 软件竞价
  */
-Route::get('/soft/test', 'Home\SoftwareController@test');//软件
+Route::post('/soft/test', 'Home\SoftwareController@test');//软件
+Route::get('/soft/auction/{softwaretype}', 'Home\SoftwareController@getAuction');//软件
+Route::post('/soft/auction', 'Home\SoftwareController@postAuction');//软件
 Route::get('/soft/Softwarelist', 'Home\SoftwareController@Softwarelist');//我的软件位的竞价列表
 Route::get('/soft/bidPrice', 'Home\SoftwareController@bidPrice');//我的软件位的竞价列表
 Route::get('/soft/allList', 'Home\SoftwareController@allList');//没有被竞拍的软件位，
@@ -385,8 +408,16 @@ Route::get('/soft/bidPrice', 'Home\SoftwareController@bidPrice');//跳转竞价�
 Route::get('/soft/doBidPrice/{softwaretype}/{order}', 'Home\SoftwareController@doBidPrice');//执行竞价动作
 Route::resource('/billboard','Admin\BillboardController');
 Route::get('/billboard/verify','Admin\BillboardController@verify');
+Route::get('/Admin/Billboard/{id}','Admin\BillboardController@edit');
+Route::post('/Admin/Billboard/update','Admin\BillboardController@update');
 Route::post('/billboard/verify','Admin\BillboardController@doverify');
 Route::get('/billboardAuc/{billboards_position}', 'Admin\BillboardController@getresultAuc');//结束竞拍
+
+Route::resource('/acarousel', 'Admin\CarouselController');//后台轮播广告
+Route::get('/acarousel/getresultAuc', 'Admin\CarouselController@getresultAuc');//结束竞拍
+Route::get('/Admin/acarousel/overview', 'Admin\CarouselController@overview');
+
+Route::get('/soft/checking','Home\SoftwareController@softCheck');
 
 /**
  * 广告牌竞拍
@@ -394,5 +425,50 @@ Route::get('/billboardAuc/{billboards_position}', 'Admin\BillboardController@get
 Route::get('/auc', 'Home\BillboardController@show');
 Route::get('/createauc/{id}', 'Home\BillboardController@createAuc');
 Route::post('/auc', 'Home\BillboardController@auction');
-Route::get('/auc/list/{view}', 'Home\BillboardController@list');//我的广告牌
-Route::post('/auc/markup', 'Home\BillboardController@markup');//我的广告牌
+Route::get('/auc/list/{swf_viewport(xmin, xmax, ymin, ymax)}', 'Home\BillboardController@list'); //我的广告牌
+
+
+Route::get('/auc/stAdvertising', 'Home\BillboardController@stAdvertising');
+
+
+Route::post('/auc/markup', 'Home\BillboardController@markup');
+
+Route::get('/auc/list/alllist/{alllist}', 'Home\BillboardController@list'); //我参与的竞拍
+
+/**
+ * 我竞拍到的广告位
+ */
+Route::get('/myAdvertisement', 'Home\BillboardController@show');
+
+/**
+ * 后台 竞拍中的软件位列表
+ */
+Route::get('/AdvertisementList/{id}', 'Admin\BillboardController@AdvertisementList');
+Route::post('/AdvertisementList/xiugai', 'Admin\BillboardController@xiugai');
+Route::post('/AdvertisementList/bannertime', 'Admin\BillboardController@bannertime');
+/**
+ * 结束竞拍
+ */
+Route::get('/getresultAdvertisement', 'Admin\BillboardController@getresultAdvertisement');//结束竞拍
+
+Route::resource('/Tixian/list', 'Admin\TixianController');
+
+Route::get('/Tixian/DoHandle', 'Admin\TixianController@DoHandle');
+//留言管理
+Route::resource('/Information/list', 'Admin\InformationController');
+Route::get('Admin/Information/create', 'Admin\InformationController@create');
+Route::post('Admin/Information/InformationAdd', 'Admin\InformationController@InformationAdd');
+Route::get('Admin/Information/Information', 'Admin\InformationController@Information');
+Route::post('Admin/Information/InformationUp', 'Admin\InformationController@InformationUp');
+Route::get('Admin/Information/InformationDel', 'Admin\InformationController@InformationDel');
+
+/**我的账户**/
+
+Route::get('/Tixian/zhanghu', 'Home\TixianController@zhanghu'); //我的账户
+Route::post('/Tixian/tixian', 'Home\TixianController@tixian'); //体现表单
+Route::any('/doRecharge', 'Home\transactionsController@doRecharge'); //体现表单
+
+
+Route::get('Admin/billboards/edit/{id}','Admin\BillboardController@edit');
+Route::get('/Admin/billboards/delete','Admin\BillboardController@delete');
+Route::post('/Admin/billboards/update','Admin\BillboardController@updatebillboards');

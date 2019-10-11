@@ -3,8 +3,11 @@
 namespace Yansongda\Pay\Gateways\Wechat;
 
 use Symfony\Component\HttpFoundation\Request;
+use Yansongda\Pay\Events;
+use Yansongda\Pay\Exceptions\GatewayException;
+use Yansongda\Pay\Exceptions\InvalidArgumentException;
+use Yansongda\Pay\Exceptions\InvalidSignException;
 use Yansongda\Pay\Gateways\Wechat;
-use Yansongda\Pay\Log;
 use Yansongda\Supports\Collection;
 
 class TransferGateway extends Gateway
@@ -17,6 +20,10 @@ class TransferGateway extends Gateway
      * @param string $endpoint
      * @param array  $payload
      *
+     * @throws GatewayException
+     * @throws InvalidArgumentException
+     * @throws InvalidSignException
+     *
      * @return Collection
      */
     public function pay($endpoint, array $payload): Collection
@@ -24,25 +31,46 @@ class TransferGateway extends Gateway
         if ($this->mode === Wechat::MODE_SERVICE) {
             unset($payload['sub_mch_id'], $payload['sub_appid']);
         }
-        $type = isset($payload['type']) ? ($payload['type'].($payload['type'] == 'app' ?: '_').'id') : 'app_id';
 
-        $payload['mch_appid'] = $this->config->get($type, '');
+        $type = Support::getTypeName($payload['type'] ?? '');
+
+        $payload['mch_appid'] = Support::getInstance()->getConfig($type, '');
         $payload['mchid'] = $payload['mch_id'];
-        php_sapi_name() === 'cli' ?: $payload['spbill_create_ip'] = Request::createFromGlobals()->server->get('SERVER_ADDR');
+
+        if (php_sapi_name() !== 'cli' && !isset($payload['spbill_create_ip'])) {
+            $payload['spbill_create_ip'] = Request::createFromGlobals()->server->get('SERVER_ADDR');
+        }
 
         unset($payload['appid'], $payload['mch_id'], $payload['trade_type'],
             $payload['notify_url'], $payload['type']);
 
-        $payload['sign'] = Support::generateSign($payload, $this->config->get('key'));
+        $payload['sign'] = Support::generateSign($payload);
 
-        Log::debug('Paying A Transfer Order:', [$endpoint, $payload]);
+        Events::dispatch(Events::PAY_STARTED, new Events\PayStarted('Wechat', 'Transfer', $endpoint, $payload));
 
         return Support::requestApi(
             'mmpaymkttransfers/promotion/transfers',
             $payload,
-            $this->config->get('key'),
-            ['cert' => $this->config->get('cert_client'), 'ssl_key' => $this->config->get('cert_key')]
+            true
         );
+    }
+
+    /**
+     * Find.
+     *
+     * @author yansongda <me@yansongda.cn>
+     *
+     * @param $order
+     *
+     * @return array
+     */
+    public function find($order): array
+    {
+        return [
+            'endpoint' => 'mmpaymkttransfers/gettransferinfo',
+            'order'    => is_array($order) ? $order : ['partner_trade_no' => $order],
+            'cert'     => true,
+        ];
     }
 
     /**

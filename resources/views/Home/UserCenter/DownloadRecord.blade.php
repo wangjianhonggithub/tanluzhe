@@ -38,6 +38,17 @@
                             <span>下载次数</span>
                             <span>操作</span>
                         </p>
+                        @foreach($DownInfo as $downInfo)
+                        <p class="wz-con">
+                            <a href="/SoftwareInfo/{{$downInfo->id}}.html">
+                                <span>{{$downInfo->softwarename}}</span>
+                                <span>{{$downInfo->caty_name}}</span>
+                                <span>{{$downInfo->software_size}}</span>
+                                <span>{{$downInfo->created_at}}</span>
+                            </a>
+                        </p>
+                        @endforeach
+                        {{ $DownInfo->links() }}
                     </li>
                 </ul>
 

@@ -19,28 +19,28 @@
                 <p>密码找回</p>
                 <p>PASSWORD BACK</p>
             </div>
-            <form>
+            <form autocomplete="off">
                 <label>
                     <span>用户名：</span>
-                    <input type="text" name="username" placeholder="请输入用户名">
+                    <input type="text" name="username" autocomplete="off" placeholder="请输入用户名">
                 </label>
                 <label>
                     <span>邮箱：</span>
-                    <input type="text" name="email" disabled placeholder="请输入邮箱">
+                    <input type="text" name="email" autocomplete="off" disabled placeholder="请输入邮箱">
                 </label>
                 <label class="lab">
                     <span>验证码：</span>
-                    <input type="text" name="reCode" placeholder="请输入验证码" class="inp">
+                    <input type="text" name="reCode" autocomplete="off" placeholder="请输入验证码" class="inp">
                     <div class="inp1 msgs CheckEmail">发送邮箱验证码</div>
                 </label>
                 <input type="hidden" name="nickname">
                 <label>
                     <span>密码：</span>
-                    <input type="password" name="password" placeholder="请输入密码">
+                    <input type="password" name="password" autocomplete="off" placeholder="请输入密码">
                 </label>
                 <label>
                     <span>确认密码：</span>
-                    <input type="password" name="repassword" placeholder="请输入密码">
+                    <input type="password" name="repassword" autocomplete="off" placeholder="请输入密码">
                 </label>
                 <input type="button" class="tijiao CheckEmailSubmit" value="确认">
             </form>

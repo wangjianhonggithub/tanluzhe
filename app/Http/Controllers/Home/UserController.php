@@ -25,7 +25,7 @@ class UserController extends Controller
     public function UserMessage()
     {
         $UserId = Cookie::get('UserId');
-        $data = DB::table('news')->where('uid',$UserId)->get();
+        $data = DB::table('news')->where('uid',$UserId)->orderBy('create_time','desc')->get();
         return view('/Home/UserCenter/UserMessage',[
             'MsgData'=>$data,
         ]);
@@ -448,7 +448,7 @@ class UserController extends Controller
       $UserComment->star = empty($request->star) ? 0 : $request->star;
       $UserComment->sid = $request->sid;
       $UserComment->uid = Cookie::get('UserId');
-      $is_code = DB::table('user_comments')->where('uid',Cookie::get('UserId'))->count('id');
+      $is_code = DB::table('user_comments')->where('uid',Cookie::get('UserId'))->where('sid',$request->sid)->count('id');
       if ($is_code >= 1) {
           $UserComment->is_code =2;
       }else{

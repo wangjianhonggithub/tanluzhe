@@ -142,4 +142,16 @@ class AdministratorController extends Controller
             }
         }
     }
+
+    public function admindelete()
+    {
+        $id = $_GET['id'];
+        $res = AdminUser::DataDelete($id);
+
+        if ($res) {
+            echo json_encode(['code'=>1,'msg'=>'删除成功']);
+        }else{
+            echo json_encode(['code'=>0,'msg'=>'删除失败']);
+        }
+    }
 }

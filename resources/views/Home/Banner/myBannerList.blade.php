@@ -27,19 +27,23 @@
                 <ul class="con-wz">
                     <li>
                         <p class="con-title">
-                            <span>标题</span>
-                            <span>操作</span>
+                            <!-- 标题   位置  链接  广告图片    订单提交时间 -->
+                            <span style='width: 25%;text-align: center;'>位置</span>
+                            <span style='width: 25%;text-align: center;'>广告图片</span>
+                            <span style='width: 25%;text-align: center;'>链接</span>
+                            <!--<span style='width: 25%;text-align: center;'>操作</span>-->
                         </p>
                         @foreach($banList as $banList)
                         <p class="wz-con">
-                            <a href="">
-                                <span>{{$banList->title}}</span>
-
-                            </a>
-                            <span>
-                                <a href="/Banner/addMyBanner/{{$banList->id}}">添加广告</a>
-                                <a href="javascript:;">删除广告</a>
-                            </span>
+                            
+                                <span style='width: 25%;text-align: center;'>{{$banList->description}}</span>
+                                <span style='width: 25%;text-align: center;'><img style="width: 60px; height: 60px;" src="{{$banList->banner_img}}"></span>
+                                <span style='width: 25%;text-align: center;'>{{$banList->url}}</span>
+                            
+                            <!--<span style='width: 25%;text-align: center;'>
+                                 <a href="/Banner/addMyBanner/{{$banList->id}}">添加广告</a> 
+                                <a href="javascript:;" class="MsgDelete" data-id='{{$banList->id}}'>删除广告</a>
+                            </span>-->
                         </p>
                             @endforeach
                     </li>
@@ -55,5 +59,35 @@
 <script src="/Home/js/bootstrap.min.js"></script>
 <script src="/Home/js/personal.js"></script>
 <script src="/Home/js/public.js"></script>
+<script>
+    $(function(){
+        $('.MsgDelete').click(function(){
+            var id = $(this).attr('data-id');
+            $.ajax({
+                type: 'GET',
+                url: '/Banner/delMyBanner',
+                data: {
+                  id:id,
+                },
+                dataType: 'json',
+                success: function(data){
+                   if (data.code == 1) {
+                        layer.msg(data.meg, function(){
+                        });
+                        setTimeout(function(){//两秒后跳转  
+                         window.location.href='/UserMessage';
+                        },2000);  
+                        return false;
+                    }else{
+                        layer.msg(data.meg, function(){
+                          //关闭后的操作
+                        });
+                        return false;
+                    }
+                },
+            });
+        })
+    })
+</script>
 </body>
 </html>

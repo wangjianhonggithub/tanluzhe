@@ -26,6 +26,7 @@ laravel 扩展包请 [传送至这里](https://github.com/yansongda/laravel-pay)
 QQ交流群：690027516
 
 ## 特点
+- 丰富的事件系统
 - 命名不那么乱七八糟
 - 隐藏开发者不需要关注的细节
 - 根据支付宝、微信最新 API 开发而成
@@ -50,6 +51,7 @@ QQ交流群：690027516
 - 刷卡支付
 - 扫码支付
 - 账户转账
+- 小程序支付
 
 |  method   |   描述       |
 | :-------: | :-------:   |
@@ -59,6 +61,7 @@ QQ交流群：690027516
 |  pos      | 刷卡支付  |
 |  scan     | 扫码支付  |
 |  transfer | 帐户转账  |
+|  mini     | 小程序支付 |
 
 ### 2、微信
 - 公众号支付
@@ -136,7 +139,7 @@ namespace App\Http\Controllers;
 use Yansongda\Pay\Pay;
 use Yansongda\Pay\Log;
 
-class PayController extends Controller
+class PayController
 {
     protected $config = [
         'app_id' => '2016082000295641',
@@ -147,7 +150,14 @@ class PayController extends Controller
         'private_key' => 'MIIEpAIBAAKCAQEAs6+F2leOgOrvj9jTeDhb5q46GewOjqLBlGSs/bVL4Z3fMr3p+Q1Tux/6uogeVi/eHd84xvQdfpZ87A1SfoWnEGH5z15yorccxSOwWUI+q8gz51IWqjgZxhWKe31BxNZ+prnQpyeMBtE25fXp5nQZ/pftgePyUUvUZRcAUisswntobDQKbwx28VCXw5XB2A+lvYEvxmMv/QexYjwKK4M54j435TuC3UctZbnuynSPpOmCu45ZhEYXd4YMsGMdZE5/077ZU1aU7wx/gk07PiHImEOCDkzqsFo0Buc/knGcdOiUDvm2hn2y1XvwjyFOThsqCsQYi4JmwZdRa8kvOf57nwIDAQABAoIBAQCw5QCqln4VTrTvcW+msB1ReX57nJgsNfDLbV2dG8mLYQemBa9833DqDK6iynTLNq69y88ylose33o2TVtEccGp8Dqluv6yUAED14G6LexS43KtrXPgugAtsXE253ZDGUNwUggnN1i0MW2RcMqHdQ9ORDWvJUCeZj/AEafgPN8AyiLrZeL07jJz/uaRfAuNqkImCVIarKUX3HBCjl9TpuoMjcMhz/MsOmQ0agtCatO1eoH1sqv5Odvxb1i59c8Hvq/mGEXyRuoiDo05SE6IyXYXr84/Nf2xvVNHNQA6kTckj8shSi+HGM4mO1Y4Pbb7XcnxNkT0Inn6oJMSiy56P+CpAoGBAO1O+5FE1ZuVGuLb48cY+0lHCD+nhSBd66B5FrxgPYCkFOQWR7pWyfNDBlmO3SSooQ8TQXA25blrkDxzOAEGX57EPiipXr/hy5e+WNoukpy09rsO1TMsvC+v0FXLvZ+TIAkqfnYBgaT56ku7yZ8aFGMwdCPL7WJYAwUIcZX8wZ3dAoGBAMHWplAqhe4bfkGOEEpfs6VvEQxCqYMYVyR65K0rI1LiDZn6Ij8fdVtwMjGKFSZZTspmsqnbbuCE/VTyDzF4NpAxdm3cBtZACv1Lpu2Om+aTzhK2PI6WTDVTKAJBYegXaahBCqVbSxieR62IWtmOMjggTtAKWZ1P5LQcRwdkaB2rAoGAWnAPT318Kp7YcDx8whOzMGnxqtCc24jvk2iSUZgb2Dqv+3zCOTF6JUsV0Guxu5bISoZ8GdfSFKf5gBAo97sGFeuUBMsHYPkcLehM1FmLZk1Q+ljcx3P1A/ds3kWXLolTXCrlpvNMBSN5NwOKAyhdPK/qkvnUrfX8sJ5XK2H4J8ECgYAGIZ0HIiE0Y+g9eJnpUFelXvsCEUW9YNK4065SD/BBGedmPHRC3OLgbo8X5A9BNEf6vP7fwpIiRfKhcjqqzOuk6fueA/yvYD04v+Da2MzzoS8+hkcqF3T3pta4I4tORRdRfCUzD80zTSZlRc/h286Y2eTETd+By1onnFFe2X01mwKBgQDaxo4PBcLL2OyVT5DoXiIdTCJ8KNZL9+kV1aiBuOWxnRgkDjPngslzNa1bK+klGgJNYDbQqohKNn1HeFX3mYNfCUpuSnD2Yag53Dd/1DLO+NxzwvTu4D6DCUnMMMBVaF42ig31Bs0jI3JQZVqeeFzSET8fkoFopJf3G6UXlrIEAQ==',
         'log' => [ // optional
             'file' => './logs/alipay.log',
-            'level' => 'debug'
+            'level' => 'info', // 建议生产环境等级调整为 info，开发环境为 debug
+            'type' => 'single', // optional, 可选 daily.
+            'max_file' => 30, // optional, 当 type 为 daily 时有效，默认 30 天
+        ],
+        'http' => [ // optional
+            'timeout' => 5.0,
+            'connect_timeout' => 5.0,
+            // 更多配置项请参考 [Guzzle](https://guzzle-cn.readthedocs.io/zh_CN/latest/request-options.html)
         ],
         'mode' => 'dev', // optional,设置此参数，将进入沙箱模式
     ];
@@ -189,7 +199,7 @@ class PayController extends Controller
             // 5、其它业务逻辑情况
 
             Log::debug('Alipay notify', $data->all());
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // $e->getMessage();
         }
 
@@ -207,7 +217,7 @@ namespace App\Http\Controllers;
 use Yansongda\Pay\Pay;
 use Yansongda\Pay\Log;
 
-class PayController extends Controller
+class PayController
 {
     protected $config = [
         'appid' => 'wxb3fxxxxxxxxxxx', // APP APPID
@@ -220,7 +230,14 @@ class PayController extends Controller
         'cert_key' => './cert/apiclient_key.pem',// optional，退款等情况时用到
         'log' => [ // optional
             'file' => './logs/wechat.log',
-            'level' => 'debug'
+            'level' => 'info', // 建议生产环境等级调整为 info，开发环境为 debug
+            'type' => 'single', // optional, 可选 daily.
+            'max_file' => 30, // optional, 当 type 为 daily 时有效，默认 30 天
+        ],
+        'http' => [ // optional
+            'timeout' => 5.0,
+            'connect_timeout' => 5.0,
+            // 更多配置项请参考 [Guzzle](https://guzzle-cn.readthedocs.io/zh_CN/latest/request-options.html)
         ],
         'mode' => 'dev', // optional, dev/hk;当为 `hk` 时，为香港 gateway。
     ];
@@ -251,7 +268,7 @@ class PayController extends Controller
             $data = $pay->verify(); // 是的，验签就这么简单！
 
             Log::debug('Wechat notify', $data->all());
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // $e->getMessage();
         }
         
@@ -260,8 +277,11 @@ class PayController extends Controller
 }
 ```
 
-## 文档
-[详细说明文档](https://yansongda.gitbooks.io/pay/)
+## 事件系统
+[请见详细文档](https://docs.pay.yansongda.cn/qi-ta/event)
+
+## 详细文档
+[详细说明文档](https://docs.pay.yansongda.cn)
 
 ## 错误
 如果在调用相关支付网关 API 时有错误产生，会抛出 `GatewayException`,`InvalidSignException` 错误，可以通过 `$e->getMessage()` 查看，同时，也可通过 `$e->raw` 查看调用 API 后返回的原始数据，该值为数组格式。
@@ -278,6 +298,10 @@ class PayController extends Controller
 由于测试及使用环境的限制，本项目中只开发了「支付宝」和「微信支付」的相关支付网关。
 
 如果您有其它支付网关的需求，或者发现本项目中需要改进的代码，**_欢迎 Fork 并提交 PR！_**
+
+## 赏一杯咖啡吧
+
+![pay](docs/pay.jpg)
 
 ## LICENSE
 MIT

@@ -19,5 +19,9 @@ class VerifyCsrfToken extends Middleware
         '/auc',
         '/carousel',
         '/carousel/*',
+		'/Tixian/*',
+		'/Admin/*',
+		'AdvertisementList/*',
+        'notify',
     ];
 }

@@ -84,21 +84,30 @@
                     <td>{{$val->created_at}}</td>
                     <td>
                     	<a href="/Admin/Up/{{$val->id}}/edit" class="btn btn-xs btn-rounded btn-warning">查看信息</a>
-                        <form action="/Admin/Up/{{$val->id}}" method="POST" style="display: inline;" accept-charset="utf-8">
-                            {{ method_field('DELETE') }}
-                            {{ csrf_field() }}
-                           <button class="btn btn-xs btn-rounded btn-danger">删除</button>
-                        </form>
-                        @if($val->is_person == 1)
-                            <a href="/Admin/Up/UNperson/{{$val->id}}" class="btn btn-xs btn-rounded btn-info">取消个性推荐</a>
+                        {{--<form action="/Admin/Up/{{$val->id}}" method="POST" style="display: inline;" accept-charset="utf-8">--}}
+                            {{--{{ method_field('DELETE') }}--}}
+                            {{--{{ csrf_field() }}--}}
+                           {{--<button class="btn btn-xs btn-rounded btn-danger">删除</button>--}}
+                        {{--</form>--}}
+						<!--审核按钮-->
+                        <a href="javascript:;" data-id="{{$val->id}}" class="btn btn-xs Delete btn-rounded btn-danger">删除</a>
+						
+						@if($val->is_status == 1)
+                            <a href="javascript:void(0)" class="btn btn-xs btn-rounded btn-info" onclick="caozuo('is_status',{{$val->is_status}},{{$val->id}})">审核未通过</a>
                         @else
-                            <a href="/Admin/Up/person/{{$val->id}}" class="btn btn-xs btn-rounded btn-info">个性推荐</a>
+                            <a href="javascript:void(0)" class="btn btn-xs btn-rounded btn-info" onclick="caozuo('is_status',{{$val->is_status}},{{$val->id}})">审核通过</a>
                         @endif
-                       
-                        @if($val->is_shuff == 1)
-                        <a href="/Admin/Up/UNshuff/{{$val->id}}" class="btn btn-xs btn-rounded btn-mint">取消软件位推荐</a>
+						<!--个性推荐按钮-->
+                        @if($val->is_person == 1)
+                            <a href="/Admin/Up/UNperson/{{$val->id}}" class="btn btn-xs btn-rounded btn-info" onclick="caozuo('is_person',{{$val->is_person}},{{$val->id}})">取消个性推荐</a>
                         @else
-                        <a href="/Admin/Up/shuff/{{$val->id}}" class="btn btn-xs btn-rounded btn-mint">软件位推荐</a>
+                            <a href="/Admin/Up/person/{{$val->id}}" class="btn btn-xs btn-rounded btn-info" onclick="caozuo('is_person',{{$val->is_person}},{{$val->id}})">个性推荐</a>
+                        @endif
+                        <!--软件位推荐按钮-->
+                        @if($val->is_shuff == 1)
+                        <a href="/Admin/Up/UNshuff/{{$val->id}}" class="btn btn-xs btn-rounded btn-mint" onclick="caozuo('is_shuff',{{$val->is_shuff}},{{$val->id}})">取消软件位推荐</a>
+                        @else
+                        <a href="/Admin/Up/shuff/{{$val->id}}" class="btn btn-xs btn-rounded btn-mint" onclick="caozuo('is_shuff',{{$val->is_shuff}},{{$val->id}})">软件位推荐</a>
                         @endif
                         <a href="/Admin/Up/down/{{$val->id}}" class="btn btn-xs btn-rounded btn-success">下载</a>
                     </td>
@@ -118,4 +127,127 @@
         @endif
     </div> 
 </div>
+<div class="layui-layer layui-layer-page layui-layer-prompt" id="layui-layer2" type="page" times="2" showtime="0" contype="string" style="display:none;z-index: 19891016; top: 149.5px; left: 790px;">
+	<div class="layui-layer-title" style="cursor: move;">请写出的原因</div>
+	
+	<div id="" class="layui-layer-content">
+		<form action="" method="post" id="search_form">
+			<input type="hidden" name="id">
+
+			<select class="yes" >
+			@foreach($information as $v)
+			@if($v->type ==1)
+			<option value="{{$v->liuyan}}">{{$v->liuyan}}</option>
+			@endif
+			@endforeach
+			</select>
+			<select class="no" >
+			@foreach($information as $v)
+			@if($v->type ==2)
+			<option value="{{$v->liuyan}}">{{$v->liuyan}}</option>
+			@endif
+			@endforeach
+			</select>
+			<textarea class="layui-layer-input" name="msg"></textarea>
+		<form>
+	</div>
+	
+	<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;"></a></span>
+	<div class="layui-layer-btn layui-layer-btn-">
+	<a class="layui-layer-btn0">确定</a>
+	<a class="layui-layer-btn1">取消</a>
+	</div>
+</div>
+<script src="/layui/layui.all.js"></script>
+<script>
+function caozuo(m,n,id){
+	
+	//审核
+	if(m=='is_status'){
+		$('input[name="id"]').val(id)
+		//提示框
+		$('.layui-layer').show();
+		//提示语
+		if(n==0){
+			$('.yes').show();
+			$('.no').hide();
+			$('.layui-layer-input').val($('.yes').val());
+		}else{
+			$('.yes').hide();
+			$('.no').show();
+			$('.layui-layer-input').val($('.no').val());
+		}
+		if(n==1){
+			document.getElementById('search_form').action = "/Admin/Up/UNstatus";
+		}else{
+			document.getElementById('search_form').action = "/Admin/Up/status";
+		}
+	}
+	//个性推荐按钮
+	//if(m=='is_person'){
+		
+	//}
+	//软件位推荐按钮
+	//if(m=='is_shuff'){
+		
+	//}
+}
+$(function(){
+	//提示语
+	$('.yes').change(function(){
+		var options=$(".yes option:selected").val();
+		//alert(options)
+		$('.layui-layer-input').val(options);
+	})
+	$('.no').change(function(){
+		var options=$(".no option:selected").val();
+		//alert(options)
+		$('.layui-layer-input').val(options);
+	})
+	//提交
+	$('.layui-layer-btn0').click(function(){
+
+		document.getElementById('search_form').submit();
+
+	})
+	//关闭
+	$('.layui-layer-ico,.layui-layer-btn1').click(function(){
+		$('.layui-layer').hide();
+	})
+
+
+        $('.Delete').click(function(){
+            var id = $(this).attr('data-id');
+            layer.msg('你确定要删除吗？', {
+                time: 0 //不自动关闭
+                ,btn: ['确认', '取消']
+                ,yes: function(index){
+                    //假设 id 的 class  是 getId
+                    //然后发送ajax;
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Admin/Up/UNdelete',
+                        data: {
+                            id:id,
+                        },
+                        dataType: 'json',
+                        success: function(res){
+                            if (res.code == 1) {
+                                layer.msg(res.msg, {icon: 6});
+                                // alert(res.msg);
+                                setTimeout(function(){//两秒后跳转5
+                                    window.location.href='/Admin/Up';
+                                },1500);
+                            }else{
+                                layer.msg(res.msg, {icon: 5});
+                            }
+                        },
+                    });
+                }
+            });
+        });
+
+
+})
+</script>
 @endsection

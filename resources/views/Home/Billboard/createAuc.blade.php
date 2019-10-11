@@ -193,7 +193,7 @@
             </div>
         </div>
         <div class="adfoot">
-            想知道当前竞价排名？请点击这里查看<a href="/Auction/showAll">[竞价排名]</a>
+            想知道当前竞价排名？请点击这里查看<a href="/Auction/showAll/{{$billboards_position}}">[竞价排名]</a>
         </div>
     </div>
 </div>

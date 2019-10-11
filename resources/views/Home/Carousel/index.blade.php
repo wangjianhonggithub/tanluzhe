@@ -173,28 +173,62 @@
                     @foreach($list as $value)
                     <tr class="row">
                         <td class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">{{$value->title}}</td>
-                        <td class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center"><img width="180px" src="{{$value->position}}"></td>
+                        <td class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center fangda">
+							<img width="180px" src="{{$value->position}}">
+						</td>
                         <td class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                            <a href="/carousel/create?id={{$value->id}}">选择竞拍</a>
+                            @if($value->banner_etime < time())
+                                <a href="javascript:volid(0);" disabled="true">竞拍结束</a>
+                            @elseif($value->banner_stime > time())
+                                <a href="javascript:volid(0);" disabled="true">竞拍未开始</a>
+                            @else
+                                <a href="/carousel/create?id={{$value->id}}" >选择竞拍</a>
+                            @endif
+
                             <br/>
                             <br/>
+							<!--<a href="/Auction/showAll/{{$value->id}}">查看排名</a>-->
+							@if($value->money)
+								<span>当前最高出价位{{$value->money}}</span>
+							@else
+								<span>暂时无人竞拍</span>
+							@endif
+							
                             <br/>
-                            <a>查看排名</a>
+							<br />
+                            <span>截止至{{date('Y-m-d H:i',$value->banner_etime)}}停止竞拍</span>
                         </td>
                     </tr>
+					
                     @endforeach
                     </tbody>
                 </table>
             </div>
+            {{$list->links()}}
         </div>
     </div>
 </div>
 
 @include('Home.Public.footer')
 
+
+
 <script src="/Home/js/jquery-3.2.1.min.js"></script>
 <script src="/Home/js/bootstrap.min.js"></script>
 <script src="/Home/js/personal.js"></script>
 <script src="/Home/js/public.js"></script>
+
+<script>
+	$(function(){
+		$('.fangda>img').mouseenter(function(){
+			$(this).attr('width','800px');
+
+		})
+		$('.fangda>img').mouseleave(function(){
+			$(this).attr('width','180px');
+		})
+	})
+	
+</script>
 </body>
 </html>

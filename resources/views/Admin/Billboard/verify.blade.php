@@ -27,7 +27,7 @@
                         <thead>
                         <tr>
                             <th class="text-center">标题</th>
-                            <th>位置</th>
+                            <th>价格</th>
                             <th>链接</th>
                             <th>广告图片</th>
                             <th width="20%">订单提交时间</th>
@@ -38,12 +38,14 @@
                         @foreach ($data as $value)
                             <tr>
                                 <td><a class="btn-link" href="#">{{$value->title}}</a></td>
-                                <td>{{$value->billboards_position}}</td>
+                                <td>{{$value->money}}</td>
                                 <td><span class="text-muted">{{$value->url}}</span></td>
                                 <td><img  width="200rem" src="{{$value->pic}}"></td>
                                 <td><i class="demo-pli-clock"></i> {{$value->addtime}}</td>
                                 <td>
-                                    <form class="form-inline" action="/billboard/verify" method="post">
+									<a href="javascript:;" data-id='{{$value->id}}' class="QueStatus btn btn-xs btn-rounded btn-success">审核通过</a>
+									<a href="javascript:;" data-id='{{$value->id}}'  class="UnStatus btn btn-xs btn-rounded btn-primary">审核不通过</a>
+                                    <!--<form class="form-inline" action="/billboard/verify" method="post">
                                         <div class="form-group">
                                             <label for="demo-inline-inputmail{{$value->id}}" class="sr-only">填写失败信息</label>
                                             <input type="text" name="errorinfo" placeholder="填写失败信息" id="demo-inline-inputmail{{$value->id}}" class="form-control">
@@ -56,12 +58,13 @@
                                             <label for="demo-remember-me1{{$value->id}}">不通过</label>
                                         </div>
                                         <button class="btn btn-primary" type="submit">提交审核</button>
-                                    </form>
+                                    </form>-->
                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
+                    {{ $data->links() }}
                 </div>
             </div>
             <!--===================================================-->
@@ -72,5 +75,86 @@
 
     </div>
     <!--===================================================-->
+<div class="layui-layer layui-layer-page layui-layer-prompt" id="layui-layer2" type="page" times="2" showtime="0" contype="string" style="display:none;z-index: 19891016; top: 149.5px; left: 790px;">
+	<div class="layui-layer-title" style="cursor: move;">请写出的原因</div>
+	
+	<div id="" class="layui-layer-content">
+		<form action="/billboard/verify" method="post" id="search_form">
+			<input type="hidden" name="id">
+			<input type="hidden" name="type">
+			<select class="yes" >
+			@foreach($information as $v)
+			@if($v->type ==1)
+			<option value="{{$v->liuyan}}">{{$v->liuyan}}</option>
+			@endif
+			@endforeach
+			</select>
+			<select class="no" >
+			@foreach($information as $v)
+			@if($v->type ==2)
+			<option value="{{$v->liuyan}}">{{$v->liuyan}}</option>
+			@endif
+			@endforeach
+			</select>
+			<textarea class="layui-layer-input" name="msg"></textarea>
+		<form>
+	</div>
+	
+	<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;"></a></span>
+	<div class="layui-layer-btn layui-layer-btn-">
+	<a class="layui-layer-btn0">确定</a>
+	<a class="layui-layer-btn1">取消</a>
+	</div>
+</div>
 
+<script src="/layui/layui.all.js"></script>
+<script>
+$(function(){
+	//通过
+
+	$('.QueStatus').click(function(){
+		var id = $(this).attr('data-id');
+		$('input[name="id"]').val(id)
+		$('input[name="type"]').val(1)
+		$('.layui-layer-input').val($('.yes').val());
+		$('.layui-layer').show();
+		$('.yes').show();
+		$('.no').hide();
+	})
+
+	//未通过
+
+	$('.UnStatus').click(function(){
+		var id = $(this).attr('data-id');
+		$('input[name="id"]').val(id)
+		$('input[name="type"]').val(2)
+		$('.layui-layer-input').val($('.no').val());
+		$('.layui-layer').show();
+		$('.yes').hide();
+		$('.no').show();
+	})
+	//提示语
+	$('.yes').change(function(){
+		var options=$(".yes option:selected").val();
+		//alert(options)
+		$('.layui-layer-input').val(options);
+	})
+	$('.no').change(function(){
+		var options=$(".no option:selected").val();
+		//alert(options)
+		$('.layui-layer-input').val(options);
+	})
+	//关闭
+	$('.layui-layer-ico,.layui-layer-btn1').click(function(){
+		$('.layui-layer').hide();
+	})
+	//提交
+	$('.layui-layer-btn0').click(function(){
+
+		document.getElementById('search_form').submit();
+
+	})
+	
+})
+</script>
 @endsection

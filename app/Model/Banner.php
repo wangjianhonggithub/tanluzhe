@@ -28,7 +28,21 @@ class Banner extends Model
 
     public static function GetBannerSelect($id)
     {
+
         $result = Banner::where('c_id',$id)->get();
+      
+        if ($result) {
+            foreach ($result as $k => $value) {
+
+
+                if (isset($value['user_image']) && $value['user_image']) {
+
+                    $result[$k]['banner_img'] = $value['user_image'];
+
+                }
+            }
+        } 
+                // var_dump($result->toArray());die;
         return $result;
     }
     /**

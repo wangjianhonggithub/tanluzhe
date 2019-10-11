@@ -19,20 +19,52 @@ class transactionsController extends Controller
     /**
      * 进行充值动作
      */
-    public function doRecharge()
+    public function doRecharge(Request $request)
     {
-        $transactions['uid'] = Cookie::get('UserId');
-        $transactions['content'] = '充值';
-        $transactions['addtime'] =date('Y-m-d H:i:s');
-        $transactions['out_trade_no'] =date('YmdHis').rand(100000,999999);
-        $transactions['total_amount'] =0.02;
-        DB::table('transactions')->insert($transactions);
-        //拼接支付宝参数
-        $order['out_trade_no'] = $transactions['out_trade_no'];
-        $order['total_amount'] = $transactions['total_amount'];
-        $order['subject'] = '探路者网络充值';
-        $p = new PayController();
-        $p->toPay($order);
+		if($request->input('money')==''){
+			return back()->withErrors(['请输入金额']);
+			
+		}
+		//channel  1微信   2支付宝
+		if($request->input('type')==1){
+			$transactions['uid'] = Cookie::get('UserId');
+			$transactions['content'] = '充值';
+			$transactions['addtime'] =date('Y-m-d H:i:s');
+			$transactions['channel'] =1;
+			$transactions['out_trade_no'] =date('YmdHis').rand(100000,999999);
+			$transactions['total_amount'] =$request->input('money');
+			$id = DB::table('transactions')->insert($transactions);
+			//拼接微信参数
+			/**$order = [
+				'out_trade_no' => $transactions['out_trade_no'],
+				'body'         => '探路者网络充值',
+				'total_fee'    => $transactions['total_amount']*100,
+			];**/
+			$p = new Pay2Controller();
+			$data = $p->index($transactions['out_trade_no']);
+			return view('/Home/Tixian/scerweima',[
+				'data'=>$data,
+			]);
+		}else{
+			$transactions['uid'] = Cookie::get('UserId');
+			$transactions['content'] = '充值';
+			$transactions['addtime'] =date('Y-m-d H:i:s');
+			$transactions['channel'] =2;
+			$transactions['out_trade_no'] =date('YmdHis').rand(100000,999999);
+			$transactions['total_amount'] =$request->input('money');
+			DB::table('transactions')->insert($transactions);
+			//拼接支付宝参数
+			$order['out_trade_no'] = $transactions['out_trade_no'];
+			if(Cookie::get('UserId')==41){
+				 $order['total_amount'] = '0.01';
+			}else{
+				 $order['total_amount'] = $transactions['total_amount'];
+			}
+			$order['subject'] = '探路者网络充值';
+			$p = new PayController();
+			$p->toPay($order);
+		}
+        
     }
 
     public function test()

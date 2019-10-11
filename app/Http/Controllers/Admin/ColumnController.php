@@ -17,6 +17,7 @@ class ColumnController extends Controller
     public function index()
     {
         $data = Column::GetColumnAll();
+		//var_dump($data);die();
         $tree = Common::tree($data);
         return view('Admin/List/ColumnList',[
                 'data'=>$tree,

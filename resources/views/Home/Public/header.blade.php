@@ -47,7 +47,8 @@
                 @endforeach
                 </ul>
             </div>
-            <input type="hidden" name="id" value="{{$caties[0]->id}}" class="SeachSoleWareId">   
+			<input type="hidden" name="hot" value="">
+            <!--<input type="hidden" name="id" value="{{$caties[0]->id}}" class="SeachSoleWareId">-->
             <!--<input type="submit" value="搜索" class="btn">-->
         </form>
     </div>

@@ -168,7 +168,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div style="border: 1px solid #cccccc;border-radius: 0px 0px 10px 10px">
-                    <form role="form" action="/carousel" method="post" enctype="multipart/form-data">
+                    <form role="form" action="/carousel/add" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="name">广告标题：</label>
                             <input type="text" class="form-control" id="name" name="title" placeholder="请输入标题">
@@ -192,9 +192,9 @@
                 </div>
             </div>
         </div>
-      {{--  <div class="adfoot">
+        <div class="adfoot">
             想知道当前竞价排名？请点击这里查看<a href="/Auction/showAll">[竞价排名]</a>
-        </div>--}}
+        </div>
     </div>
 </div>
 

@@ -70,6 +70,18 @@
                </script>
             </div>
           </div> -->
+			<div class="form-group">
+				<label class="col-md-3 control-label">开始时间</label>
+				<input type="date" name="startTime" value="">
+				<input type="time" name="startDay" value="">
+			</div>
+			<div class="form-group">
+				<label class="col-md-3 control-label">结束时间</label>
+				<input type="date" name="endTime" value="">
+				<input type="time" name="endDay" value="">
+			</div>
+
+
         </div>
        </div>
     </div>

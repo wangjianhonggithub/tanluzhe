@@ -28,9 +28,9 @@
             {{--左上角广告位--}}
             <div class="carousel-inner" role="listbox">
                 @foreach($BannerOne as $ov)
-                <div class="item">
-                    <a href="{{$ov->url}}">
-                       <img src="{{$ov->banner_img}}">
+                <div class="item" style='height: 400px'>
+                    <a style='height: 400px;display: block;' href="{{$ov->url}}">
+                       <img style='height: 400px;display: block;' src="{{$ov->banner_img}}">
                     </a>
                 </div>
                 @endforeach
@@ -56,7 +56,7 @@
             <!-- Wrapper for slides -->
             {{--右上角广告位--}}
             <div class="carousel-inner" role="listbox">
-                 @foreach($BannerTwo as $tv)
+                 @foreach($BannerTwo as $tk => $tv)
                 <div class="item">
                     <a href="{{$tv->url}}">
                        <img src="{{$tv->banner_img}}">
@@ -65,14 +65,14 @@
                 @endforeach
             </div>
             {{--右上角广告位--}}
-           <!--  <a class="left carousel-control" href="#carousel-example-generic1" role="button" data-slide="prev">
+             <a class="left carousel-control" href="#carousel-example-generic1" role="button" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </a>
             <a class="right carousel-control" href="#carousel-example-generic1" role="button" data-slide="next">
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
-            </a> -->
+            </a>
         </div>
     </div>
 </div>
@@ -84,20 +84,24 @@
         {{--左下角广告位--}}
         <div class="banner-left">
             <div class="img-div">
-                <a href="javascript:;">
+                @if (isset($AdvImage[1]))
+                <a href="{{$AdvImage[1]->billboards_url? $AdvImage[1]->billboards_url : $AdvImage[1]->billboards_default_url}}">
                    <img src="{{$AdvImage[1]->billboards_pic? $AdvImage[1]->billboards_pic : $AdvImage[1]->billboards_default_pic}}">
                 </a>
+                @endif
             </div>
             <div class="img-div">
-                <a href="javascript:;">
+                @if (isset($AdvImage[2]))
+                <a href="{{$AdvImage[2]->billboards_url? $AdvImage[2]->billboards_url : $AdvImage[2]->billboards_default_url}}">
                    <img src="{{$AdvImage[2]->billboards_pic? $AdvImage[2]->billboards_pic : $AdvImage[2]->billboards_default_pic}}">
                 </a>
+                @endif
             </div>
         </div>
         {{--左下角广告位--}}
         {{--右下角广告位--}}
         <div class="banner-right">
-            <div id="carousel-example-generic5" class="carousel slide" data-ride="carousel">
+            <div id="carousel-example-generic2" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <?php foreach($BannerOne as $ok =>$oy){ ?>
                     <li data-target="#carousel-example-generic5" data-slide-to="{{$ok}}"></li>
@@ -116,11 +120,11 @@
                     </div>
                     @endforeach
                 </div>
-               <a class="left carousel-control" href="#carousel-example-generic5" role="button" data-slide="prev">
+               <a class="left carousel-control" href="#carousel-example-generic2" role="button" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"><img src="/Home/images/left-g.png" alt=""></span>
                     <span class="sr-only">Previous</span>
                 </a>
-                <a class="right carousel-control" href="#carousel-example-generic5" role="button" data-slide="next">
+                <a class="right carousel-control" href="#carousel-example-generic2" role="button" data-slide="next">
                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"><img src="/Home/images/right-g.png" alt=""></span>
                     <span class="sr-only">Next</span>
                 </a>
@@ -197,7 +201,9 @@
     <div class="container">
         <a href="javascript:;">
             {{--<img src="{{$AdvImage[3]->billboards_default_pic}}">--}}
+            @if (isset($AdvImage[3]))
             <img src="{{$AdvImage[3]->billboards_pic? $AdvImage[3]->billboards_pic : $AdvImage[3]->billboards_default_pic}}">
+            @endif
         </a>
     </div>
 </div>
@@ -231,7 +237,7 @@
                                 <div class="nr-con">{{$down->description}}</div>
                                 <div class="nr-biao">
                                     <p>上传时间：<?= substr($down->created_at,0,10) ?></p>
-                                    <p>上传者：{{$down->nickname}}</p>
+                                    <p>上传者：<?= substr($down->nickname,0,8) ?></p>
                                     @if($down->comment >= 5)
                                     <p><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"></p>
                                     @elseif($down->comment >= 4)
@@ -327,7 +333,14 @@
                         }else{
                             var str2 = '<span class="hot">付费</span></div>';
                         }
-                        var str3 = '<div class="nr-con">'+obj.description+'</div><div class="nr-biao"><p>上传时间：'+obj.created_at.substring(0,10)+'</p><p>上传者：'+obj.nickname+'</p>'
+						
+						if(obj.description.length>26){
+							var str3 = '<div class="nr-con">'+obj.description.substring(0,24)+'...</div><div class="nr-biao"><p>上传时间：'+obj.created_at.substring(0,10)+'</p><p>上传者：'+obj.nickname.substring(0,8)+'</p>'
+						}else{
+							var str3 = '<div class="nr-con">'+obj.description+'</div><div class="nr-biao"><p>上传时间：'+obj.created_at.substring(0,10)+'</p><p>上传者：'+obj.nickname.substring(0,8)+'</p>'
+						}
+						
+                        
                         if(obj.comment >= 5){
                             var str4  = '<p><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"></p></div>';
                         }else if(obj.comment >= 4){

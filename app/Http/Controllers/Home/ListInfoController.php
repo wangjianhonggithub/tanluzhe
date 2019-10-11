@@ -50,6 +50,10 @@ class ListInfoController extends Controller
         $BannerI = Banner::GetBannerSelect(8);
         $AdvImage = AdvImage::GetAdvImageOne(1);
         $CatyList = Caty::GetCatyHomeAll();
+        $list = DB::table('billboards')->where('billboards_position','>',0)->get();
+        foreach ($list as $key=>$val){
+            $AdvImage[$val->billboards_position] = $val;
+        }
         $SoftwareInfo = DB::table('software')
             ->join('caties', 'caties.id', '=', 'software.softwaretype')
             ->where('software.id','=',$id)
@@ -69,7 +73,8 @@ class ListInfoController extends Controller
         }
         $UserCommentInfo = DB::table('user_comments')->join('users', 'users.id', '=', 'user_comments.uid')->where('user_comments.sid','=',$id)->orderBy('user_comments.id','desc')->select('users.nickname','users.header_pic','user_comments.*')->paginate(10);
         $UserCommentCount = DB::table('user_comments')->join('users', 'users.id', '=', 'user_comments.uid')->where('user_comments.sid','=',$id)->count();
-        $is_code = DB::table('user_comments')->where('uid',Cookie::get('UserId'))->count('id');
+        $is_code = DB::table('user_comments')->where('uid',Cookie::get('UserId'))->where('sid',$id)->count('id');
+
         return view('/Home/ListInfo/SoftwareInfo',[
             'SoftwareCaty'=>$CatyList,
             'AdvImage'=>$AdvImage,

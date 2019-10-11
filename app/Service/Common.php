@@ -195,5 +195,23 @@ class Common
        }
     }
 
+    //    获取图片尺寸   返回样式
+    //array:6 [▼
+    //0 => 314
+    //1 => 165
+    //2 => 3
+    //3 => "width="314" height="165""
+    //"bits" => 8
+    //"mime" => "image/png"
+    //]
+    public static function Get_Image_Size($url)
+    {
+        if(!empty($url)) {
+            $url = substr($url,1);
+            $size = getimagesize($url);
+            return $size;
+        }
+    }
+
 
 }

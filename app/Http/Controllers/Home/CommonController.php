@@ -46,9 +46,30 @@ class CommonController
     }
 
     /**
-     * @param $num 被扣除的金额
+     * @param $num 被扣除的金额--新的
      */
-    static public function consumption($num)
+    static public function consumption_new($num)
+    {
+        $res = DB::table('accounts')->where('uid',Cookie::get('UserId'))->first();
+        if($res){
+            if($res->balance>=$num){
+                $result['status'] =  1;
+				//return DB::table('accounts')->where('uid',Cookie::get('UserId'))->decrement('balance',$num);
+            }else{
+                $result['status'] = 3;
+                $result['msg'] = '账户余额不足';
+            }
+        }else{
+            $result['status'] = 2;
+            $result['msg'] = '暂时没有您的账户';
+        }
+
+        return $result;
+    }
+	/**
+     * @param $num 被扣除的金额--旧的
+     */
+	static public function consumption($num)
     {
         $res = DB::table('accounts')->where('uid',Cookie::get('UserId'))->first();
         if($res){
@@ -72,13 +93,18 @@ class CommonController
     static public function getAdvList()
     {
         $list = DB::table('adv_images')->get();
+        
+
         unset($list[2]->id);
         $data = array();
+        // var_dump($list[2]);exit;
         foreach ($list[2] as $k=>$v){
+            // var_dump($v);
             if($v == Cookie::get('UserId')){
                 $data[] = $k;
             }
         }
+        // var_dump($data);exit;
         return $data;
     }
 

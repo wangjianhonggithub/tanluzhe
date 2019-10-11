@@ -52,11 +52,12 @@
                     <td>{{$val->created_at}}</td>
                     <td>
                     	<a href="/Admin/Comment/{{$val->id}}/edit" class="btn btn-xs btn-rounded btn-warning">查看详情</a>
-                        <form action="/Admin/Comment/{{$val->id}}" method="POST" style="display: inline;" accept-charset="utf-8">
-                            {{ method_field('DELETE') }}
-                            {{ csrf_field() }}
-                           <button class="btn btn-xs btn-rounded btn-danger">删除</button>
-                        </form>
+                        <a href="javascript:;" data-id="{{$val->id}}" class="btn btn-xs Delete btn-rounded btn-danger">删除</a>
+                        {{--<form action="/Admin/Comment/{{$val->id}}" method="POST" style="display: inline;" accept-charset="utf-8">--}}
+                            {{--{{ method_field('DELETE') }}--}}
+                            {{--{{ csrf_field() }}--}}
+                           {{--<button class="btn btn-xs btn-rounded btn-danger" >删除</button>--}}
+                        {{--</form>--}}
                     </td>
                 </tr>
                 @endforeach
@@ -69,4 +70,39 @@
         @endif
     </div> 
 </div>
+
+<script src="/layui/layui.all.js"></script>
+<script>
+    $(function(){
+        $('.Delete').click(function(){
+            var id = $(this).attr('data-id');
+            layer.msg('你确定要删除吗？', {
+                time: 0 //不自动关闭
+                ,btn: ['确认', '取消']
+                ,yes: function(index){
+                    //假设 id 的 class  是 getId
+                    //然后发送ajax;
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Admin/CommentDelete',
+                        data: {
+                            id:id,
+                        },
+                        dataType: 'json',
+                        success: function(res){
+                            if (res.code == 1) {
+                                layer.msg(res.msg, {icon: 6});
+                                setTimeout(function(){//两秒后跳转
+                                    window.location.href='/Admin/Comment';
+                                },1500);
+                            }else{
+                                layer.msg(res.msg, {icon: 5});
+                            }
+                        },
+                    });
+                }
+            });
+        });
+    });
+</script>
 @endsection

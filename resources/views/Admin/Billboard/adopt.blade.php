@@ -42,11 +42,11 @@
                                 <td><span class="text-muted">{{$value->url}}</span></td>
                                 <td><img  width="200rem" src="{{$value->pic}}"></td>
                                 <td><i class="demo-pli-clock"></i> {{$value->addtime}}</td>
-
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
+                    {{$data->links()}}
                 </div>
             </div>
             <!--===================================================-->

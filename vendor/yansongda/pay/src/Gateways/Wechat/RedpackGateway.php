@@ -3,8 +3,11 @@
 namespace Yansongda\Pay\Gateways\Wechat;
 
 use Symfony\Component\HttpFoundation\Request;
+use Yansongda\Pay\Events;
+use Yansongda\Pay\Exceptions\GatewayException;
+use Yansongda\Pay\Exceptions\InvalidArgumentException;
+use Yansongda\Pay\Exceptions\InvalidSignException;
 use Yansongda\Pay\Gateways\Wechat;
-use Yansongda\Pay\Log;
 use Yansongda\Supports\Collection;
 
 class RedpackGateway extends Gateway
@@ -17,26 +20,35 @@ class RedpackGateway extends Gateway
      * @param string $endpoint
      * @param array  $payload
      *
+     * @throws GatewayException
+     * @throws InvalidArgumentException
+     * @throws InvalidSignException
+     *
      * @return Collection
      */
     public function pay($endpoint, array $payload): Collection
     {
         $payload['wxappid'] = $payload['appid'];
-        php_sapi_name() === 'cli' ?: $payload['client_ip'] = Request::createFromGlobals()->server->get('SERVER_ADDR');
 
-        $this->mode !== Wechat::MODE_SERVICE ?: $payload['msgappid'] = $payload['appid'];
+        if (php_sapi_name() !== 'cli') {
+            $payload['client_ip'] = Request::createFromGlobals()->server->get('SERVER_ADDR');
+        }
 
-        unset($payload['appid'], $payload['trade_type'], $payload['notify_url'], $payload['spbill_create_ip']);
+        if ($this->mode === Wechat::MODE_SERVICE) {
+            $payload['msgappid'] = $payload['appid'];
+        }
 
-        $payload['sign'] = Support::generateSign($payload, $this->config->get('key'));
+        unset($payload['appid'], $payload['trade_type'],
+              $payload['notify_url'], $payload['spbill_create_ip']);
 
-        Log::debug('Paying A Redpack Order:', [$endpoint, $payload]);
+        $payload['sign'] = Support::generateSign($payload);
+
+        Events::dispatch(Events::PAY_STARTED, new Events\PayStarted('Wechat', 'Redpack', $endpoint, $payload));
 
         return Support::requestApi(
             'mmpaymkttransfers/sendredpack',
             $payload,
-            $this->config->get('key'),
-            ['cert' => $this->config->get('cert_client'), 'ssl_key' => $this->config->get('cert_key')]
+            true
         );
     }
 

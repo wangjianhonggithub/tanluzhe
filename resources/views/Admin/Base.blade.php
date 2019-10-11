@@ -177,7 +177,7 @@
                         <div class="nano">
                             <div class="nano-content">
                                 <?php 
-                                    $res = DB::table('column')->get();
+                                    $res = DB::table('column')->where('display',1)->get();
                                    
                                     function unlimitedForLayer($m,$name='child',$p_id = 0) {
                                         $arr = array();
@@ -254,6 +254,21 @@
                                     @endforeach
                                     @endforeach
 						            <!--Menu list item-->
+									<li>
+										<a href="Admin/Information">
+											<i class=""></i>
+											<span class="menu-title">
+												<strong>留言语句</strong>
+											</span>
+											<i class="arrow"></i>
+										</a>
+										<!--Submenu-->
+										
+										<ul class="collapse">
+											<li><a href="/Information/list">留言管理</a></li>
+										</ul>
+
+									</li>
 						        </ul>
                             </div>
                         </div>

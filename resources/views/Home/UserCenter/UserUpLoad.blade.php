@@ -26,29 +26,31 @@
                 <ul class="con-wz">
                     <li>
                         <p class="con-title">
-                            <span>标题</span>
-                            <span>类型</span>
-                            <span>状态</span>
-                            <span>时间</span>
-                            <span>下载次数</span>
-                            <span>操作</span>
+                            <span style='width: 14%;text-align: center;'>ID</span>
+                            <span style='width: 14%;text-align: center;'>标题</span>
+                            <span style='width: 14%;text-align: center;'>类型</span>
+                            <span style='width: 14%;text-align: center;'>状态</span>
+                            <span style='width: 14%;text-align: center;'>时间</span>
+                            <span style='width: 14%;text-align: center;'>下载次数</span>
+                            <span style='width: 14%;text-align: center;'>操作</span>
                         </p>
                         @foreach($UserUpLoadList as $List)
                         <p class="wz-con">
                             <a href="/SoftwareInfo/{{$List->id}}.html">
-                                <span>{{$List->softwarename}}</span>
-                                <span>{{$List->caty_name}}</span>
+                                <span style='width: 14%;text-align: center;'>{{$List->id}}</span>
+                                <span style='width: 14%;text-align: center;'>{{$List->softwarename}}</span>
+                                <span style='width: 14%;text-align: center;'>{{$List->caty_name}}</span>
                                 @if ($List->is_status === 0)
-                                <span>审核中</span>
+                                <span style='width: 14%;text-align: center;'>审核中</span>
                                 @elseif ($List->is_status === 1)
-                                <span>已通过</span>
+                                <span style='width: 14%;text-align: center;'>已通过</span>
                                 @else
-                                <span>未通过</span>
+                                <span style='width: 14%;text-align: center;'>未通过</span>
                                 @endif
-                                <span>{{$List->created_at}}</span>
-                                <span>111次</span>
+                                <span style='width: 14%;text-align: center;'>{{$List->created_at}}</span>
+                                <span style='width: 14%;text-align: center;'>111次</span>
                             </a>
-                            <span>
+                            <span style='width: 14%;text-align: center;'>
                                 <a href="/softWareUpdate/{{$List->id}}.py">编辑</a>
                                 <a href="/softWareDelete/{{$List->id}}.py">删除</a>
                             </span>

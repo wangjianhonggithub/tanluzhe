@@ -82,7 +82,7 @@
                     success: function(res){
                          if (res.code == 1) {
                             layer.msg(res.msg, {icon: 6});
-                            setTimeout(function(){//两秒后跳转  
+                            setTimeout(function(){//两秒后跳转
                                 window.location.href='/Admin/Encrypted';
                             },1500);
                          }else{

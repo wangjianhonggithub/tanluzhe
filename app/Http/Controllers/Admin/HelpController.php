@@ -108,4 +108,14 @@ class HelpController extends Controller
            return back()->with('info','删除失败');
         }
     }
+
+    public function helpdelete()
+    {
+        $id = $_GET['id'];
+        if(Help::DataDelete($id)){
+            echo json_encode(['code'=>1,'msg'=>'删除成功']);
+        }else{
+            echo json_encode(['code'=>0,'msg'=>'删除失败']);
+        }
+    }
 }

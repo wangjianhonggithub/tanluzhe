@@ -44,8 +44,11 @@ class BiddersController extends Controller
             ''=>''
         );
         foreach ($advList as $key=>$val){
+            // var_dump($val);die;
             $advList[$key]['title'] = $advs[$val["title"]];
         }
+            // var_dump($advList);die;
+    
         return view('/Admin/List/BiddersList',[
             "data"=>$data,
             "advList"=>$advList
@@ -81,6 +84,7 @@ class BiddersController extends Controller
             $array[$i] = $this->Initialization($i);
         }
         $data = array();
+
         $i = 0;
         foreach ($array[0] as $k=>$v){
             $data[$i]['title'] = $k;
@@ -89,31 +93,30 @@ class BiddersController extends Controller
 
         $i = 0;
         foreach ($array[0] as $k=>$v){
-            $data[$i]['img'] = $v;
-            $i++;
-        }
-
-        $i = 0;
-        foreach ($array[1] as $k=>$v){
             $data[$i]['url'] = $v;
             $i++;
         }
 
         $i = 0;
-        foreach ($array[2] as $k=>$v){
+        foreach ($array[1] as $k=>$v){
             $data[$i]['uid'] = $v;
             $i++;
         }
 
         $i = 0;
-        foreach ($array[3] as $k=>$v){
+        foreach ($array[2] as $k=>$v){
             $data[$i]['status'] = $v;
             $i++;
         }
 
         $i = 0;
-        foreach ($array[4] as $k=>$v){
+        foreach ($array[3] as $k=>$v){
             $data[$i]['addtime'] = $v;
+            $i++;
+        }
+        $i = 0;
+        foreach ($array[4] as $k=>$v){
+            $data[$i]['img'] = $v;
             $i++;
         }
 

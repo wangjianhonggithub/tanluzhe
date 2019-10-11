@@ -14,15 +14,20 @@ use Cookie;
 
 class BannerController extends Controller
 {
-
-
-
+    
     /**
      * 加载用户自己拥有的广告位
      */
     public function myBannerList()
     {
-        return view('Home.Banner.myBannerList',['banList'=>DB::table('banners_users')->where('uid',Cookie::get('UserId'))->get()]);
+        $where = [];
+
+        $where['uid'] = Cookie::get('UserId');
+        // $where['status']   = 1;
+
+        // user_auc_bill
+        // return view('Home.Banner.myBannerList',['banList'=>DB::table('banners_users')->where('uid',Cookie::get('UserId'))->get()]);
+        return view('Home.Banner.myBannerList',['banList'=>DB::table('banners_users')->where($where)->get()]);
     }
 
 
@@ -48,6 +53,7 @@ class BannerController extends Controller
             return back()->withErrors(['标题不能为空！']);
         }
         $data['banner_img'] = Common::DirUpload($uploadname,$request,$dir);
+  
         if(DB::table('banners_users')->where('id',$id)->update($data)){
             return redirect('/Banner/myBannerList');
         }else{
@@ -122,7 +128,6 @@ class BannerController extends Controller
         return view('Home.Banner.RuleAds');
     }
 
-    //-------------------------------------------------------------------------------
     /**
      * 跳转到广告位添加页面
      * @param $id
@@ -135,9 +140,9 @@ class BannerController extends Controller
     /**
      * 执行广告添加动作
      */
+    
     public function doAddAdv()
     {
-
     }
 
 
@@ -146,7 +151,7 @@ class BannerController extends Controller
      * @param int $c_id 分类
      * @return array
      */
-    static public function displayBanner($c_id=0)
+    static public function displayBanners($c_id=0)
     {
         $ban = DB::table('banners')->get();
         $ban_users = DB::table('banners_users')->where('status',1)->get();
@@ -154,7 +159,7 @@ class BannerController extends Controller
             $banners[$v->id] = $v;
         }
         foreach ($ban_users as $k=>$v){
-            $banners_users[$v->id] = $v;
+            $banners_users[$v->c_id] = $v;
         }
         foreach ($banners as $k=>$v){
             if(isset($banners_users[$k])){
@@ -172,8 +177,41 @@ class BannerController extends Controller
                 }
             }
         }
-
+// var_dump($data);die;
         return $data;
+    }
+	
+	static public function displayBanner($c_id)
+    {	
+        $ban = DB::table('banners')->where('c_id',$c_id)->get();
+        //$ban_users = DB::table('banners_users')->where('status',1)->get();
+		
+		
+		//$data = DB::table('banners')
+        //    ->join('banners_users', 'banners_users.c_id', '=', 'banners.id')
+        //    ->where('banners.c_id','=',$c_id)
+        //    ->where('banners_users.status','=',1)
+         //   ->select('banners.*', 'banners_users.status','banners_users.c_id')
+         //   ->get();
+		$data = [];
+		
+		if(isset($ban) && $ban){
+                foreach($ban as &$v){
+					$nan = DB::table('banners_users')->where(['c_id'=>$v->id,'status'=>1])->first();
+					
+					if (isset($nan) && $nan) {
+						$v->banner_img = $nan->banner_img;
+					} else {
+						$v->banner_img = $v->position;
+					}
+					
+				}
+            }
+		
+		
+		
+		
+        return $ban;
     }
 
 }

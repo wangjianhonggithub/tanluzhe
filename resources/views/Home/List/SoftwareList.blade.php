@@ -54,13 +54,13 @@
         </div>
         <div class="banner-left">
             <div class="img-div">
-                <a href="javascript:;">
-                   <img src="{{$AdvImage->list_s}}">
+                <a href="{{$AdvImage[11]->billboards_url? $AdvImage[11]->billboards_url : $AdvImage[11]->billboards_default_url}}">
+                    <img src="{{$AdvImage[11]->billboards_pic? $AdvImage[11]->billboards_pic : $AdvImage[11]->billboards_default_pic}}">
                 </a>
             </div>
             <div class="img-div">
-                <a href="javascript:;">
-                    <img src="{{$AdvImage->list_x}}">
+                <a href="{{$AdvImage[12]->billboards_url? $AdvImage[12]->billboards_url : $AdvImage[12]->billboards_default_url}}">
+                    <img src="{{$AdvImage[12]->billboards_pic? $AdvImage[12]->billboards_pic : $AdvImage[12]->billboards_default_pic}}">
                 </a>
             </div>
         </div>
@@ -77,12 +77,12 @@
                     @foreach($SoftwareShuff['shuff1'] as $Shuff1)
                     <div class="big">
                         <a href="/SoftwareInfo/{{$Shuff1->id}}.html">
-                            <div class="title">{{$Shuff1->softwarename}}</div>
+                            <div class="title">{{$Shuff1->softwarename ? $Shuff1->softwarename : '暂无数据'}}</div>
                             <div class="nr">
-                                {{$Shuff1->description}}
+                                {{$Shuff1->description ? $Shuff1->description : '暂无数据'}}
                             </div>
                             <div class="shang">
-                                <p>资源大小：{{$Shuff1->software_size}}</p>
+                                <p>资源大小：{{$Shuff1->software_size?$Shuff1->software_size:'暂无'}}</p>
                                 @if($Shuff1->comment >= 5)
                                     <p>
                                         <img src="/Home/images/star1.png">
@@ -141,12 +141,12 @@
                     @foreach($SoftwareShuff['shuff2'] as $Shuff2) 
                     <div class="big">
                         <a href="/SoftwareInfo/{{$Shuff2->id}}.html">
-                            <div class="title">{{$Shuff2->softwarename}}</div>
+                            <div class="title">{{$Shuff2->softwarename?$Shuff2->softwarename:'暂无数据'}}</div>
                             <div class="nr">
-                                {{$Shuff2->description}}
+                                {{$Shuff2->description?$Shuff2->description:'暂无数据'}}
                             </div>
                             <div class="shang">
-                                <p>资源大小：{{$Shuff2->software_size}}</p>
+                                <p>资源大小：{{$Shuff2->software_size?$Shuff2->software_size:'暂无数据'}}</p>
                                 @if($Shuff2->comment >= 5)
                                     <p>
                                         <img src="/Home/images/star1.png">
@@ -205,12 +205,12 @@
                     @foreach($SoftwareShuff['shuff3'] as $Shuff3)
                     <div class="big">
                         <a href="/SoftwareInfo/{{$Shuff3->id}}.html">
-                            <div class="title">{{$Shuff3->softwarename}}</div>
+                            <div class="title">{{$Shuff3->softwarename?$Shuff3->softwarename:'暂无数据'}}</div>
                             <div class="nr">
-                                {{$Shuff3->description}}
+                                {{$Shuff3->description?$Shuff3->description:'暂无数据'}}
                             </div>
                             <div class="shang">
-                                <p>资源大小：{{$Shuff3->software_size}}</p>
+                                <p>资源大小：{{$Shuff3->software_size?$Shuff3->software_size:'暂无数据'}}</p>
                                 @if($Shuff3->comment >= 5)
                                     <p>
                                         <img src="/Home/images/star1.png">
@@ -269,12 +269,12 @@
                      @foreach($SoftwareShuff['shuff4'] as $Shuff4)
                     <div class="big">
                         <a href="/SoftwareInfo/{{$Shuff4->id}}.html">
-                            <div class="title">{{$Shuff4->softwarename}}</div>
+                            <div class="title">{{$Shuff4->softwarename?$Shuff4->softwarename:'暂无数据'}}</div>
                             <div class="nr">
-                                {{$Shuff4->description}}
+                                {{$Shuff4->description?$Shuff4->description:'暂无数据'}}
                             </div>
                             <div class="shang">
-                                <p>资源大小：{{$Shuff4->software_size}}</p>
+                                <p>资源大小：{{$Shuff4->software_size?$Shuff4->software_size:'暂无数据'}}</p>
                                 @if($Shuff4->comment >= 5)
                                     <p>
                                         <img src="/Home/images/star1.png">
@@ -333,12 +333,12 @@
                     @foreach($SoftwareShuff['shuff5'] as $Shuff5)
                     <div class="big">
                         <a href="/SoftwareInfo/{{$Shuff5->id}}.html">
-                            <div class="title">{{$Shuff5->softwarename}}</div>
+                            <div class="title">{{$Shuff5->softwarename?$Shuff5->softwarename:'暂无数据'}}</div>
                             <div class="nr">
-                                {{$Shuff5->description}}
+                                {{$Shuff5->description?$Shuff5->description:'暂无数据'}}
                             </div>
                             <div class="shang">
-                                <p>资源大小：{{$Shuff5->software_size}}</p>
+                                <p>资源大小：{{$Shuff5->software_size?$Shuff5->software_size:'暂无数据'}}</p>
                                 @if($Shuff5->comment >= 5)
                                     <p>
                                         <img src="/Home/images/star1.png">
@@ -934,7 +934,14 @@
 <div class="new">
     <div class="container">
         <div class="top">
-            {{$CatyNav->caty_name}} <span class="radiochecked" data-id="{{$CatyNav->id}}"><input type="radio" name="radio" value="1" checked="checked" id="NEWSLIST"> 最新 &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="HOTLIST" name="radio" value="2"> 最热<a href="/SoftwareList/{{$CatyNav->id}}.html">全部</a><a class="fufei" href="/SoftwareList/{{$CatyNav->id}}.html?charge=0&hot=1">付费</a><a class="mianfei" href="/SoftwareList/{{$CatyNav->id}}.html?charge=1&hot=1">免费</a></span>
+            {{$CatyNav->caty_name}} 
+			<span class="radiochecked" data-id="{{$CatyNav->id}}">
+				<input type="radio" name="radio" value="1" checked="checked" id="NEWSLIST"> 最新 &nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="radio" id="HOTLIST" name="radio" value="2"> 最热
+				<a href="/SoftwareList/{{$CatyNav->id}}.html">全部</a>
+				<a class="fufei" href="/SoftwareList/{{$CatyNav->id}}.html?charge=0&hot=1">付费</a>
+				<a class="mianfei" href="/SoftwareList/{{$CatyNav->id}}.html?charge=1&hot=1">免费</a>
+			</span>
         </div>
 
         <div class="content">
@@ -1018,7 +1025,7 @@
                                 <div class="nr-con">{{$Recommended->description}}</div>
                                 <div class="nr-biao">
                                     <p>上传时间：<?= substr($Recommended->created_at,0,10) ?></p>
-                                    <p>上传者：{{$Recommended->nickname}}</p>
+                                    <p>上传者：<?= substr($Recommended->nickname,0,8) ?></p>
                                     @if($Recommended->comment >= 5)
                                     <p><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"></p>
                                     @elseif($Recommended->comment >= 4)
@@ -1131,8 +1138,14 @@
                     }else{
                         var str2 = '<span class="hot">付费</span></div>';
                     }
-                    var str3 = '<div class="nr-con">'+obj.description+'</div><div class="nr-biao"><p>上传时间：'+obj.created_at.substring(0,10)+'</p><p>上传者：'+obj.nickname+'</p>'
-                    if(obj.comment >= 5){
+                    
+                    if(obj.nickname.length>8){
+						var str3 = '<div class="nr-con">'+obj.description+'</div><div class="nr-biao"><p>上传时间：'+obj.created_at.substring(0,10)+'</p><p>上传者：'+obj.nickname.substring(0,8)+'</p>'
+						//var str3 = '<div class="nr-con">'+obj.description.substring(0,24)+'...</div><div class="nr-biao"><p>上传时间：'+obj.created_at.substring(0,10)+'</p><p>上传者：'+obj.nickname.substring(0,8)+'</p>'
+					}else{
+						var str3 = '<div class="nr-con">'+obj.description+'</div><div class="nr-biao"><p>上传时间：'+obj.created_at.substring(0,10)+'</p><p>上传者：'+obj.nickname+'</p>'
+					}
+					if(obj.comment >= 5){
                         var str4  = '<p><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"></p></div>';
                     }else if(obj.comment >= 4){
                          var str4  = '<p><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star-h.png"></p></div>';

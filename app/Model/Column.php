@@ -13,7 +13,7 @@ class Column extends Model
      */
     public static function GetColumnAll()
     {
-    	$result = Column::all();
+    	$result = Column::where('display',1)->get();
     	return $result;
     }
     /**

@@ -93,7 +93,7 @@
                 <table id="demo-dt-addrow" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>标题</th>
                         <th class="min-tablet">轮播图</th>
                         <th class="min-tablet">跳转链接</th>
                         <th class="min-tablet">状态</th>
@@ -109,6 +109,12 @@
                             <td>{{$advList['url']}}</td>
                             <td>{{$advList['status']}}</td>
                             <td>{{$advList['addtime']}}</td>
+                            <!-- 
+                            <td>{{$advList['title']}}</td>
+                            <td><img src="{{$advList['img']}}" width="150" height="80" alt=""></td>
+                            <td>{{$advList['url']}}</td>
+                            <td>{{$advList['status']}}</td>
+                            <td>{{$advList['addtime']}}</td> -->
                             <td>
                                 <a href="/Bidders/getresult/{{$advList['title']}}" class="btn btn-xs btn-rounded btn-warning">结束竞拍</a>
                             </td>

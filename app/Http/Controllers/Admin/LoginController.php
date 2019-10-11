@@ -38,10 +38,15 @@ class LoginController extends Controller
     {
         $username = $request->username;
         $password = $request->password;
-        if (empty($username)&&empty($password)) {
+        if (empty($username) || empty($password)) {
             return back()->with('info','请填写用户名和密码');
         }else{
             $AdminUser = AdminUser::where('username',$username)->first(); //读取数据库
+
+            if (!$AdminUser) {
+                return back()->with('info','账户错误！请检查后重新输入');
+            }
+
             if(Hash::check($request->password, $AdminUser->password)) {//检测密码
                 if ($AdminUser->status == 1) {
                     $AdminUserId = Cookie::make('AdminUserId', $AdminUser->id);

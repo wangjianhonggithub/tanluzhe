@@ -3,7 +3,10 @@
 namespace Yansongda\Pay\Gateways\Wechat;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Yansongda\Pay\Events;
+use Yansongda\Pay\Exceptions\GatewayException;
+use Yansongda\Pay\Exceptions\InvalidArgumentException;
+use Yansongda\Pay\Exceptions\InvalidSignException;
 
 class WapGateway extends Gateway
 {
@@ -15,16 +18,22 @@ class WapGateway extends Gateway
      * @param string $endpoint
      * @param array  $payload
      *
-     * @return Response
+     * @throws GatewayException
+     * @throws InvalidArgumentException
+     * @throws InvalidSignException
+     *
+     * @return RedirectResponse
      */
-    public function pay($endpoint, array $payload): Response
+    public function pay($endpoint, array $payload): RedirectResponse
     {
         $payload['trade_type'] = $this->getTradeType();
 
-        $data = $this->preOrder('pay/unifiedorder', $payload);
+        Events::dispatch(Events::PAY_STARTED, new Events\PayStarted('Wechat', 'Wap', $endpoint, $payload));
 
-        $url = is_null($this->config->get('return_url')) ? $data->mweb_url : $data->mweb_url.
-                        '&redirect_url='.urlencode($this->config->get('return_url'));
+        $mweb_url = $this->preOrder($payload)->get('mweb_url');
+
+        $url = is_null(Support::getInstance()->return_url) ? $mweb_url : $mweb_url.
+                        '&redirect_url='.urlencode(Support::getInstance()->return_url);
 
         return RedirectResponse::create($url);
     }

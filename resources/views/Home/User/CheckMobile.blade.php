@@ -19,27 +19,27 @@
                 <p>密码找回</p>
                 <p>PASSWORD BACK</p>
             </div>
-            <form>
+            <form autocomplete="off">
                 <label>
                     <span>用户名：</span>
-                    <input type="text" name="username" placeholder="请输入用户名">
+                    <input type="text" name="username" autocomplete="off" placeholder="请输入用户名">
                 </label>
                 <label>
                     <span>手机号：</span>
-                    <input type="text" name="mobile" disabled placeholder="请输入手机号">
+                    <input type="text" name="mobile" disabled autocomplete="off" placeholder="请输入手机号">
                 </label>
                 <label class="lab">
                     <span>验证码：</span>
-                    <input type="text" name="reCode" placeholder="请输入验证码" class="inp">
+                    <input type="text" name="reCode" placeholder="请输入验证码" autocomplete="off" class="inp">
                     <div class="inp1 msgs checkReCode">获取验证码</div>
                 </label>
                 <label>
                     <span>密码：</span>
-                    <input name="password" type="password" placeholder="请输入密码">
+                    <input name="password" type="password" autocomplete="off" placeholder="请输入密码">
                 </label>
                 <label>
                     <span>确认密码：</span>
-                    <input name="repassword" type="password" placeholder="请输入密码">
+                    <input name="repassword" type="password" autocomplete="off" placeholder="请输入密码">
                 </label>
                 <input type="button" class="tijiao checkMobileSubmit" value="确认">
             </form>

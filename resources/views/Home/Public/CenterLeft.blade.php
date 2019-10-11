@@ -61,7 +61,7 @@
                     @endif
                 </a>
             </li>
-            <li>
+            <!--<li>
                 <a href="/Banner/myBannerList">
                     <img src="/Home/images/icon(6).png">
                     <span>我的广告位(轮播图)</span>
@@ -71,6 +71,12 @@
                 <a href="/adv/advList">
                     <img src="/Home/images/icon(6).png">
                     <span>我的广告位（静态广告）</span>
+                </a>
+            </li>-->
+            <li>
+                <a href="/Tixian/zhanghu?type=1">
+                    <img src="/Home/images/icon(6).png">
+                    <span>我的账户</span>
                 </a>
             </li>
         </ul>

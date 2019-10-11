@@ -27,17 +27,17 @@
                         <a href="/complaints/create" class="title">投诉建议</a>
                     </li>
                     <li>
-                        <a href="" class="title">广告投放</a>
+                        <a href="/soft/auction/1" class="title">赞助推荐</a>
                     </li>
                     <li>
-                        <a href="/Banner/Advertising" class="title">轮播广告竞拍</a>
+                        <a href="/carousel" class="title">轮播广告竞拍</a>
                     </li>
                     <li>
-                        <a href="/auc" class="title">广告牌竞拍</a>
+                        <a href="/auc" class="title">静态广告竞拍</a>
                         {{--<a href="/Banner/stAdvertising" class="title">静态广告竞拍</a>--}}
                     </li>
                     <li>
-                        <a href="/Auction/myBiddersOfBanner" class="title">我参与的竞拍</a>
+                        <a href="/auc/list/alllist/alllist" class="title">我参与的竞拍</a>
                     </li>
 
                 </ul>

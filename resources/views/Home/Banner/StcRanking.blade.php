@@ -106,20 +106,13 @@
                     <div class="oneleft">
                         请选择您要查看的广告位排名：
                     </div>
-                    <select name="">
-
-                            <option onclick="list('ind_s')" value="ind_s">首轮播上</option>
-                            <option onclick="list('ind_x')" value="ind_x">首轮播下</option>
-                            <option onclick="list('ind_z')" value="ind_z">首页中部</option>
-                            <option onclick="list('list_h')" value="list_h">列表横幅</option>
-                            <option onclick="list('list_s')" value="list_s">列表轮播上</option>
-                            <option onclick="list('list_x')" value="list_x">列表轮播下</option>
-                            <option onclick="list('info_bz')" value="info_bz">详情轮播左</option>
-                            <option onclick="list('info_bc')" value="info_bc">详情轮播中</option>
-                            <option onclick="list('info_by')" value="info_by">详情轮播右</option>
-                            <option onclick="list('info_z')" value="info_z">详情中部</option>
-                            <option onclick="list('info_bcy')" value="info_bcy">详情轮播中右</option>
-
+                        <select onchange="list()" id="list" name="">
+                        @foreach($banList as $banList)
+                                <!-- <a href="/Auction/showAll/{$banList->id}" > -->
+                                    <option  value="{{$banList->billboards_position}}" {{ $banList->billboards_position == $id ?  'selected' : '' }}>{{$banList->billboards_title}}</option>
+                                <!-- </a> -->
+                            
+                        @endforeach
                     </select>
                 </div>
                 <div id="box" class="boxtwo">
@@ -138,20 +131,22 @@
                         </div>
                     </div>
 
+                    @foreach($resData as $banList)
                     <div class="twocontent">
                         <div class="twoc">
-                           zhangs
+                           {{$banList->billboards_title}}
                         </div>
                         <div class="twoc">
-                            张三
+                            {{$banList->username}}
                         </div>
                         <div class="twoc">
-                            50.00
+                            {{$banList->money}}
                         </div>
                         <div class="twoc">
-                            1
+                            {{$banList->key}}
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
             <div onclick="demo()" class="adfoot">
@@ -170,24 +165,26 @@
 <script src="/Home/js/public.js"></script>
 <script>
     function list(id){
-        var re = $.get("/Auction/stcshowone/"+id,
-                function(data){
-                    console.log(data);
-                    $('.twocontent').remove()// 删除标签
-                    if(data.sta==1){
-                        var ht = '';
-                        $.each(data.data, function(i,val){
-                            ht +='<div class="twocontent"><div class="twoc">'+'zhangsan'
-                            ht +='</div><div class="twoc">'+'zhangsan'
-                            ht +='</div><div class="twoc">'+'zhangsan'
-                            ht +='</div><div class="twoc">'+'zhangsan'
-                            ht += '</div>'
-                        });
-                        $(".boxtwo").append(ht);//追加标签
-                    }else{
-                        alert(data.msg);
-                    }
-                });
+        // var re = $.get("/Auction/stcshowone/"+id,
+        //         function(data){
+        //             console.log(data);
+        //             $('.twocontent').remove()// 删除标签
+        //             if(data.sta==1){
+        //                 var ht = '';
+        //                 $.each(data.data, function(i,val){
+        //                     ht +='<div class="twocontent"><div class="twoc">'+'zhangsan'
+        //                     ht +='</div><div class="twoc">'+'zhangsan'
+        //                     ht +='</div><div class="twoc">'+'zhangsan'
+        //                     ht +='</div><div class="twoc">'+'zhangsan'
+        //                     ht += '</div>'
+        //                 });
+        //                 $(".boxtwo").append(ht);//追加标签
+        //             }else{
+        //                 alert(data.msg);
+        //             }
+        //         });
+        var val=$('#list').val()        
+        window.location.href= '/Auction/stcshowAll/'+val;
     }
 </script>
 </body>

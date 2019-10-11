@@ -40,8 +40,8 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 @foreach($SoftwareBanner as $SoV)
-                <div class="item">
-                    <img src="{{$SoV->banner_img}}">
+                <div class="item" style="height: 400px;">
+                    <img style='display: block;width: 100%;height: 100%' src="{{$SoV->banner_img}}">
                 </div>
                 @endforeach
             </div>
@@ -54,12 +54,21 @@
         </div>
         <div class="guang">
             <ul>
-                <li><a href="javascript:;"><img src="{{$AdvImage->info_bz}}"></a></li>
-                <li><a href="javascript:;"><img src="{{$AdvImage->info_bc}}"></a></li>
-                <li><a href="javascript:;"><img src="{{$AdvImage->info_bcy}}"></a></li>
-                <li><a href="javascript:;"><img src="{{$AdvImage->info_by}}"></a></li>
+                @if(isset($AdvImage[21]))
+                <li><a href="{{$AdvImage[21]->billboards_url? $AdvImage[21]->billboards_url : $AdvImage[21]->billboards_default_url}}"><img src="{{$AdvImage[21]->billboards_pic? $AdvImage[21]->billboards_pic : $AdvImage[21]->billboards_default_pic}}"></a></li>
+                @endif
+                @if(isset($AdvImage[22]))
+                <li><a href="{{$AdvImage[22]->billboards_url? $AdvImage[22]->billboards_url : $AdvImage[22]->billboards_default_url}}"><img src="{{$AdvImage[22]->billboards_pic? $AdvImage[22]->billboards_pic : $AdvImage[22]->billboards_default_pic}}"></a></li>
+                @endif
+                @if(isset($AdvImage[23]))
+                <li><a href="{{$AdvImage[23]->billboards_url? $AdvImage[23]->billboards_url : $AdvImage[23]->billboards_default_url}}"><img src="{{$AdvImage[23]->billboards_pic? $AdvImage[23]->billboards_pic : $AdvImage[23]->billboards_default_pic}}"></a></li>
+                @endif
+                @if(isset($AdvImage[25]))
+                <li><a href="{{$AdvImage[25]->billboards_url? $AdvImage[25]->billboards_url : $AdvImage[25]->billboards_default_url}}"><img src="{{$AdvImage[25]->billboards_pic? $AdvImage[25]->billboards_pic : $AdvImage[25]->billboards_default_pic}}"></a></li>
+                @endif
             </ul>
         </div>
+
     </div>
 </div>
 <!--banner-->
@@ -200,7 +209,7 @@
                             <img src="/Home/images/star-h.png">
                             <img src="/Home/images/star-h.png">
                             @else
-                            
+
                             @endif
 
                         </span>
@@ -249,7 +258,9 @@
 <!--广告位-->
 <div class="guang">
     <div class="container">
-        <img src="{{$AdvImage->info_z}}">
+        @if(isset($AdvImage[25]))
+        <a href="{{$AdvImage[25]->billboards_url? $AdvImage[25]->billboards_url : $AdvImage[25]->billboards_default_pic}}"><img src="{{$AdvImage[25]->billboards_pic? $AdvImage[25]->billboards_pic : $AdvImage[25]->billboards_default_pic}}"></a>
+        @endif
     </div>
 </div>
 <!--广告位-->
@@ -278,10 +289,10 @@
                         <div class="nr">
                             <div class="nr-left">
                                 <div class="nr-top">{{$Recommend->softwarename}} @if($Recommend->charge == 1)<span>免费</span>@else<span class="hot">付费</span>@endif</div>
-                                <div class="nr-con">{{$Recommend->description}}</div>
+                                <div class="nr-con"><?= substr($Recommend->description,0,27) ?></div>
                                 <div class="nr-biao">
                                     <p>上传时间：<?=substr($Recommend->created_at,0,10); ?></p>
-                                    <p>上传者：{{$Recommend->nickname}}</p>
+                                    <p>上传者：<?= substr($Recommend->nickname,0,8) ?></p></p>
                                     @if($Recommend->comment >= 5)
                                     <p><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"></p>
                                     @elseif($Recommend->comment >= 4)
@@ -356,7 +367,7 @@
                     }else{
                         var str2 = '<span class="hot">付费</span></div>';
                     }
-                    var str3 = '<div class="nr-con">'+obj.description+'</div><div class="nr-biao"><p>上传时间：'+obj.created_at.substring(0,10)+'</p><p>上传者：'+obj.nickname+'</p>'
+                    var str3 = '<div class="nr-con">'+obj.description.substring(0,27)+'</div><div class="nr-biao"><p>上传时间：'+obj.created_at.substring(0,10)+'</p><p>上传者：'+obj.nickname.substring(0,8)+'</p>'
                     if(obj.comment >= 5){
                         var str4  = '<p><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"><img src="/Home/images/star.png"></p></div>';
                     }else if(obj.comment >= 4){

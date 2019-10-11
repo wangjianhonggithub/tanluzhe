@@ -51,11 +51,12 @@
                     <td>{{$val->updated_at}}</td>
                     <td>
                     	<a href="/Admin/Help/{{$val->id}}/edit" class="btn btn-xs btn-rounded btn-warning">修改</a>
-                        <form action="/Admin/Help/{{$val->id}}" method="POST" style="display: inline;" accept-charset="utf-8">
-                            {{ method_field('DELETE') }}
-                            {{ csrf_field() }}
-                           <button class="btn btn-xs btn-rounded btn-danger">删除</button>
-                        </form>
+                        {{--<form action="/Admin/Help/{{$val->id}}" method="POST" style="display: inline;" accept-charset="utf-8">--}}
+                            {{--{{ method_field('DELETE') }}--}}
+                            {{--{{ csrf_field() }}--}}
+                           {{--<button class="btn btn-xs btn-rounded btn-danger">删除</button>--}}
+                        {{--</form>--}}
+                        <a href="javasctipt:;" data-id='{{$val->id}}' class="btn Delete btn-xs btn-rounded btn-danger">删除</a>
                     </td>
                 </tr>
                 @endforeach
@@ -64,4 +65,39 @@
         {{ $data->links() }}
     </div> 
 </div>
+
+<script src="/layui/layui.all.js"></script>
+<script>
+    $(function(){
+        $('.Delete').click(function(){
+            var id = $(this).attr('data-id');
+            layer.msg('你确定要删除吗？', {
+                time: 0 //不自动关闭
+                ,btn: ['确认', '取消']
+                ,yes: function(index){
+                    //假设 id 的 class  是 getId
+                    //然后发送ajax;
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Admin/Help/helpdelete',
+                        data: {
+                            id:id,
+                        },
+                        dataType: 'json',
+                        success: function(res){
+                            if (res.code == 1) {
+                                layer.msg(res.msg, {icon: 6});
+                                setTimeout(function(){//两秒后跳转
+                                    window.location.href='/Admin/Help';
+                                },1500);
+                            }else{
+                                layer.msg(res.msg, {icon: 5});
+                            }
+                        },
+                    });
+                }
+            });
+        });
+    });
+</script>
 @endsection

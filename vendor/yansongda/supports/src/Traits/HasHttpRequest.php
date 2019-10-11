@@ -5,8 +5,29 @@ namespace Yansongda\Supports\Traits;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * Trait HasHttpRequest.
+ *
+ * @property string baseUri        base_uri
+ * @property string timeout        timeout
+ * @property string connectTimeout connect_timeout
+ */
 trait HasHttpRequest
 {
+    /**
+     * Http client.
+     *
+     * @var null|Client
+     */
+    protected $httpClient = null;
+
+    /**
+     * Http client options.
+     *
+     * @var array
+     */
+    protected $httpOptions = [];
+
     /**
      * Send a GET request.
      *
@@ -18,7 +39,7 @@ trait HasHttpRequest
      *
      * @return array|string
      */
-    protected function get($endpoint, $query = [], $headers = [])
+    public function get($endpoint, $query = [], $headers = [])
     {
         return $this->request('get', $endpoint, [
             'headers' => $headers,
@@ -37,7 +58,7 @@ trait HasHttpRequest
      *
      * @return array|string
      */
-    protected function post($endpoint, $data, $options = [])
+    public function post($endpoint, $data, $options = [])
     {
         if (!is_array($data)) {
             $options['body'] = $data;
@@ -59,39 +80,67 @@ trait HasHttpRequest
      *
      * @return array|string
      */
-    protected function request($method, $endpoint, $options = [])
+    public function request($method, $endpoint, $options = [])
     {
-        return $this->unwrapResponse($this->getHttpClient($this->getBaseOptions())->{$method}($endpoint, $options));
+        return $this->unwrapResponse($this->getHttpClient()->{$method}($endpoint, $options));
     }
 
     /**
-     * Get base options.
+     * Set http client.
+     *
+     * @author yansongda <me@yansongda.cn>
+     *
+     * @param Client $client
+     *
+     * @return $this
+     */
+    public function setHttpClient(Client $client)
+    {
+        $this->httpClient = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get default options.
      *
      * @author yansongda <me@yansongda.cn>
      *
      * @return array
      */
-    protected function getBaseOptions()
+    public function getOptions()
     {
-        $options = [
-            'base_uri'         => property_exists($this, 'baseUri') ? $this->baseUri : '',
-            'timeout'          => property_exists($this, 'timeout') ? $this->timeout : 5.0,
-            'connect_timeout'  => property_exists($this, 'connect_timeout') ? $this->connect_timeout : 5.0,
-        ];
-
-        return $options;
+        return array_merge([
+            'base_uri'        => property_exists($this, 'baseUri') ? $this->baseUri : '',
+            'timeout'         => property_exists($this, 'timeout') ? $this->timeout : 5.0,
+            'connect_timeout' => property_exists($this, 'connectTimeout') ? $this->connectTimeout : 5.0,
+        ], $this->httpOptions);
     }
 
     /**
      * Return http client.
      *
-     * @param array $options
-     *
-     * @return \GuzzleHttp\Client
+     * @return Client
      */
-    protected function getHttpClient(array $options = [])
+    public function getHttpClient()
     {
-        return new Client($options);
+        if (is_null($this->httpClient)) {
+            $this->httpClient = $this->getDefaultHttpClient();
+        }
+
+        return $this->httpClient;
+    }
+
+    /**
+     * Get default http client.
+     *
+     * @author yansongda <me@yansongda.cn>
+     *
+     * @return Client
+     */
+    public function getDefaultHttpClient()
+    {
+        return new Client($this->getOptions());
     }
 
     /**
@@ -103,7 +152,7 @@ trait HasHttpRequest
      *
      * @return array|string
      */
-    protected function unwrapResponse(ResponseInterface $response)
+    public function unwrapResponse(ResponseInterface $response)
     {
         $contentType = $response->getHeaderLine('Content-Type');
         $contents = $response->getBody()->getContents();

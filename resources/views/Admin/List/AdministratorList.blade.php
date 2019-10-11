@@ -56,11 +56,12 @@
                     <td>{{$val->updated_at}}</td>
                     <td>
                     	<a href="/Admin/Administrator/{{$val->id}}/edit" class="btn btn-xs btn-rounded btn-warning">修改</a>
-                        <form action="/Admin/Administrator/{{$val->id}}" method="POST" style="display: inline;" accept-charset="utf-8">
-                            {{ method_field('DELETE') }}
-                            {{ csrf_field() }}
-                           <button class="btn btn-xs btn-rounded btn-danger">删除</button>
-                        </form>
+                        {{--<form action="/Admin/Administrator/{{$val->id}}" method="POST" style="display: inline;" accept-charset="utf-8">--}}
+                            {{--{{ method_field('DELETE') }}--}}
+                            {{--{{ csrf_field() }}--}}
+                           {{--<button class="btn btn-xs btn-rounded btn-danger">删除</button>--}}
+                        {{--</form>--}}
+                        <a href="javasctipt:;" data-id='{{$val->id}}' class="btn Delete btn-xs btn-rounded btn-danger">删除</a>
                     </td>
                 </tr>
                 @endforeach
@@ -69,4 +70,37 @@
         {{ $data->links() }}
     </div> 
 </div>
+
+<script src="/layui/layui.all.js"></script>
+<script>
+    $(function(){
+        $('.Delete').click(function(){
+            var id = $(this).attr('data-id');
+            layer.msg('你确定要删除吗？', {
+                time: 0 //不自动关闭
+                ,btn: ['确认', '取消']
+                ,yes: function(index){
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Admin/Administrator/delete',
+                        data: {
+                            id:id,
+                        },
+                        dataType: 'json',
+                        success: function(res){
+                            if (res.code == 1) {
+                                layer.msg(res.msg, {icon: 6});
+                                setTimeout(function(){//两秒后跳转
+                                    window.location.href='/Admin/Administrator';
+                                },1500);
+                            }else{
+                                layer.msg(res.msg, {icon: 5});
+                            }
+                        },
+                    });
+                }
+            });
+        });
+    });
+</script>
 @endsection

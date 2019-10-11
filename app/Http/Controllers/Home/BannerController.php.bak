@@ -172,7 +172,7 @@ class BannerController extends Controller
                 }
             }
         }
-
+        
         return $data;
     }
 

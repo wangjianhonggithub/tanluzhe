@@ -22,23 +22,23 @@
             <form>
                 <label>
                     <span>用户名：</span>
-                    <input type="text" name="username" placeholder="请输入用户名">
+                    <input type="text" name="username" autocomplete="off" placeholder="请输入用户名">
                 </label>
                <label>
                     <span>密保问题：</span>
-                    <input type="text" name="encrypted" disabled placeholder="密保问题">
+                    <input type="text" name="encrypted" disabled autocomplete="off" placeholder="密保问题">
                 </label>
                 <label>
                     <span>密保答案：</span>
-                    <input type="text" name="answer" placeholder="请输入密保答案">
+                    <input type="text" name="answer" autocomplete="off" placeholder="请输入密保答案">
                 </label>
                 <label>
                     <span>密码：</span>
-                    <input type="password" name="password" placeholder="请输入密码">
+                    <input type="password" name="password" autocomplete="off" placeholder="请输入密码">
                 </label>
                 <label>
                     <span>确认密码：</span>
-                    <input type="password" name="repassword" placeholder="请输入密码">
+                    <input type="password" name="repassword" autocomplete="off" placeholder="请输入密码">
                 </label>
                 <input type="button" class="tijiao checkEncryptedSubmit" value="确认">
             </form>
